@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Game.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hello</a> &gt; <a href="index.source.html" class="el_package">ro.unibuc.hello.data.model</a> &gt; <span class="el_source">Game.java</span></div><h1>Game.java</h1><pre class="source lang-java linenums">package ro.unibuc.hello.data.model;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import java.time.LocalDate;
+
+@Document(collection = &quot;games&quot;)
+public class Game {
+
+    @Id
+    private String id;
+    private String title;
+    private String genre;
+    private double price;
+    private int maxPlayers;
+    private LocalDate addedDate;
+    private double purchasePrice;
+    private AgeCategory ageCategory;
+
+<span class="nc" id="L20">    public Game() {}</span>
+
+<span class="nc" id="L22">    public Game(String title, String genre, double price, int maxPlayers, LocalDate addedDate, double purchasePrice, AgeCategory ageCategory) {</span>
+<span class="nc" id="L23">        this.title = title;</span>
+<span class="nc" id="L24">        this.genre = genre;</span>
+<span class="nc" id="L25">        this.price = price;</span>
+<span class="nc" id="L26">        this.maxPlayers = maxPlayers;</span>
+<span class="nc" id="L27">        this.addedDate = addedDate;</span>
+<span class="nc" id="L28">        this.purchasePrice = purchasePrice;</span>
+<span class="nc" id="L29">        this.ageCategory = ageCategory;</span>
+<span class="nc" id="L30">    }</span>
+
+   
+<span class="nc" id="L33">    public AgeCategory getAgeCategory() { return ageCategory; }</span>
+<span class="nc" id="L34">    public void setAgeCategory(AgeCategory ageCategory) { this.ageCategory = ageCategory; }</span>
+<span class="nc" id="L35">       public String getId() { return id; }</span>
+<span class="nc" id="L36">    public void setId(String id) { this.id = id; }</span>
+
+<span class="nc" id="L38">    public String getTitle() { return title; }</span>
+<span class="nc" id="L39">    public void setTitle(String title) { this.title = title; }</span>
+
+<span class="nc" id="L41">    public String getGenre() { return genre; }</span>
+<span class="nc" id="L42">    public void setGenre(String genre) { this.genre = genre; }</span>
+
+<span class="nc" id="L44">    public double getPrice() { return price; }</span>
+<span class="nc" id="L45">    public void setPrice(double price) { this.price = price; }</span>
+
+<span class="nc" id="L47">    public int getMaxPlayers() { return maxPlayers; }</span>
+<span class="nc" id="L48">    public void setMaxPlayers(int maxPlayers) { this.maxPlayers = maxPlayers; }</span>
+
+<span class="nc" id="L50">    public LocalDate getAddedDate() { return addedDate; }</span>
+<span class="nc" id="L51">    public void setAddedDate(LocalDate addedDate) { this.addedDate = addedDate; }</span>
+
+<span class="nc" id="L53">    public double getPurchasePrice() { return purchasePrice; }</span>
+<span class="nc" id="L54">    public void setPurchasePrice(double purchasePrice) { this.purchasePrice = purchasePrice; }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

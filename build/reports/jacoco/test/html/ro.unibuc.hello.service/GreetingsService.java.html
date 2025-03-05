@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GreetingsService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hello</a> &gt; <a href="index.source.html" class="el_package">ro.unibuc.hello.service</a> &gt; <span class="el_source">GreetingsService.java</span></div><h1>GreetingsService.java</h1><pre class="source lang-java linenums">package ro.unibuc.hello.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import ro.unibuc.hello.data.InformationEntity;
+import ro.unibuc.hello.data.InformationRepository;
+import ro.unibuc.hello.dto.Greeting;
+import ro.unibuc.hello.exception.EntityNotFoundException;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.concurrent.atomic.AtomicLong;
+
+@Component
+<span class="fc" id="L15">public class GreetingsService {</span>
+
+    @Autowired
+    private InformationRepository informationRepository;
+
+<span class="fc" id="L20">    private final AtomicLong counter = new AtomicLong();</span>
+    private static final String helloTemplate = &quot;Hello, %s!&quot;;
+    private static final String informationTemplate = &quot;%s : %s!&quot;;
+
+    public Greeting hello(String name) {
+<span class="fc" id="L25">        return new Greeting(Long.toString(counter.incrementAndGet()), String.format(helloTemplate, name));</span>
+    }
+
+    public Greeting buildGreetingFromInfo(String title) throws EntityNotFoundException {
+<span class="fc" id="L29">        InformationEntity entity = informationRepository.findByTitle(title);</span>
+<span class="fc bfc" id="L30" title="All 2 branches covered.">        if (entity == null) {</span>
+<span class="fc" id="L31">            throw new EntityNotFoundException(title);</span>
+        }
+<span class="fc" id="L33">        return new Greeting(Long.toString(counter.incrementAndGet()), String.format(informationTemplate, entity.getTitle(), entity.getDescription()));</span>
+    }
+
+    public List&lt;Greeting&gt; getAllGreetings() {
+<span class="fc" id="L37">        List&lt;InformationEntity&gt; entities = informationRepository.findAll();</span>
+<span class="fc" id="L38">        return entities.stream()</span>
+<span class="fc" id="L39">                .map(entity -&gt; new Greeting(entity.getId(), entity.getTitle()))</span>
+<span class="fc" id="L40">                .collect(Collectors.toList());</span>
+    }
+
+    public Greeting getGreetingById(String id) throws EntityNotFoundException {
+<span class="nc" id="L44">        Optional&lt;InformationEntity&gt; optionalEntity = informationRepository.findById(id);</span>
+<span class="nc" id="L45">        InformationEntity entity = optionalEntity.orElseThrow(() -&gt; new EntityNotFoundException(id));</span>
+<span class="nc" id="L46">        return new Greeting(entity.getId(), entity.getTitle());</span>
+    }
+
+    public Greeting saveGreeting(Greeting greeting) {
+<span class="fc" id="L50">        InformationEntity entity = new InformationEntity();</span>
+<span class="fc" id="L51">        entity.setId(greeting.getId());</span>
+<span class="fc" id="L52">        entity.setTitle(greeting.getContent());</span>
+<span class="fc" id="L53">        informationRepository.save(entity);</span>
+<span class="fc" id="L54">        return new Greeting(entity.getId(), entity.getTitle());</span>
+    }
+
+    public List&lt;Greeting&gt; saveAll(List&lt;Greeting&gt; greetings) {
+<span class="nc" id="L58">        List&lt;InformationEntity&gt; entities = greetings.stream()</span>
+<span class="nc" id="L59">                .map(greeting -&gt; {</span>
+<span class="nc" id="L60">                    InformationEntity entity = new InformationEntity();</span>
+<span class="nc" id="L61">                    entity.setId(greeting.getId());</span>
+<span class="nc" id="L62">                    entity.setTitle(greeting.getContent());</span>
+<span class="nc" id="L63">                    return entity;</span>
+                })
+<span class="nc" id="L65">                .collect(Collectors.toList());</span>
+
+<span class="nc" id="L67">        List&lt;InformationEntity&gt; savedEntities = informationRepository.saveAll(entities);</span>
+
+<span class="nc" id="L69">        return savedEntities.stream()</span>
+<span class="nc" id="L70">                .map(entity -&gt; new Greeting(entity.getId(), entity.getTitle()))</span>
+<span class="nc" id="L71">                .collect(Collectors.toList());</span>
+    }
+
+    public Greeting updateGreeting(String id, Greeting greeting) throws EntityNotFoundException {
+<span class="fc" id="L75">        InformationEntity entity = informationRepository.findById(id)</span>
+<span class="fc" id="L76">                .orElseThrow(() -&gt; new EntityNotFoundException(String.valueOf(id)));</span>
+<span class="fc" id="L77">        entity.setTitle(greeting.getContent());</span>
+<span class="fc" id="L78">        informationRepository.save(entity);</span>
+<span class="fc" id="L79">        return new Greeting(entity.getId(), entity.getTitle());</span>
+    }
+
+    public void deleteGreeting(String id) throws EntityNotFoundException {
+<span class="fc" id="L83">        InformationEntity entity = informationRepository.findById(id)</span>
+<span class="fc" id="L84">                .orElseThrow(() -&gt; new EntityNotFoundException(String.valueOf(id)));</span>
+<span class="fc" id="L85">        informationRepository.delete(entity);</span>
+<span class="fc" id="L86">    }</span>
+
+    public void deleteAllGreetings() {
+<span class="nc" id="L89">        informationRepository.deleteAll();</span>
+<span class="nc" id="L90">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
