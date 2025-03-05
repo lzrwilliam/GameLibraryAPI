@@ -51,3 +51,24 @@ DELETE http://localhost:8080/greetings/{{deleteGreetingId}}
 
 
 # TODO add requests for your own endpoints!
+
+
+
+
+### Get all games
+GET http://localhost:8080/games
+
+### Add a new game
+POST http://localhost:8080/games
+Content-Type: application/json
+
+{
+    "title": "Cyberpunk 2078",
+    "genre": "RPG",
+    "price": 19.99,
+    "maxPlayers": 1,
+    "addedDate": "2024-03-04",
+    "purchasePrice": 59.99,
+    "ageCategory": "MATURE"
+}
+
