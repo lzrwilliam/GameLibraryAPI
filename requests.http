@@ -86,6 +86,7 @@ Content-Type: application/json
     "title": "Cyberpunk 2078",
     "genre": "RPG",
     "price": 19.99,
+    "totalCopies": 50,
     "maxPlayers": 1,
     "addedDate": "2024-03-04",
     "purchasePrice": 59.99,
