@@ -1,0 +1,13 @@
+- modelele :
+    - useri (MIHAI)
+    - jocuri (adaugat camp cantitate disponibila) (MIHAI)
+    - categorie varsta 
+    - inchirieri (MIHAI)
+    - review-uri
+- baza de date
+- features:
+    - inchiriere (DRAGOS)
+    - notificare ca se apropie deadline-ul
+    - review (DRAGOS)
+    - penalizari (plata in plus pe zi)
+    - cumparare?
