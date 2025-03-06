@@ -1,7 +1,10 @@
 package ro.unibuc.hello.controller;
 
 import ro.unibuc.hello.data.model.Game;
+import ro.unibuc.hello.data.model.Rent;
+
 import ro.unibuc.hello.service.GameService;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,38 +15,46 @@ import java.util.Optional;
 @RequestMapping("/games")
 public class GameController {
 
-    private final GameService gameService;
+    private final GameService _gameService;
+
 
     public GameController(GameService gameService) {
-        this.gameService = gameService;
+        this._gameService = gameService;
     }
 
     @GetMapping("/GetAll")
     public List<Game> getAllGames() {
-        return gameService.getAllGames();
+        return _gameService.getAllGames();
     }
 
     @GetMapping("/Find/{id}")
     public ResponseEntity<Game> getGameById(@PathVariable String id) {
-        Optional<Game> game = gameService.getGameById(id);
+        Optional<Game> game = _gameService.getGameById(id);
         return game.map(ResponseEntity::ok)
                    .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping("/Add")
     public Game addGame(@RequestBody Game game) {
-        return gameService.addGame(game);
+        return _gameService.addGame(game);
     }
+
+    @PatchMapping("/Rent/game={gameid}&user={userid}&for={length}")
+    public Rent rentGame(@PathVariable String gameid, @PathVariable String userid, @PathVariable int length){
+        return _gameService.rentGame(gameid, userid, length);
+    }
+
+
 
     @DeleteMapping("Delete/{id}")
     public ResponseEntity<Void> deleteGame(@PathVariable String id) {
-        gameService.deleteGame(id);
+        _gameService.deleteGame(id);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/DeleteAll")
     public ResponseEntity<String> deleteAllUsers() {
-        gameService.deleteAllGames();
+        _gameService.deleteAllGames();
         return ResponseEntity.ok("Toate jocurile au fost ștersee");
     }
 }

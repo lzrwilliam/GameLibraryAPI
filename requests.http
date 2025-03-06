@@ -89,6 +89,7 @@ Content-Type: application/json
     "genre": "RPG",
     "price": 19.99,
     "totalCopies": 50,
+    "availableCopies": 50,
     "maxPlayers": 1,
     "addedDate": "2024-03-04",
     "purchasePrice": 59.99,
@@ -97,6 +98,10 @@ Content-Type: application/json
 
 ### Get By ID
 GET http://localhost:8080/games/Find/67c9a12035e72b2ba5c0694a
+
+### Rent Game
+
+PATCH  http://localhost:8080/games/Rent/game=67c9c044570c7b6db77e1f72&user=67c9ab605040be58cff44db0&for=2
 
 ### Delete All
 DELETE http://localhost:8080/games/DeleteAll

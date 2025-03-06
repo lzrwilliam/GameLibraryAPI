@@ -4,7 +4,6 @@ import ro.unibuc.hello.data.model.User;
 import ro.unibuc.hello.data.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
-import java.io.PrintStream;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,25 +11,25 @@ import java.util.Optional;
 public class UserService{
     private final UserRepository _userRepository;
 
-<span class="nc" id="L15">    public UserService(UserRepository userRepository) {</span>
-<span class="nc" id="L16">        _userRepository = userRepository;</span>
-<span class="nc" id="L17">    }</span>
+<span class="nc" id="L14">    public UserService(UserRepository userRepository) {</span>
+<span class="nc" id="L15">        _userRepository = userRepository;</span>
+<span class="nc" id="L16">    }</span>
 
     public List&lt;User&gt; getAllUsers(){
-<span class="nc" id="L20">        return _userRepository.findAll();</span>
+<span class="nc" id="L19">        return _userRepository.findAll();</span>
     }
 
     public Optional&lt;User&gt; GetUserByID(String id){
-<span class="nc" id="L24">        return _userRepository.findById(id);</span>
+<span class="nc" id="L23">        return _userRepository.findById(id);</span>
     }
 
     public User addUser(User user){
-<span class="nc" id="L28">        return _userRepository.save(user);</span>
+<span class="nc" id="L27">        return _userRepository.save(user);</span>
         
     }
 
     public void deleteAllUsers() {
-<span class="nc" id="L33">        _userRepository.deleteAll();</span>
-<span class="nc" id="L34">    }</span>
+<span class="nc" id="L32">        _userRepository.deleteAll();</span>
+<span class="nc" id="L33">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

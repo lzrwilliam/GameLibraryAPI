@@ -4,7 +4,6 @@ import ro.unibuc.hello.data.model.User;
 import ro.unibuc.hello.data.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
-import java.io.PrintStream;
 import java.util.List;
 import java.util.Optional;
 
