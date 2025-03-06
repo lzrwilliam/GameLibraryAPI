@@ -18,7 +18,7 @@ public class GameController {
 <span class="nc" id="L18">        this.gameService = gameService;</span>
 <span class="nc" id="L19">    }</span>
 
-    @GetMapping
+    @GetMapping(&quot;/GetAll&quot;)
     public List&lt;Game&gt; getAllGames() {
 <span class="nc" id="L23">        return gameService.getAllGames();</span>
     }
@@ -30,7 +30,7 @@ public class GameController {
 <span class="nc" id="L30">                   .orElseGet(() -&gt; ResponseEntity.notFound().build());</span>
     }
 
-    @PostMapping
+    @PostMapping(&quot;/Add&quot;)
     public Game addGame(@RequestBody Game game) {
 <span class="nc" id="L35">        return gameService.addGame(game);</span>
     }

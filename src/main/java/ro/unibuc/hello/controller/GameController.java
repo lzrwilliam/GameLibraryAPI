@@ -18,7 +18,7 @@ public class GameController {
         this.gameService = gameService;
     }
 
-    @GetMapping
+    @GetMapping("/GetAll")
     public List<Game> getAllGames() {
         return gameService.getAllGames();
     }
@@ -30,7 +30,7 @@ public class GameController {
                    .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping
+    @PostMapping("/Add")
     public Game addGame(@RequestBody Game game) {
         return gameService.addGame(game);
     }

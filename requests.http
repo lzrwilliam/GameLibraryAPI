@@ -76,10 +76,10 @@ Content-Type: application/json
 DELETE http://localhost:8080/Users/DeleteAll
 
 ### Get all games
-GET http://localhost:8080/games
+GET http://localhost:8080/games/GetAll
 
 ### Add a new game
-POST http://localhost:8080/games
+POST http://localhost:8080/games/Add
 Content-Type: application/json
 
 {
