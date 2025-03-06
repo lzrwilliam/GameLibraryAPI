@@ -52,23 +52,51 @@ DELETE http://localhost:8080/greetings/{{deleteGreetingId}}
 
 # TODO add requests for your own endpoints!
 
+####Users
 
+###GetAll
+GET http://localhost:8080/Users/GetAll
 
+###AddUser
+POST http://localhost:8080/Users/Add
+Content-Type: application/json
+
+{
+    "fName": "John",
+    "lName": "Doe",
+    "userName": "johndoe",
+    "password": "securepassword123",
+    "birthDate": "1990-01-01",
+    "email": "johndoe@example.com",
+    "phoneNumber": "1234567890"
+}
+
+### Get By ID
+GET http://localhost:8080/Users/Find/67c9ab605040be58cff44db0
+
+###deleteAll
+DELETE http://localhost:8080/Users/DeleteAll
 
 ### Get all games
-GET http://localhost:8080/games
+GET http://localhost:8080/games/GetAll
 
 ### Add a new game
-POST http://localhost:8080/games
+POST http://localhost:8080/games/Add
 Content-Type: application/json
 
 {
     "title": "Cyberpunk 2078",
     "genre": "RPG",
     "price": 19.99,
+    "totalCopies": 50,
     "maxPlayers": 1,
     "addedDate": "2024-03-04",
     "purchasePrice": 59.99,
     "ageCategory": "MATURE"
 }
 
+### Get By ID
+GET http://localhost:8080/games/Find/67c9a12035e72b2ba5c0694a
+
+### Delete All
+DELETE http://localhost:8080/games/DeleteAll

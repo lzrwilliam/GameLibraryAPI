@@ -18,7 +18,7 @@ public class GameController {
 <span class="nc" id="L18">        this.gameService = gameService;</span>
 <span class="nc" id="L19">    }</span>
 
-    @GetMapping
+    @GetMapping(&quot;/GetAll&quot;)
     public List&lt;Game&gt; getAllGames() {
 <span class="nc" id="L23">        return gameService.getAllGames();</span>
     }
@@ -30,15 +30,21 @@ public class GameController {
 <span class="nc" id="L30">                   .orElseGet(() -&gt; ResponseEntity.notFound().build());</span>
     }
 
-    @PostMapping
+    @PostMapping(&quot;/Add&quot;)
     public Game addGame(@RequestBody Game game) {
 <span class="nc" id="L35">        return gameService.addGame(game);</span>
     }
 
-    @DeleteMapping(&quot;/{id}&quot;)
+    @DeleteMapping(&quot;/Find/{id}&quot;)
     public ResponseEntity&lt;Void&gt; deleteGame(@PathVariable String id) {
 <span class="nc" id="L40">        gameService.deleteGame(id);</span>
 <span class="nc" id="L41">        return ResponseEntity.noContent().build();</span>
+    }
+
+    @DeleteMapping(&quot;/DeleteAll&quot;)
+    public ResponseEntity&lt;String&gt; deleteAllUsers() {
+<span class="nc" id="L46">        gameService.deleteAllGames();</span>
+<span class="nc" id="L47">        return ResponseEntity.ok(&quot;Toate jocurile au fost ștersee&quot;);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

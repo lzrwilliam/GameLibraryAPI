@@ -13,16 +13,18 @@ public class Game {
     private String genre;
     private double price;
     private int maxPlayers;
+    private int totalCopies;
     private LocalDate addedDate;
     private double purchasePrice;
     private AgeCategory ageCategory;
 
     public Game() {}
 
-    public Game(String title, String genre, double price, int maxPlayers, LocalDate addedDate, double purchasePrice, AgeCategory ageCategory) {
+    public Game(String title, String genre, double price, int totalCopies, int maxPlayers, LocalDate addedDate, double purchasePrice, AgeCategory ageCategory) {
         this.title = title;
         this.genre = genre;
         this.price = price;
+        this.totalCopies = totalCopies;
         this.maxPlayers = maxPlayers;
         this.addedDate = addedDate;
         this.purchasePrice = purchasePrice;
@@ -43,6 +45,9 @@ public class Game {
 
     public double getPrice() { return price; }
     public void setPrice(double price) { this.price = price; }
+
+    public int getTotalCopies() { return totalCopies; }
+    public void setTotalCopies(int totalCopies) { this.totalCopies = totalCopies; }
 
     public int getMaxPlayers() { return maxPlayers; }
     public void setMaxPlayers(int maxPlayers) { this.maxPlayers = maxPlayers; }
