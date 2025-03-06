@@ -40,5 +40,11 @@ public class GameController {
 <span class="nc" id="L40">        gameService.deleteGame(id);</span>
 <span class="nc" id="L41">        return ResponseEntity.noContent().build();</span>
     }
+
+    @DeleteMapping(&quot;/DeleteAll&quot;)
+    public ResponseEntity&lt;String&gt; deleteAllUsers() {
+<span class="nc" id="L46">        gameService.deleteAllGames();</span>
+<span class="nc" id="L47">        return ResponseEntity.ok(&quot;Toate jocurile au fost ștersee&quot;);</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

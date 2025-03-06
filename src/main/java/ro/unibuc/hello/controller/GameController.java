@@ -40,4 +40,10 @@ public class GameController {
         gameService.deleteGame(id);
         return ResponseEntity.noContent().build();
     }
+
+    @DeleteMapping("/DeleteAll")
+    public ResponseEntity<String> deleteAllUsers() {
+        gameService.deleteAllGames();
+        return ResponseEntity.ok("Toate jocurile au fost ștersee");
+    }
 }
