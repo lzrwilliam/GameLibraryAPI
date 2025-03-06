@@ -52,8 +52,28 @@ DELETE http://localhost:8080/greetings/{{deleteGreetingId}}
 
 # TODO add requests for your own endpoints!
 
+####Users
+
+###GetAll
+GET http://localhost:8080/Users/GetAll
+
+###AddUser
+POST http://localhost:8080/Users/Add
+Content-Type: application/json
+
+{
+    "fName": "John",
+    "lName": "Doe",
+    "userName": "johndoe",
+    "password": "securepassword123",
+    "birthDate": "1990-01-01",
+    "email": "johndoe@example.com",
+    "phoneNumber": "1234567890"
+}
 
 
+###deleteAll
+DELETE http://localhost:8080/Users/DeleteAll
 
 ### Get all games
 GET http://localhost:8080/games
