@@ -24,15 +24,20 @@ public class UserController {
 <span class="nc" id="L24">        return _userService.getAllUsers();</span>
     }
 
+    @GetMapping(&quot;/Find/{id}&quot;)
+    public Optional&lt;User&gt; GetUserByID(@PathVariable String id){
+<span class="nc" id="L29">        return _userService.GetUserByID(id);</span>
+    }
+
     @PostMapping(&quot;/Add&quot;)
     public User addUser(@RequestBody User user){
-<span class="nc" id="L29">        return _userService.addUser(user);</span>
+<span class="nc" id="L34">        return _userService.addUser(user);</span>
     }
 
     @DeleteMapping(&quot;/DeleteAll&quot;)
     public ResponseEntity&lt;String&gt; deleteAllUsers() {
-<span class="nc" id="L34">        _userService.deleteAllUsers();</span>
-<span class="nc" id="L35">        return ResponseEntity.ok(&quot;Toți utilizatorii au fost șterși&quot;);</span>
+<span class="nc" id="L39">        _userService.deleteAllUsers();</span>
+<span class="nc" id="L40">        return ResponseEntity.ok(&quot;Toți utilizatorii au fost șterși&quot;);</span>
     }
 
 

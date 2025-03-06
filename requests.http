@@ -71,6 +71,8 @@ Content-Type: application/json
     "phoneNumber": "1234567890"
 }
 
+### Get By ID
+GET http://localhost:8080/Users/Find/67c9ab605040be58cff44db0
 
 ###deleteAll
 DELETE http://localhost:8080/Users/DeleteAll
@@ -92,6 +94,9 @@ Content-Type: application/json
     "purchasePrice": 59.99,
     "ageCategory": "MATURE"
 }
+
+### Get By ID
+GET http://localhost:8080/games/Find/67c9a12035e72b2ba5c0694a
 
 ### Delete All
 DELETE http://localhost:8080/games/DeleteAll

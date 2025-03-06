@@ -35,7 +35,7 @@ public class GameController {
 <span class="nc" id="L35">        return gameService.addGame(game);</span>
     }
 
-    @DeleteMapping(&quot;/{id}&quot;)
+    @DeleteMapping(&quot;/Find/{id}&quot;)
     public ResponseEntity&lt;Void&gt; deleteGame(@PathVariable String id) {
 <span class="nc" id="L40">        gameService.deleteGame(id);</span>
 <span class="nc" id="L41">        return ResponseEntity.noContent().build();</span>

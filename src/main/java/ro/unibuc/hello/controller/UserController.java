@@ -24,6 +24,11 @@ public class UserController {
         return _userService.getAllUsers();
     }
 
+    @GetMapping("/Find/{id}")
+    public Optional<User> GetUserByID(@PathVariable String id){
+        return _userService.GetUserByID(id);
+    }
+
     @PostMapping("/Add")
     public User addUser(@RequestBody User user){
         return _userService.addUser(user);
