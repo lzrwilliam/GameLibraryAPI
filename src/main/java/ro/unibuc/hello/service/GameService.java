@@ -52,14 +52,24 @@ public class GameService {
             throw new RuntimeException("User not found with ID: " + userID);
         }
     
-        Game game = optionalGame.get(); 
-        int noCopies = game.getAvailableCopies();
+        Game game = optionalGame.get();
+        int noCopies = game.getAvailableCopies(); 
+        User user = optionalUser.get();
+        double balance = user.getBalance();
         if (noCopies >= 1) {
-            game.setAvailableCopies(game.getAvailableCopies() - 1);
-            _gameRepository.save(game);
             double price = game.getPrice();
             price *= length;
+
+            if(balance < price){
+                throw new RuntimeException("User dose not have enough money");
+            }
+
+            game.setAvailableCopies(game.getAvailableCopies() - 1);
+            _gameRepository.save(game);
+            user.addToBalance(-price);
+            _userRepository.save(user);
             return _rentRepository.save(new Rent(userID, gameID, LocalDate.now(), length, price));
+            
         }
     
         throw new RuntimeException("No available copies for game: " + gameID);

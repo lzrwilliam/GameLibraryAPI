@@ -52,26 +52,36 @@ public class GameService {
 <span class="nc" id="L52">            throw new RuntimeException(&quot;User not found with ID: &quot; + userID);</span>
         }
     
-<span class="nc" id="L55">        Game game = optionalGame.get(); </span>
-<span class="nc" id="L56">        int noCopies = game.getAvailableCopies();</span>
-<span class="nc bnc" id="L57" title="All 2 branches missed.">        if (noCopies &gt;= 1) {</span>
-<span class="nc" id="L58">            game.setAvailableCopies(game.getAvailableCopies() - 1);</span>
-<span class="nc" id="L59">            _gameRepository.save(game);</span>
+<span class="nc" id="L55">        Game game = optionalGame.get();</span>
+<span class="nc" id="L56">        int noCopies = game.getAvailableCopies(); </span>
+<span class="nc" id="L57">        User user = optionalUser.get();</span>
+<span class="nc" id="L58">        double balance = user.getBalance();</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        if (noCopies &gt;= 1) {</span>
 <span class="nc" id="L60">            double price = game.getPrice();</span>
 <span class="nc" id="L61">            price *= length;</span>
-<span class="nc" id="L62">            return _rentRepository.save(new Rent(userID, gameID, LocalDate.now(), length, price));</span>
+
+<span class="nc bnc" id="L63" title="All 2 branches missed.">            if(balance &lt; price){</span>
+<span class="nc" id="L64">                throw new RuntimeException(&quot;User dose not have enough money&quot;);</span>
+            }
+
+<span class="nc" id="L67">            game.setAvailableCopies(game.getAvailableCopies() - 1);</span>
+<span class="nc" id="L68">            _gameRepository.save(game);</span>
+<span class="nc" id="L69">            user.addToBalance(-price);</span>
+<span class="nc" id="L70">            _userRepository.save(user);</span>
+<span class="nc" id="L71">            return _rentRepository.save(new Rent(userID, gameID, LocalDate.now(), length, price));</span>
+            
         }
     
-<span class="nc" id="L65">        throw new RuntimeException(&quot;No available copies for game: &quot; + gameID);</span>
+<span class="nc" id="L75">        throw new RuntimeException(&quot;No available copies for game: &quot; + gameID);</span>
     }
     
 
     public void deleteGame(String id) {
-<span class="nc" id="L70">        _gameRepository.deleteById(id);</span>
-<span class="nc" id="L71">    }</span>
+<span class="nc" id="L80">        _gameRepository.deleteById(id);</span>
+<span class="nc" id="L81">    }</span>
 
     public void deleteAllGames(){
-<span class="nc" id="L74">        _gameRepository.deleteAll();</span>
-<span class="nc" id="L75">    }</span>
+<span class="nc" id="L84">        _gameRepository.deleteAll();</span>
+<span class="nc" id="L85">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
