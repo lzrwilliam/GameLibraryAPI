@@ -14,17 +14,19 @@ public class User {
     private String userName;
     private String password;
     private LocalDate birthDate;
+    private double balance;
     private String email;
     private String phoneNumber;
     private LocalDate registrationDate; 
 
     public User(String fName, String lName, String userName, String password,
-                LocalDate birthDate, String email, String phoneNumber) {
+                LocalDate birthDate, double balance, String email, String phoneNumber) {
         this.fName = fName;
         this.lName = lName;
         this.userName = userName;
         this.password = password;
         this.birthDate = birthDate;
+        this.balance = balance;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.registrationDate = LocalDate.now();
@@ -72,6 +74,17 @@ public class User {
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
+
+    public double getBalance(){
+        return balance;
+    }
+    public void setBalance(double balance){
+        this.balance = balance;
+    }
+    public void addToBalance(double sumToAdd){
+        balance += sumToAdd;
+    }
+
 
     public String getEmail() {
         return email;

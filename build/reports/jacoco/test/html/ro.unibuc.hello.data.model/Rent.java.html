@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Rent.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hello</a> &gt; <a href="index.source.html" class="el_package">ro.unibuc.hello.data.model</a> &gt; <span class="el_source">Rent.java</span></div><h1>Rent.java</h1><pre class="source lang-java linenums">package ro.unibuc.hello.data.model;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDate;
 
 @Document(collection = &quot;Rents&quot;)
 public class Rent {
   
+    @Id
+    private String id;
 
     private String userID;
     private String gameID;
@@ -14,58 +17,73 @@ public class Rent {
     private int length;
     private double price;
 
+<span class="nc" id="L20">    public Rent(){</span>
+<span class="nc" id="L21">    }</span>
 
-<span class="nc" id="L18">    public Rent(String userID, String gameID, LocalDate date, int length, double price){</span>
-<span class="nc" id="L19">        this.userID = userID;</span>
-<span class="nc" id="L20">        this.gameID = gameID;</span>
-<span class="nc" id="L21">        this.startDate = date;</span>
-<span class="nc" id="L22">        this.length = length;</span>
-<span class="nc" id="L23">        this.endDate = startDate.plusDays(length);</span>
-<span class="nc" id="L24">        this.price = price;</span>
-<span class="nc" id="L25">    }</span>
+<span class="nc" id="L23">    public Rent(String userID, String gameID, LocalDate startDate, int length, double price){</span>
+<span class="nc" id="L24">        this.userID = userID;</span>
+<span class="nc" id="L25">        this.gameID = gameID;</span>
+<span class="nc" id="L26">        this.startDate = startDate;</span>
+<span class="nc" id="L27">        this.length = length;</span>
+<span class="nc" id="L28">        this.endDate = startDate.plusDays(length);</span>
+<span class="nc" id="L29">        this.price = price;</span>
+<span class="nc" id="L30">    }</span>
+
+    public String getId(){
+<span class="nc" id="L33">        return id;</span>
+    }
 
     public String getUserID(){
-<span class="nc" id="L28">        return userID;</span>
+<span class="nc" id="L37">        return userID;</span>
     }
     public void setUserID(String userID){
-<span class="nc" id="L31">        this.userID = userID;</span>
-<span class="nc" id="L32">    }</span>
+<span class="nc" id="L40">        this.userID = userID;</span>
+<span class="nc" id="L41">    }</span>
 
     public String getGameID(){
-<span class="nc" id="L35">        return gameID;</span>
+<span class="nc" id="L44">        return gameID;</span>
     }
     public void setGameID(String gameID){
-<span class="nc" id="L38">        this.gameID = gameID;</span>
-<span class="nc" id="L39">    }</span>
+<span class="nc" id="L47">        this.gameID = gameID;</span>
+<span class="nc" id="L48">    }</span>
 
     public LocalDate getStartDate(){
-<span class="nc" id="L42">        return startDate;</span>
+<span class="nc" id="L51">        return startDate;</span>
     }
     public void setStartDate(LocalDate date){
-<span class="nc" id="L45">        this.startDate = date;</span>
-<span class="nc" id="L46">    }</span>
+<span class="nc" id="L54">        this.startDate = date;</span>
+<span class="nc" id="L55">    }</span>
 
     public LocalDate getEndDate(){
-<span class="nc" id="L49">        return endDate;</span>
+<span class="nc" id="L58">        return endDate;</span>
     }
     public void setEndDate(LocalDate date){
-<span class="nc" id="L52">        this.endDate = date;</span>
-<span class="nc" id="L53">    }</span>
-    
+<span class="nc" id="L61">        this.endDate = date;</span>
+<span class="nc" id="L62">    }</span>
+    public void addToEndDate(int noDays){
+<span class="nc" id="L64">        endDate = endDate.plusDays(noDays); </span>
+<span class="nc" id="L65">        addToLength(noDays);</span>
+<span class="nc" id="L66">    }</span>
+
     public int getLength(){
-<span class="nc" id="L56">        return length;</span>
+<span class="nc" id="L69">        return length;</span>
     }
     public void setLength(int length){
-<span class="nc" id="L59">        this.length = length;</span>
-<span class="nc" id="L60">    }</span>
+<span class="nc" id="L72">        this.length = length;</span>
+<span class="nc" id="L73">    }</span>
+    public void addToLength(int addingLength){
+<span class="nc" id="L75">        this.length += addingLength;</span>
+<span class="nc" id="L76">    }</span>
 
     public double getPrice(){
-<span class="nc" id="L63">        return price;</span>
+<span class="nc" id="L79">        return price;</span>
     }
     public void setPrice(double price){
-<span class="nc" id="L66">        this.price = price;</span>
-<span class="nc" id="L67">    }</span>
-
+<span class="nc" id="L82">        this.price = price;</span>
+<span class="nc" id="L83">    }</span>
+    public void addToPrice(double price){
+<span class="nc" id="L85">        this.price += price;</span>
+<span class="nc" id="L86">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

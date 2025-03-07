@@ -34,6 +34,11 @@ public class UserController {
         return _userService.addUser(user);
     }
 
+    @PatchMapping("/AddMoney/user={userID}&sum={sum}")
+    public User addMoney(@PathVariable String userID, @PathVariable double sum){
+        return _userService.addMoney(userID, sum);
+    }
+
     @DeleteMapping("/DeleteAll")
     public ResponseEntity<String> deleteAllUsers() {
         _userService.deleteAllUsers();

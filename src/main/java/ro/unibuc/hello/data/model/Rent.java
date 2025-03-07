@@ -1,11 +1,14 @@
 package ro.unibuc.hello.data.model;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDate;
 
 @Document(collection = "Rents")
 public class Rent {
   
+    @Id
+    private String id;
 
     private String userID;
     private String gameID;
@@ -14,14 +17,20 @@ public class Rent {
     private int length;
     private double price;
 
+    public Rent(){
+    }
 
-    public Rent(String userID, String gameID, LocalDate date, int length, double price){
+    public Rent(String userID, String gameID, LocalDate startDate, int length, double price){
         this.userID = userID;
         this.gameID = gameID;
-        this.startDate = date;
+        this.startDate = startDate;
         this.length = length;
         this.endDate = startDate.plusDays(length);
         this.price = price;
+    }
+
+    public String getId(){
+        return id;
     }
 
     public String getUserID(){
@@ -51,12 +60,19 @@ public class Rent {
     public void setEndDate(LocalDate date){
         this.endDate = date;
     }
-    
+    public void addToEndDate(int noDays){
+        endDate = endDate.plusDays(noDays); 
+        addToLength(noDays);
+    }
+
     public int getLength(){
         return length;
     }
     public void setLength(int length){
         this.length = length;
+    }
+    public void addToLength(int addingLength){
+        this.length += addingLength;
     }
 
     public double getPrice(){
@@ -65,6 +81,8 @@ public class Rent {
     public void setPrice(double price){
         this.price = price;
     }
-
+    public void addToPrice(double price){
+        this.price += price;
+    }
 
 }

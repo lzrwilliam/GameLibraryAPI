@@ -34,10 +34,15 @@ public class UserController {
 <span class="nc" id="L34">        return _userService.addUser(user);</span>
     }
 
+    @PatchMapping(&quot;/AddMoney/user={userID}&amp;sum={sum}&quot;)
+    public User addMoney(@PathVariable String userID, @PathVariable double sum){
+<span class="nc" id="L39">        return _userService.addMoney(userID, sum);</span>
+    }
+
     @DeleteMapping(&quot;/DeleteAll&quot;)
     public ResponseEntity&lt;String&gt; deleteAllUsers() {
-<span class="nc" id="L39">        _userService.deleteAllUsers();</span>
-<span class="nc" id="L40">        return ResponseEntity.ok(&quot;Toți utilizatorii au fost șterși&quot;);</span>
+<span class="nc" id="L44">        _userService.deleteAllUsers();</span>
+<span class="nc" id="L45">        return ResponseEntity.ok(&quot;Toți utilizatorii au fost șterși&quot;);</span>
     }
 
 

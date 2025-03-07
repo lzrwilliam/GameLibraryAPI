@@ -28,6 +28,18 @@ public class UserService{
         
     }
 
+    public User addMoney(String id, double sum){
+        Optional<User> optionalUser = _userRepository.findById(id);
+        if(optionalUser.isEmpty()){
+            throw new RuntimeException("User not found with ID: " + id);
+        }
+
+        User user = optionalUser.get();
+        user.addToBalance(sum);
+        
+        return _userRepository.save(user);
+    }
+
     public void deleteAllUsers() {
         _userRepository.deleteAll();
     }

@@ -42,29 +42,81 @@ public class GameService {
     public Rent rentGame(String gameID, String userID, int length) {
         
         Optional<Game> optionalGame = getGameById(gameID);
-        Optional<User> optionalUser = _userRepository.findById(userID);
-
         if (optionalGame.isEmpty()) {
             throw new RuntimeException("Game not found with ID: " + gameID);
         }
 
+        Optional<User> optionalUser = _userRepository.findById(userID);
         if (optionalUser.isEmpty()){
             throw new RuntimeException("User not found with ID: " + userID);
         }
     
-        Game game = optionalGame.get(); 
-        int noCopies = game.getAvailableCopies();
+        Game game = optionalGame.get();
+        int noCopies = game.getAvailableCopies(); 
+        User user = optionalUser.get();
+        double balance = user.getBalance();
         if (noCopies >= 1) {
-            game.setAvailableCopies(game.getAvailableCopies() - 1);
-            _gameRepository.save(game);
             double price = game.getPrice();
             price *= length;
+
+            if(balance < price){
+                throw new RuntimeException("User dose not have enough money");
+            }
+
+            game.setAvailableCopies(game.getAvailableCopies() - 1);
+            _gameRepository.save(game);
+            user.addToBalance(-price);
+            _userRepository.save(user);
             return _rentRepository.save(new Rent(userID, gameID, LocalDate.now(), length, price));
+            
         }
     
         throw new RuntimeException("No available copies for game: " + gameID);
     }
     
+    public Rent extendRent(String gameID, String userID, LocalDate startDate, int length){
+        Optional<Game> optionalGame = getGameById(gameID);
+        if (optionalGame.isEmpty()) {
+            throw new RuntimeException("Game not found with ID: " + gameID);
+        }
+
+        Optional<User> optionalUser = _userRepository.findById(userID);
+        if (optionalUser.isEmpty()){
+            throw new RuntimeException("User not found with ID: " + userID);
+        }
+
+        Optional<Rent> optionalRent = _rentRepository.findByUserIDAndGameIDAndStartDate(userID, gameID, startDate);
+        if (optionalRent.isEmpty()){
+            throw new RuntimeException("User: \"" + userID + "\" did not rent the game: \"" + gameID + "\" on date :" + startDate);
+        }
+
+        
+
+        Rent rent = optionalRent.get(); 
+        LocalDate endDate = rent.getEndDate();
+
+        LocalDate actualDate = LocalDate.now();
+        if (actualDate.isAfter(endDate)) {
+            throw new RuntimeException("Can't extend a rent that is over");
+        }
+
+        User user = optionalUser.get();
+        Game game = optionalGame.get();
+        double balance = user.getBalance();
+        double price = game.getPrice();
+        price *= length;
+        
+        if(balance < price){
+            throw new RuntimeException("User dose not have enough money");
+        }
+        
+        user.addToBalance(-price);
+        _userRepository.save(user);
+        rent.addToEndDate(length);
+        rent.addToPrice(price);
+
+        return _rentRepository.save(rent);
+    }
 
     public void deleteGame(String id) {
         _gameRepository.deleteById(id);
@@ -72,5 +124,9 @@ public class GameService {
 
     public void deleteAllGames(){
         _gameRepository.deleteAll();
+    }
+
+    public void deleteAllrents(){
+        _rentRepository.deleteAll();
     }
 }

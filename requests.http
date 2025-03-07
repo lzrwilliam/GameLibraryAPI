@@ -67,12 +67,16 @@ Content-Type: application/json
     "userName": "johndoe",
     "password": "securepassword123",
     "birthDate": "1990-01-01",
+    "balance": 10.00,
     "email": "johndoe@example.com",
     "phoneNumber": "1234567890"
 }
 
 ### Get By ID
 GET http://localhost:8080/Users/Find/67c9ab605040be58cff44db0
+
+### Add Money to User
+PATCH http://localhost:8080/Users/AddMoney/user=67caf05de704c46fb40e6a92&sum=100.10
 
 ###deleteAll
 DELETE http://localhost:8080/Users/DeleteAll
@@ -87,7 +91,7 @@ Content-Type: application/json
 {
     "title": "Cyberpunk 2078",
     "genre": "RPG",
-    "price": 19.99,
+    "price": 2.99,
     "totalCopies": 50,
     "availableCopies": 50,
     "maxPlayers": 1,
@@ -97,11 +101,15 @@ Content-Type: application/json
 }
 
 ### Get By ID
-GET http://localhost:8080/games/Find/67c9a12035e72b2ba5c0694a
+GET http://localhost:8080/games/Find/67caf185879a72024606b493
 
 ### Rent Game
+PATCH  http://localhost:8080/games/Rent/game=67caf185879a72024606b493&user=67caf05de704c46fb40e6a92&for=2
 
-PATCH  http://localhost:8080/games/Rent/game=67c9c044570c7b6db77e1f72&user=67c9ab605040be58cff44db0&for=2
+### Extend Rent 
+PATCH http://localhost:8080/games/Extend/game/67caf185879a72024606b493/user/67caf05de704c46fb40e6a92/start/2025-03-07/for/4
 
-### Delete All
-DELETE http://localhost:8080/games/DeleteAll
+### Delete All Rents
+DELETE http://localhost:8080/games/DeleteAllRents
+### Delete All Games
+DELETE http://localhost:8080/games/DeleteAllGames
