@@ -90,7 +90,16 @@ public class GameService {
             throw new RuntimeException("User: \"" + userID + "\" did not rent the game: \"" + gameID + "\" on date :" + startDate);
         }
 
+        
+
         Rent rent = optionalRent.get(); 
+        LocalDate endDate = rent.getEndDate();
+
+        LocalDate actualDate = LocalDate.now();
+        if (actualDate.isAfter(endDate)) {
+            throw new RuntimeException("Can't extend a rent that is over");
+        }
+
         User user = optionalUser.get();
         Game game = optionalGame.get();
         double balance = user.getBalance();
