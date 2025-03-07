@@ -75,6 +75,9 @@ Content-Type: application/json
 ### Get By ID
 GET http://localhost:8080/Users/Find/67c9ab605040be58cff44db0
 
+### Add Money to User
+PATCH http://localhost:8080/Users/AddMoney/user=67caf05de704c46fb40e6a92&sum=100.10
+
 ###deleteAll
 DELETE http://localhost:8080/Users/DeleteAll
 
@@ -101,8 +104,12 @@ Content-Type: application/json
 GET http://localhost:8080/games/Find/67caf185879a72024606b493
 
 ### Rent Game
-
 PATCH  http://localhost:8080/games/Rent/game=67caf185879a72024606b493&user=67caf05de704c46fb40e6a92&for=2
 
-### Delete All
-DELETE http://localhost:8080/games/DeleteAll
+### Extend Rent 
+PATCH http://localhost:8080/games/Extend/game/67caf185879a72024606b493/user/67caf05de704c46fb40e6a92/start/2025-03-07/for/4
+
+### Delete All Rents
+DELETE http://localhost:8080/games/DeleteAllRents
+### Delete All Games
+DELETE http://localhost:8080/games/DeleteAllGames

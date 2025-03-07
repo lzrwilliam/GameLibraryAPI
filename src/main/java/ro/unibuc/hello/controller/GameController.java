@@ -5,9 +5,12 @@ import ro.unibuc.hello.data.model.Rent;
 
 import ro.unibuc.hello.service.GameService;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,16 +47,34 @@ public class GameController {
         return _gameService.rentGame(gameid, userid, length);
     }
 
+    @PatchMapping("/Extend/game/{gameid}/user/{userid}/start/{startDate}/for/{length}")
+    public ResponseEntity<?> extendRent(@PathVariable String gameid, @PathVariable String userid, @PathVariable String startDate, @PathVariable int length ){
+        try {
+            LocalDate dateStartDate = LocalDate.parse(startDate);
+            Rent rent = _gameService.extendRent(gameid, userid, dateStartDate, length);
+            return ResponseEntity.ok(rent);
+        } catch (DateTimeParseException e) {
+            return ResponseEntity.badRequest().body("Invalid date format: " + startDate);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/DeleteAllRents")
+    public ResponseEntity<String> deleteAllRents(){
+        _gameService.deleteAllrents();
+        return ResponseEntity.ok("Toate inchirierile au fost ștersee");
+    }
 
 
-    @DeleteMapping("Delete/{id}")
+    @DeleteMapping("/Delete/{id}")
     public ResponseEntity<Void> deleteGame(@PathVariable String id) {
         _gameService.deleteGame(id);
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/DeleteAll")
-    public ResponseEntity<String> deleteAllUsers() {
+    @DeleteMapping("/DeleteAllGames")
+    public ResponseEntity<String> deleteAllGames() {
         _gameService.deleteAllGames();
         return ResponseEntity.ok("Toate jocurile au fost ștersee");
     }

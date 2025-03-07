@@ -28,8 +28,20 @@ public class UserService{
         
     }
 
+    public User addMoney(String id, double sum){
+<span class="nc" id="L32">        Optional&lt;User&gt; optionalUser = _userRepository.findById(id);</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">        if(optionalUser.isEmpty()){</span>
+<span class="nc" id="L34">            throw new RuntimeException(&quot;User not found with ID: &quot; + id);</span>
+        }
+
+<span class="nc" id="L37">        User user = optionalUser.get();</span>
+<span class="nc" id="L38">        user.addToBalance(sum);</span>
+        
+<span class="nc" id="L40">        return _userRepository.save(user);</span>
+    }
+
     public void deleteAllUsers() {
-<span class="nc" id="L32">        _userRepository.deleteAll();</span>
-<span class="nc" id="L33">    }</span>
+<span class="nc" id="L44">        _userRepository.deleteAll();</span>
+<span class="nc" id="L45">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
