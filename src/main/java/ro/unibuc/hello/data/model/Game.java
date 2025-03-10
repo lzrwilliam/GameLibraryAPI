@@ -3,6 +3,9 @@ package ro.unibuc.hello.data.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Document(collection = "games")
 public class Game {
@@ -18,6 +21,8 @@ public class Game {
     private LocalDate addedDate;
     private double purchasePrice;
     private AgeCategory ageCategory;
+    private List<Review> reviews = new ArrayList<>();
+
 
     public Game() {}
 
@@ -31,6 +36,7 @@ public class Game {
         this.addedDate = addedDate;
         this.purchasePrice = purchasePrice;
         this.ageCategory = ageCategory;
+        this.reviews = new ArrayList<>();
     }
 
    
@@ -62,5 +68,18 @@ public class Game {
 
     public double getPurchasePrice() { return purchasePrice; }
     public void setPurchasePrice(double purchasePrice) { this.purchasePrice = purchasePrice; }
+
+
+     public void addReview(Review review) {
+        reviews.add(review);
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
 
 }

@@ -3,10 +3,12 @@ package ro.unibuc.hello.service;
 import ro.unibuc.hello.data.model.Game;
 import ro.unibuc.hello.data.model.Rent;
 import ro.unibuc.hello.data.model.User;
+import ro.unibuc.hello.data.model.Review;
 
 import ro.unibuc.hello.data.repository.GameRepository;
 import ro.unibuc.hello.data.repository.RentRepository;
 import ro.unibuc.hello.data.repository.UserRepository;
+
 
 import org.springframework.stereotype.Service;
 
@@ -128,5 +130,61 @@ public class GameService {
 
     public void deleteAllrents(){
         _rentRepository.deleteAll();
+    }
+
+public String addReview(String userId, String gameId, String reviewText, int rating) {
+    
+    Optional<Game> gameOpt = _gameRepository.findById(gameId);
+    if (gameOpt.isEmpty()) {
+        throw new RuntimeException("Jocul nu există!");
+    }
+    Game game = gameOpt.get();
+
+    
+    if (rating < 1 || rating > 5) {
+        throw new RuntimeException("Rating-ul trebuie să fie între 1 și 5!");
+    }
+    if(reviewText.length() == 0){
+        throw new RuntimeException("Review-ul nu poate fi gol!");
+    }
+
+   
+    Optional<User> userOpt = _userRepository.findById(userId);
+    if (userOpt.isEmpty()) {
+        throw new RuntimeException("Utilizatorul nu există!");
+    }
+    
+    User user = userOpt.get();
+
+   
+    List<Rent> rentals = _rentRepository.findAll();
+    boolean hasRentedGame = rentals.stream()
+            .anyMatch(r -> r.getUserID().equals(userId) && r.getGameID().equals(gameId));
+
+    if (!hasRentedGame) {
+        throw new RuntimeException("Nu poți lăsa un review pentru un joc pe care nu l-ai închiriat!");
+    }
+
+  
+
+   
+    boolean alreadyReviewed = game.getReviews().stream().anyMatch(r -> r.getUserId().equals(userId));
+    if (alreadyReviewed) {
+        throw new RuntimeException("Ai lăsat deja un review pentru acest joc!");
+    }
+
+   
+    game.addReview(new Review(userId, reviewText, rating));
+    _gameRepository.save(game);
+
+    return "Review adăugat cu succes!";
+}
+
+    public List<Review> getReviewsForGame(String gameId) {
+        Optional<Game> gameOpt = _gameRepository.findById(gameId);
+        if (gameOpt.isEmpty()) {
+            throw new RuntimeException("Jocul nu există!");
+        }
+        return gameOpt.get().getReviews();
     }
 }

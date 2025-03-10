@@ -2,6 +2,8 @@ package ro.unibuc.hello.controller;
 
 import ro.unibuc.hello.data.model.Game;
 import ro.unibuc.hello.data.model.Rent;
+import ro.unibuc.hello.data.model.Review;
+import ro.unibuc.hello.dto.ReviewRequest;
 
 import ro.unibuc.hello.service.GameService;
 
@@ -77,5 +79,26 @@ public class GameController {
     public ResponseEntity<String> deleteAllGames() {
         _gameService.deleteAllGames();
         return ResponseEntity.ok("Toate jocurile au fost ștersee");
+    }
+
+
+@PostMapping("/AddReview")
+public ResponseEntity<String> addReview(@RequestBody ReviewRequest reviewRequest) {
+    try {
+        return ResponseEntity.ok(_gameService.addReview(
+                reviewRequest.getUserId(),
+                reviewRequest.getGameId(),
+                reviewRequest.getReviewText(),
+                reviewRequest.getRating()
+        ));
+    } catch (RuntimeException e) {
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
+}
+
+
+    @GetMapping("/{gameId}/reviews")
+    public ResponseEntity<List<Review>> getReviews(@PathVariable String gameId) {
+        return ResponseEntity.ok(_gameService.getReviewsForGame(gameId));
     }
 }

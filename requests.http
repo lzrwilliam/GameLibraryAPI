@@ -1,56 +1,4 @@
 
-# You can use this file to easily send requests to your API.
-# Prerequisite: humao.rest-client Vscode plugin (already present on codespace)
-# High-level overview of REST API concepts used here: https://www.packtpub.com/en-us/learning/how-to-tutorials/what-are-rest-verbs-and-status-codes-tutorial?srsltid=AfmBOoppDqtkhRxj5BLZONRZFzRDmh6eP-xyTo6H4OuEHYuVbrg1d4Dm
-
-
-# Requests for API endpoints of the sample project:
-
-### Hello world endpoint: get response "Hello, Stranger!"
-GET http://localhost:8080/hello-world
-
-### Hello world with a request param passed.
-# When sending the request it will ask you for the name
-# hitting enter will avoid passing the param, and do the default behaviour above
-# @prompt name The name to display in response
-GET http://localhost:8080/hello-world
-    ?name={{name}}
-
-### Save a greeting to database
-@postGreetingId = 1001
-@postGreetingContent = Hello!
-POST http://localhost:8080/greetings
-Content-Type: application/json
-
-{
-    "id": "{{postGreetingId}}",
-    "content": "{{postGreetingContent}}"
-}
-
-### Get all greetings
-GET http://localhost:8080/greetings
-
-### Get info for greeting with given content
-# @prompt content Greeting content to look for, defaults to "Overview"
-GET http://localhost:8080/info
-    ?title={{content}}
-
-### Update an existing greeting
-@putGreetingId = 1001
-@putGreetingContent = Hello again!
-PUT http://localhost:8080/greetings/{{putGreetingId}}
-Content-Type: application/json
-
-{
-    "content": "{{putGreetingContent}}"
-}
-
-### Delete greeting
-@deleteGreetingId = 1001
-DELETE http://localhost:8080/greetings/{{deleteGreetingId}}
-
-
-# TODO add requests for your own endpoints!
 
 ####Users
 
@@ -76,7 +24,7 @@ Content-Type: application/json
 GET http://localhost:8080/Users/Find/67c9ab605040be58cff44db0
 
 ### Add Money to User
-PATCH http://localhost:8080/Users/AddMoney/user=67caf05de704c46fb40e6a92&sum=100.10
+PATCH http://localhost:8080/Users/AddMoney/user=67ccc010855661506565c51c&sum=100.10
 
 ###deleteAll
 DELETE http://localhost:8080/Users/DeleteAll
@@ -104,7 +52,7 @@ Content-Type: application/json
 GET http://localhost:8080/games/Find/67caf185879a72024606b493
 
 ### Rent Game
-PATCH  http://localhost:8080/games/Rent/game=67caf185879a72024606b493&user=67caf05de704c46fb40e6a92&for=2
+PATCH  http://localhost:8080/games/Rent/game=67cccbff4d25151eda36936c&user=67ccc010855661506565c51c&for=2
 
 ### Extend Rent 
 PATCH http://localhost:8080/games/Extend/game/67caf185879a72024606b493/user/67caf05de704c46fb40e6a92/start/2025-03-07/for/4
@@ -113,3 +61,104 @@ PATCH http://localhost:8080/games/Extend/game/67caf185879a72024606b493/user/67ca
 DELETE http://localhost:8080/games/DeleteAllRents
 ### Delete All Games
 DELETE http://localhost:8080/games/DeleteAllGames
+
+
+###REVIEWS
+### 🟢 1. Adăugare review valid (utilizator a închiriat jocul)
+POST http://localhost:8080/games/AddReview
+Content-Type: application/json
+
+{
+    "userId": "67ccc010855661506565c51c",
+    "gameId": "67ccc7f53ed186549c0667ee",
+    "reviewText": "Joc fantastic! Grafica superbă și gameplay captivant!",
+    "rating": 5
+}
+
+###
+
+### 🔴 2. Adăugare review de către un utilizator care NU a închiriat jocul (ar trebui să eșueze)
+POST http://localhost:8080/games/AddReview
+Content-Type: application/json
+
+{
+    "userId": "67ccc010855661506565c51c",
+    "gameId": "67ccc7f53ed186549c066799",
+    "reviewText": "Nu am jucat jocul, dar pare interesant.",
+    "rating": 4
+}
+
+###
+
+### 🔴 3. Adăugare review duplicat (utilizatorul încearcă să lase încă un review pentru același joc)
+POST http://localhost:8080/games/AddReview
+Content-Type: application/json
+
+{
+    "userId": "67ccc010855661506565c51c",
+    "gameId": "67ccc7f53ed186549c0667ee",
+    "reviewText": "Îmi mențin părerea, jocul este minunat!",
+    "rating": 5
+}
+
+###
+
+### 🟢 4. Obținere review-uri pentru un joc (ar trebui să conțină review-ul adăugat)
+GET http://localhost:8080/games/67ccc7f53ed186549c0667ee/reviews
+
+###
+
+### 🔴 5. Obținere review-uri pentru un joc care nu are recenzii (ar trebui să returneze listă goală)
+GET http://localhost:8080/games/67ccc7f53ed186549c066799/reviews
+
+###
+
+### 🔴 6. Adăugare review cu rating invalid (ar trebui să eșueze)
+POST http://localhost:8080/games/AddReview
+Content-Type: application/json
+
+{
+    "userId": "67ccc010855661506565c51c",
+    "gameId": "67cccbff4d25151eda36936c",
+    "reviewText": "Acest joc este prea greu!",
+    "rating": 6
+}
+
+###
+
+### 🔴 7. Adăugare review cu text gol (ar trebui să eșueze)
+POST http://localhost:8080/games/AddReview
+Content-Type: application/json
+
+{
+    "userId": "67ccc010855661506565c51c",
+    "gameId": "67ccc7f53ed186549c0667ee",
+    "reviewText": "",
+    "rating": 3
+}
+
+###
+
+### 🔴 8. Adăugare review cu utilizator inexistent (ar trebui să eșueze)
+POST http://localhost:8080/games/AddReview
+Content-Type: application/json
+
+{
+    "userId": "67ccc010855661506565aaaa",
+    "gameId": "67ccc7f53ed186549c0667ee",
+    "reviewText": "Joc decent, dar sunt bug-uri.",
+    "rating": 3
+}
+
+###
+
+### 🔴 9. Adăugare review pentru un joc inexistent (ar trebui să eșueze)
+POST http://localhost:8080/games/AddReview
+Content-Type: application/json
+
+{
+    "userId": "67ccc010855661506565c51c",
+    "gameId": "67ccc7f53ed186549c066aaa",
+    "reviewText": "Am auzit lucruri bune despre acest joc.",
+    "rating": 4
+}
