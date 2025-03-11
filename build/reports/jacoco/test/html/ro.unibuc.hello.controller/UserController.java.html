@@ -25,7 +25,7 @@ public class UserController {
     }
 
     @GetMapping(&quot;/Find/{id}&quot;)
-    public Optional&lt;User&gt; GetUserByID(@PathVariable String id){
+    public Optional&lt;User&gt; GetUserByID(@PathVariable int id){
 <span class="nc" id="L29">        return _userService.GetUserByID(id);</span>
     }
 
@@ -35,7 +35,7 @@ public class UserController {
     }
 
     @PatchMapping(&quot;/AddMoney/user={userID}&amp;sum={sum}&quot;)
-    public User addMoney(@PathVariable String userID, @PathVariable double sum){
+    public User addMoney(@PathVariable int userID, @PathVariable double sum){
 <span class="nc" id="L39">        return _userService.addMoney(userID, sum);</span>
     }
 

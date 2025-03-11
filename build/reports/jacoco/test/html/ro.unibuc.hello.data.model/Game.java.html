@@ -2,6 +2,9 @@
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.FieldType;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +14,9 @@ import java.util.List;
 public class Game {
 
     @Id
-    private String id;
+    @MongoId(targetType = FieldType.INT32) // id setat drept int
+    private int id;
+
     private String title;
     private String genre;
     private double price;
@@ -21,66 +26,69 @@ public class Game {
     private LocalDate addedDate;
     private double purchasePrice;
     private AgeCategory ageCategory;
-<span class="nc" id="L24">    private List&lt;Review&gt; reviews = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L29">    private List&lt;Review&gt; reviews = new ArrayList&lt;&gt;();</span>
 
 
-<span class="nc" id="L27">    public Game() {}</span>
+<span class="nc" id="L32">    public Game() {}</span>
 
-<span class="nc" id="L29">    public Game(String title, String genre, double price, int totalCopies, int availableCopies, int maxPlayers, LocalDate addedDate, double purchasePrice, AgeCategory ageCategory) {</span>
-<span class="nc" id="L30">        this.title = title;</span>
-<span class="nc" id="L31">        this.genre = genre;</span>
-<span class="nc" id="L32">        this.price = price;</span>
-<span class="nc" id="L33">        this.totalCopies = totalCopies;</span>
-<span class="nc" id="L34">        this.availableCopies = availableCopies;</span>
-<span class="nc" id="L35">        this.maxPlayers = maxPlayers;</span>
-<span class="nc" id="L36">        this.addedDate = addedDate;</span>
-<span class="nc" id="L37">        this.purchasePrice = purchasePrice;</span>
-<span class="nc" id="L38">        this.ageCategory = ageCategory;</span>
-<span class="nc" id="L39">        this.reviews = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L40">    }</span>
+<span class="nc" id="L34">    public Game(int id,String title, String genre, double price, int totalCopies, int availableCopies, int maxPlayers, LocalDate addedDate, double purchasePrice, AgeCategory ageCategory) {</span>
+<span class="nc" id="L35">       this.id=id;</span>
+<span class="nc" id="L36">        this.title = title;</span>
+<span class="nc" id="L37">        this.genre = genre;</span>
+<span class="nc" id="L38">        this.price = price;</span>
+<span class="nc" id="L39">        this.totalCopies = totalCopies;</span>
+<span class="nc" id="L40">        this.availableCopies = availableCopies;</span>
+<span class="nc" id="L41">        this.maxPlayers = maxPlayers;</span>
+<span class="nc" id="L42">        this.addedDate = addedDate;</span>
+<span class="nc" id="L43">        this.purchasePrice = purchasePrice;</span>
+<span class="nc" id="L44">        this.ageCategory = ageCategory;</span>
+<span class="nc" id="L45">        this.reviews = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L46">    }</span>
 
    
-<span class="nc" id="L43">    public AgeCategory getAgeCategory() { return ageCategory; }</span>
-<span class="nc" id="L44">    public void setAgeCategory(AgeCategory ageCategory) { this.ageCategory = ageCategory; }</span>
-<span class="nc" id="L45">       public String getId() { return id; }</span>
-<span class="nc" id="L46">    public void setId(String id) { this.id = id; }</span>
+<span class="nc" id="L49">    public AgeCategory getAgeCategory() { return ageCategory; }</span>
+<span class="nc" id="L50">    public void setAgeCategory(AgeCategory ageCategory) { this.ageCategory = ageCategory; }</span>
+     
 
-<span class="nc" id="L48">    public String getTitle() { return title; }</span>
-<span class="nc" id="L49">    public void setTitle(String title) { this.title = title; }</span>
+<span class="nc" id="L53">    public String getTitle() { return title; }</span>
+<span class="nc" id="L54">    public void setTitle(String title) { this.title = title; }</span>
 
-<span class="nc" id="L51">    public String getGenre() { return genre; }</span>
-<span class="nc" id="L52">    public void setGenre(String genre) { this.genre = genre; }</span>
+<span class="nc" id="L56">    public String getGenre() { return genre; }</span>
+<span class="nc" id="L57">    public void setGenre(String genre) { this.genre = genre; }</span>
 
-<span class="nc" id="L54">    public double getPrice() { return price; }</span>
-<span class="nc" id="L55">    public void setPrice(double price) { this.price = price; }</span>
+<span class="nc" id="L59">    public double getPrice() { return price; }</span>
+<span class="nc" id="L60">    public void setPrice(double price) { this.price = price; }</span>
 
-<span class="nc" id="L57">    public int getTotalCopies() { return totalCopies; }</span>
-<span class="nc" id="L58">    public void setTotalCopies(int totalCopies) { this.totalCopies = totalCopies; }</span>
+<span class="nc" id="L62">    public int getTotalCopies() { return totalCopies; }</span>
+<span class="nc" id="L63">    public void setTotalCopies(int totalCopies) { this.totalCopies = totalCopies; }</span>
 
-<span class="nc" id="L60">    public int getAvailableCopies() { return availableCopies; }</span>
-<span class="nc" id="L61">    public void setAvailableCopies(int availableCopies) { this.availableCopies = availableCopies; }</span>
+<span class="nc" id="L65">    public int getAvailableCopies() { return availableCopies; }</span>
+<span class="nc" id="L66">    public void setAvailableCopies(int availableCopies) { this.availableCopies = availableCopies; }</span>
 
-<span class="nc" id="L63">    public int getMaxPlayers() { return maxPlayers; }</span>
-<span class="nc" id="L64">    public void setMaxPlayers(int maxPlayers) { this.maxPlayers = maxPlayers; }</span>
+<span class="nc" id="L68">    public int getMaxPlayers() { return maxPlayers; }</span>
+<span class="nc" id="L69">    public void setMaxPlayers(int maxPlayers) { this.maxPlayers = maxPlayers; }</span>
 
-<span class="nc" id="L66">    public LocalDate getAddedDate() { return addedDate; }</span>
-<span class="nc" id="L67">    public void setAddedDate(LocalDate addedDate) { this.addedDate = addedDate; }</span>
+<span class="nc" id="L71">    public LocalDate getAddedDate() { return addedDate; }</span>
+<span class="nc" id="L72">    public void setAddedDate(LocalDate addedDate) { this.addedDate = addedDate; }</span>
 
-<span class="nc" id="L69">    public double getPurchasePrice() { return purchasePrice; }</span>
-<span class="nc" id="L70">    public void setPurchasePrice(double purchasePrice) { this.purchasePrice = purchasePrice; }</span>
+<span class="nc" id="L74">    public double getPurchasePrice() { return purchasePrice; }</span>
+<span class="nc" id="L75">    public void setPurchasePrice(double purchasePrice) { this.purchasePrice = purchasePrice; }</span>
 
 
      public void addReview(Review review) {
-<span class="nc" id="L74">        reviews.add(review);</span>
-<span class="nc" id="L75">    }</span>
+<span class="nc" id="L79">        reviews.add(review);</span>
+<span class="nc" id="L80">    }</span>
 
     public List&lt;Review&gt; getReviews() {
-<span class="nc" id="L78">        return reviews;</span>
+<span class="nc" id="L83">        return reviews;</span>
     }
 
     public void setReviews(List&lt;Review&gt; reviews) {
-<span class="nc" id="L82">        this.reviews = reviews;</span>
-<span class="nc" id="L83">    }</span>
+<span class="nc" id="L87">        this.reviews = reviews;</span>
+<span class="nc" id="L88">    }</span>
+
+<span class="nc" id="L90">    public int getId() { return id; }</span>
+<span class="nc" id="L91">    public void setId(int id) { this.id = id; }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

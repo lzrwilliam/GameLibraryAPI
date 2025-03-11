@@ -12,6 +12,6 @@ import org.springframework.stereotype.Repository;
 public interface RentRepository extends MongoRepository<Rent, String> {
     
 
-    Optional<Rent> findByUserIDAndGameIDAndStartDate(String userID, String gameID, LocalDate startDate);
+    Optional<Rent> findByUserIDAndGameIDAndStartDate(int userID, int gameID, LocalDate startDate);
 
 }

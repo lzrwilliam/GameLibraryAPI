@@ -10,8 +10,8 @@ public class Rent {
     @Id
     private String id;
 
-    private String userID;
-    private String gameID;
+    private int userID;
+    private int gameID;
     private LocalDate startDate;
     private LocalDate endDate;
     private int length;
@@ -20,7 +20,7 @@ public class Rent {
 <span class="nc" id="L20">    public Rent(){</span>
 <span class="nc" id="L21">    }</span>
 
-<span class="nc" id="L23">    public Rent(String userID, String gameID, LocalDate startDate, int length, double price){</span>
+<span class="nc" id="L23">    public Rent(int userID, int gameID, LocalDate startDate, int length, double price){</span>
 <span class="nc" id="L24">        this.userID = userID;</span>
 <span class="nc" id="L25">        this.gameID = gameID;</span>
 <span class="nc" id="L26">        this.startDate = startDate;</span>
@@ -33,17 +33,17 @@ public class Rent {
 <span class="nc" id="L33">        return id;</span>
     }
 
-    public String getUserID(){
+    public int getUserID(){
 <span class="nc" id="L37">        return userID;</span>
     }
-    public void setUserID(String userID){
+    public void setUserID(int userID){
 <span class="nc" id="L40">        this.userID = userID;</span>
 <span class="nc" id="L41">    }</span>
 
-    public String getGameID(){
+    public int getGameID(){
 <span class="nc" id="L44">        return gameID;</span>
     }
-    public void setGameID(String gameID){
+    public void setGameID(int gameID){
 <span class="nc" id="L47">        this.gameID = gameID;</span>
 <span class="nc" id="L48">    }</span>
 

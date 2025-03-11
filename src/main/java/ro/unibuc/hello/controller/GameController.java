@@ -33,7 +33,7 @@ public class GameController {
     }
 
     @GetMapping("/Find/{id}")
-    public ResponseEntity<Game> getGameById(@PathVariable String id) {
+    public ResponseEntity<Game> getGameById(@PathVariable int id) {
         Optional<Game> game = _gameService.getGameById(id);
         return game.map(ResponseEntity::ok)
                    .orElseGet(() -> ResponseEntity.notFound().build());
@@ -45,12 +45,12 @@ public class GameController {
     }
 
     @PatchMapping("/Rent/game={gameid}&user={userid}&for={length}")
-    public Rent rentGame(@PathVariable String gameid, @PathVariable String userid, @PathVariable int length){
+    public Rent rentGame(@PathVariable int gameid, @PathVariable int userid, @PathVariable int length){
         return _gameService.rentGame(gameid, userid, length);
     }
 
     @PatchMapping("/Extend/game/{gameid}/user/{userid}/start/{startDate}/for/{length}")
-    public ResponseEntity<?> extendRent(@PathVariable String gameid, @PathVariable String userid, @PathVariable String startDate, @PathVariable int length ){
+    public ResponseEntity<?> extendRent(@PathVariable int gameid, @PathVariable int userid, @PathVariable String startDate, @PathVariable int length ){
         try {
             LocalDate dateStartDate = LocalDate.parse(startDate);
             Rent rent = _gameService.extendRent(gameid, userid, dateStartDate, length);
@@ -70,7 +70,7 @@ public class GameController {
 
 
     @DeleteMapping("/Delete/{id}")
-    public ResponseEntity<Void> deleteGame(@PathVariable String id) {
+    public ResponseEntity<Void> deleteGame(@PathVariable  int id) {
         _gameService.deleteGame(id);
         return ResponseEntity.noContent().build();
     }
@@ -85,9 +85,12 @@ public class GameController {
 @PostMapping("/AddReview")
 public ResponseEntity<String> addReview(@RequestBody ReviewRequest reviewRequest) {
     try {
+        int gameId = Integer.parseInt(reviewRequest.getGameId());
+        int userId = Integer.parseInt( reviewRequest.getUserId());
+
         return ResponseEntity.ok(_gameService.addReview(
-                reviewRequest.getUserId(),
-                reviewRequest.getGameId(),
+                userId,
+                gameId,
                 reviewRequest.getReviewText(),
                 reviewRequest.getRating()
         ));
@@ -98,7 +101,7 @@ public ResponseEntity<String> addReview(@RequestBody ReviewRequest reviewRequest
 
 
     @GetMapping("/{gameId}/reviews")
-    public ResponseEntity<List<Review>> getReviews(@PathVariable String gameId) {
+    public ResponseEntity<List<Review>> getReviews(@PathVariable int gameId) {
         return ResponseEntity.ok(_gameService.getReviewsForGame(gameId));
     }
 }

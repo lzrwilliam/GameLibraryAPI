@@ -2,6 +2,9 @@ package ro.unibuc.hello.data.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.FieldType;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +14,9 @@ import java.util.List;
 public class Game {
 
     @Id
-    private String id;
+    @MongoId(targetType = FieldType.INT32) // id setat drept int
+    private int id;
+
     private String title;
     private String genre;
     private double price;
@@ -26,7 +31,8 @@ public class Game {
 
     public Game() {}
 
-    public Game(String title, String genre, double price, int totalCopies, int availableCopies, int maxPlayers, LocalDate addedDate, double purchasePrice, AgeCategory ageCategory) {
+    public Game(int id,String title, String genre, double price, int totalCopies, int availableCopies, int maxPlayers, LocalDate addedDate, double purchasePrice, AgeCategory ageCategory) {
+       this.id=id;
         this.title = title;
         this.genre = genre;
         this.price = price;
@@ -42,8 +48,7 @@ public class Game {
    
     public AgeCategory getAgeCategory() { return ageCategory; }
     public void setAgeCategory(AgeCategory ageCategory) { this.ageCategory = ageCategory; }
-       public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
+     
 
     public String getTitle() { return title; }
     public void setTitle(String title) { this.title = title; }
@@ -81,5 +86,8 @@ public class Game {
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
     }
+
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
 }

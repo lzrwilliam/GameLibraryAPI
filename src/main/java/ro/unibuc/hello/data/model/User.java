@@ -2,13 +2,17 @@ package ro.unibuc.hello.data.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.FieldType;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 import java.time.LocalDate;
 
 @Document(collection = "users")
 public class User {
 
     @Id
-    private String id;
+    @MongoId(targetType = FieldType.INT32) // id setat drept int
+    private int id;
     private String fName;
     private String lName;
     private String userName;
@@ -19,8 +23,9 @@ public class User {
     private String phoneNumber;
     private LocalDate registrationDate; 
 
-    public User(String fName, String lName, String userName, String password,
+    public User(int id ,String fName, String lName, String userName, String password,
                 LocalDate birthDate, double balance, String email, String phoneNumber) {
+        this.id = id;
         this.fName = fName;
         this.lName = lName;
         this.userName = userName;
@@ -33,10 +38,10 @@ public class User {
     }
 
 
-    public String getId() {
+    public int getId() {
         return id;
     }
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

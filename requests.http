@@ -2,6 +2,9 @@
 
 ####Users
 
+###deleteAll
+DELETE http://localhost:8080/Users/DeleteAll
+
 ###GetAll
 GET http://localhost:8080/Users/GetAll
 
@@ -21,13 +24,11 @@ Content-Type: application/json
 }
 
 ### Get By ID
-GET http://localhost:8080/Users/Find/67c9ab605040be58cff44db0
+GET http://localhost:8080/Users/Find/5
 
 ### Add Money to User
-PATCH http://localhost:8080/Users/AddMoney/user=67ccc010855661506565c51c&sum=100.10
+PATCH http://localhost:8080/Users/AddMoney/user=5&sum=100.10
 
-###deleteAll
-DELETE http://localhost:8080/Users/DeleteAll
 
 ### Get all games
 GET http://localhost:8080/games/GetAll
@@ -49,10 +50,10 @@ Content-Type: application/json
 }
 
 ### Get By ID
-GET http://localhost:8080/games/Find/67caf185879a72024606b493
+GET http://localhost:8080/games/Find/1
 
 ### Rent Game
-PATCH  http://localhost:8080/games/Rent/game=67cccbff4d25151eda36936c&user=67ccc010855661506565c51c&for=2
+PATCH  http://localhost:8080/games/Rent/game=1&user=5&for=2
 
 ### Extend Rent 
 PATCH http://localhost:8080/games/Extend/game/67caf185879a72024606b493/user/67caf05de704c46fb40e6a92/start/2025-03-07/for/4
@@ -69,8 +70,8 @@ POST http://localhost:8080/games/AddReview
 Content-Type: application/json
 
 {
-    "userId": "67ccc010855661506565c51c",
-    "gameId": "67ccc7f53ed186549c0667ee",
+    "userId": "5",
+    "gameId": "1",
     "reviewText": "Joc fantastic! Grafica superbă și gameplay captivant!",
     "rating": 5
 }
@@ -82,8 +83,8 @@ POST http://localhost:8080/games/AddReview
 Content-Type: application/json
 
 {
-    "userId": "67ccc010855661506565c51c",
-    "gameId": "67ccc7f53ed186549c066799",
+     "userId": "2",
+    "gameId": "2",
     "reviewText": "Nu am jucat jocul, dar pare interesant.",
     "rating": 4
 }
@@ -95,21 +96,21 @@ POST http://localhost:8080/games/AddReview
 Content-Type: application/json
 
 {
-    "userId": "67ccc010855661506565c51c",
-    "gameId": "67ccc7f53ed186549c0667ee",
+    "userId": "5",
+    "gameId": "1",
     "reviewText": "Îmi mențin părerea, jocul este minunat!",
     "rating": 5
 }
 
-###
 
 ### 🟢 4. Obținere review-uri pentru un joc (ar trebui să conțină review-ul adăugat)
-GET http://localhost:8080/games/67ccc7f53ed186549c0667ee/reviews
+GET http://localhost:8080/games/1/reviews
 
 ###
 
+# adaugat validare daca exista jocul
 ### 🔴 5. Obținere review-uri pentru un joc care nu are recenzii (ar trebui să returneze listă goală)
-GET http://localhost:8080/games/67ccc7f53ed186549c066799/reviews
+GET http://localhost:8080/games/2/reviews
 
 ###
 
@@ -118,8 +119,8 @@ POST http://localhost:8080/games/AddReview
 Content-Type: application/json
 
 {
-    "userId": "67ccc010855661506565c51c",
-    "gameId": "67cccbff4d25151eda36936c",
+    "userId": "5",
+    "gameId": "1",
     "reviewText": "Acest joc este prea greu!",
     "rating": 6
 }
@@ -131,8 +132,8 @@ POST http://localhost:8080/games/AddReview
 Content-Type: application/json
 
 {
-    "userId": "67ccc010855661506565c51c",
-    "gameId": "67ccc7f53ed186549c0667ee",
+     "userId": "5",
+    "gameId": "1",
     "reviewText": "",
     "rating": 3
 }
@@ -144,8 +145,8 @@ POST http://localhost:8080/games/AddReview
 Content-Type: application/json
 
 {
-    "userId": "67ccc010855661506565aaaa",
-    "gameId": "67ccc7f53ed186549c0667ee",
+    "userId": "565",
+    "gameId": "1",
     "reviewText": "Joc decent, dar sunt bug-uri.",
     "rating": 3
 }
@@ -157,8 +158,8 @@ POST http://localhost:8080/games/AddReview
 Content-Type: application/json
 
 {
-    "userId": "67ccc010855661506565c51c",
-    "gameId": "67ccc7f53ed186549c066aaa",
+    "userId": "5",
+    "gameId": "1234",
     "reviewText": "Am auzit lucruri bune despre acest joc.",
     "rating": 4
 }

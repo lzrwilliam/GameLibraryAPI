@@ -1,24 +1,24 @@
 package ro.unibuc.hello.data.model;
 
 public class Review {
-    private String userId;
+    private int userId;
     private String reviewText;
     private int rating;
 
     public Review() {}
 
-    public Review(String userId, String reviewText, int rating) {
+    public Review(int userId, String reviewText, int rating) {
         this.userId = userId;
         this.reviewText = reviewText;
         this.rating = rating;
     }
 
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 

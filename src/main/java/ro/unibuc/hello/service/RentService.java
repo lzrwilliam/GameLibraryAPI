@@ -13,7 +13,7 @@ public class RentService {
     @Autowired
     private RentRepository rentRepository;
 
-    public Rent getRent(String userID, String gameID, LocalDate startDate) {
+    public Rent getRent(int userID, int gameID, LocalDate startDate) {
         return rentRepository.findByUserIDAndGameIDAndStartDate(userID, gameID, startDate)
                 .orElseThrow(() -> new RuntimeException("Rent not found"));
     }

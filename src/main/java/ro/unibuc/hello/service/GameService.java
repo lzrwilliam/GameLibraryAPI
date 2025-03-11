@@ -10,6 +10,7 @@ import ro.unibuc.hello.data.repository.RentRepository;
 import ro.unibuc.hello.data.repository.UserRepository;
 
 
+
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -22,26 +23,30 @@ public class GameService {
     private final GameRepository _gameRepository;
     private final RentRepository _rentRepository;
     private final UserRepository _userRepository;
+    private final CounterService counterService; 
 
-    public GameService(GameRepository gameRepository, RentRepository rentRepository, UserRepository userRepository) {
+    public GameService(GameRepository gameRepository, RentRepository rentRepository, UserRepository userRepository, CounterService counterService) {
         this._gameRepository = gameRepository;
         this._rentRepository = rentRepository;
         this._userRepository = userRepository;
+        this.counterService = counterService;
     }
 
     public List<Game> getAllGames() {
         return _gameRepository.findAll();
     }
 
-    public Optional<Game> getGameById(String id) {
+    public Optional<Game> getGameById(int id) {
         return _gameRepository.findById(id);
     }
 
     public Game addGame(Game game) {
+      game.setId(counterService.getNextSequence("games"));
+
         return _gameRepository.save(game);
     }
 
-    public Rent rentGame(String gameID, String userID, int length) {
+    public Rent rentGame(int gameID, int userID, int length) {
         
         Optional<Game> optionalGame = getGameById(gameID);
         if (optionalGame.isEmpty()) {
@@ -76,7 +81,7 @@ public class GameService {
         throw new RuntimeException("No available copies for game: " + gameID);
     }
     
-    public Rent extendRent(String gameID, String userID, LocalDate startDate, int length){
+    public Rent extendRent(int gameID, int userID, LocalDate startDate, int length){
         Optional<Game> optionalGame = getGameById(gameID);
         if (optionalGame.isEmpty()) {
             throw new RuntimeException("Game not found with ID: " + gameID);
@@ -120,19 +125,20 @@ public class GameService {
         return _rentRepository.save(rent);
     }
 
-    public void deleteGame(String id) {
+    public void deleteGame(int id) {
         _gameRepository.deleteById(id);
     }
 
     public void deleteAllGames(){
         _gameRepository.deleteAll();
+         counterService.resetCounter("games");
     }
 
     public void deleteAllrents(){
         _rentRepository.deleteAll();
     }
 
-public String addReview(String userId, String gameId, String reviewText, int rating) {
+public String addReview(int userId, int gameId, String reviewText, int rating) {
     
     Optional<Game> gameOpt = _gameRepository.findById(gameId);
     if (gameOpt.isEmpty()) {
@@ -159,7 +165,8 @@ public String addReview(String userId, String gameId, String reviewText, int rat
    
     List<Rent> rentals = _rentRepository.findAll();
     boolean hasRentedGame = rentals.stream()
-            .anyMatch(r -> r.getUserID().equals(userId) && r.getGameID().equals(gameId));
+            .anyMatch(r -> r.getUserID() == userId && r.getGameID() == gameId);
+
 
     if (!hasRentedGame) {
         throw new RuntimeException("Nu poți lăsa un review pentru un joc pe care nu l-ai închiriat!");
@@ -168,7 +175,7 @@ public String addReview(String userId, String gameId, String reviewText, int rat
   
 
    
-    boolean alreadyReviewed = game.getReviews().stream().anyMatch(r -> r.getUserId().equals(userId));
+    boolean alreadyReviewed = game.getReviews().stream().anyMatch(r -> r.getUserId() == userId);
     if (alreadyReviewed) {
         throw new RuntimeException("Ai lăsat deja un review pentru acest joc!");
     }
@@ -180,7 +187,7 @@ public String addReview(String userId, String gameId, String reviewText, int rat
     return "Review adăugat cu succes!";
 }
 
-    public List<Review> getReviewsForGame(String gameId) {
+    public List<Review> getReviewsForGame(int gameId) {
         Optional<Game> gameOpt = _gameRepository.findById(gameId);
         if (gameOpt.isEmpty()) {
             throw new RuntimeException("Jocul nu există!");

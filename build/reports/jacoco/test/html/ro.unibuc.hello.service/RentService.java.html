@@ -13,7 +13,7 @@ import java.time.LocalDate;
     @Autowired
     private RentRepository rentRepository;
 
-    public Rent getRent(String userID, String gameID, LocalDate startDate) {
+    public Rent getRent(int userID, int gameID, LocalDate startDate) {
 <span class="nc" id="L17">        return rentRepository.findByUserIDAndGameIDAndStartDate(userID, gameID, startDate)</span>
 <span class="nc" id="L18">                .orElseThrow(() -&gt; new RuntimeException(&quot;Rent not found&quot;));</span>
     }
