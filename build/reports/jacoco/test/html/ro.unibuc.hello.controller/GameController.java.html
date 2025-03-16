@@ -27,82 +27,89 @@ public class GameController {
 <span class="nc" id="L27">        this._gameService = gameService;</span>
 <span class="nc" id="L28">    }</span>
 
+    @GetMapping(&quot;/genre/{genre}&quot;)
+    public List&lt;Game&gt; getAllGamesByGenre(@PathVariable String genre) {
+<span class="nc" id="L32">        return _gameService.getAllGamesByGenre(genre);</span>
+    }
+
     @GetMapping(&quot;/GetAll&quot;)
     public List&lt;Game&gt; getAllGames() {
-<span class="nc" id="L32">        return _gameService.getAllGames();</span>
+<span class="nc" id="L37">        return _gameService.getAllGames();</span>
     }
 
     @GetMapping(&quot;/Find/{id}&quot;)
     public ResponseEntity&lt;Game&gt; getGameById(@PathVariable int id) {
-<span class="nc" id="L37">        Optional&lt;Game&gt; game = _gameService.getGameById(id);</span>
-<span class="nc" id="L38">        return game.map(ResponseEntity::ok)</span>
-<span class="nc" id="L39">                   .orElseGet(() -&gt; ResponseEntity.notFound().build());</span>
+<span class="nc" id="L42">        Optional&lt;Game&gt; game = _gameService.getGameById(id);</span>
+<span class="nc" id="L43">        return game.map(ResponseEntity::ok)</span>
+<span class="nc" id="L44">                   .orElseGet(() -&gt; ResponseEntity.notFound().build());</span>
     }
 
     @PostMapping(&quot;/Add&quot;)
     public Game addGame(@RequestBody Game game) {
-<span class="nc" id="L44">        return _gameService.addGame(game);</span>
+<span class="nc" id="L49">        return _gameService.addGame(game);</span>
     }
 
     @PatchMapping(&quot;/Rent/game={gameid}&amp;user={userid}&amp;for={length}&quot;)
     public Rent rentGame(@PathVariable int gameid, @PathVariable int userid, @PathVariable int length){
-<span class="nc" id="L49">        return _gameService.rentGame(gameid, userid, length);</span>
+<span class="nc" id="L54">        return _gameService.rentGame(gameid, userid, length);</span>
     }
 
     @PatchMapping(&quot;/Extend/game/{gameid}/user/{userid}/start/{startDate}/for/{length}&quot;)
     public ResponseEntity&lt;?&gt; extendRent(@PathVariable int gameid, @PathVariable int userid, @PathVariable String startDate, @PathVariable int length ){
         try {
-<span class="nc" id="L55">            LocalDate dateStartDate = LocalDate.parse(startDate);</span>
-<span class="nc" id="L56">            Rent rent = _gameService.extendRent(gameid, userid, dateStartDate, length);</span>
-<span class="nc" id="L57">            return ResponseEntity.ok(rent);</span>
-<span class="nc" id="L58">        } catch (DateTimeParseException e) {</span>
-<span class="nc" id="L59">            return ResponseEntity.badRequest().body(&quot;Invalid date format: &quot; + startDate);</span>
-<span class="nc" id="L60">        } catch (RuntimeException e) {</span>
-<span class="nc" id="L61">            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());</span>
+<span class="nc" id="L60">            LocalDate dateStartDate = LocalDate.parse(startDate);</span>
+<span class="nc" id="L61">            Rent rent = _gameService.extendRent(gameid, userid, dateStartDate, length);</span>
+<span class="nc" id="L62">            return ResponseEntity.ok(rent);</span>
+<span class="nc" id="L63">        } catch (DateTimeParseException e) {</span>
+<span class="nc" id="L64">            return ResponseEntity.badRequest().body(&quot;Invalid date format: &quot; + startDate);</span>
+<span class="nc" id="L65">        } catch (RuntimeException e) {</span>
+<span class="nc" id="L66">            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());</span>
         }
     }
 
     @DeleteMapping(&quot;/DeleteAllRents&quot;)
     public ResponseEntity&lt;String&gt; deleteAllRents(){
-<span class="nc" id="L67">        _gameService.deleteAllrents();</span>
-<span class="nc" id="L68">        return ResponseEntity.ok(&quot;Toate inchirierile au fost ștersee&quot;);</span>
+<span class="nc" id="L72">        _gameService.deleteAllrents();</span>
+<span class="nc" id="L73">        return ResponseEntity.ok(&quot;Toate inchirierile au fost ștersee&quot;);</span>
     }
 
 
     @DeleteMapping(&quot;/Delete/{id}&quot;)
     public ResponseEntity&lt;Void&gt; deleteGame(@PathVariable  int id) {
-<span class="nc" id="L74">        _gameService.deleteGame(id);</span>
-<span class="nc" id="L75">        return ResponseEntity.noContent().build();</span>
+<span class="nc" id="L79">        _gameService.deleteGame(id);</span>
+<span class="nc" id="L80">        return ResponseEntity.noContent().build();</span>
     }
 
     @DeleteMapping(&quot;/DeleteAllGames&quot;)
     public ResponseEntity&lt;String&gt; deleteAllGames() {
-<span class="nc" id="L80">        _gameService.deleteAllGames();</span>
-<span class="nc" id="L81">        return ResponseEntity.ok(&quot;Toate jocurile au fost ștersee&quot;);</span>
+<span class="nc" id="L85">        _gameService.deleteAllGames();</span>
+<span class="nc" id="L86">        return ResponseEntity.ok(&quot;Toate jocurile au fost ștersee&quot;);</span>
     }
 
 
-@PostMapping(&quot;/AddReview&quot;)
-public ResponseEntity&lt;String&gt; addReview(@RequestBody ReviewRequest reviewRequest) {
-    try {
-<span class="nc" id="L88">        int gameId = Integer.parseInt(reviewRequest.getGameId());</span>
-<span class="nc" id="L89">        int userId = Integer.parseInt( reviewRequest.getUserId());</span>
+    @PostMapping(&quot;/AddReview&quot;)
+    public ResponseEntity&lt;String&gt; addReview(@RequestBody ReviewRequest reviewRequest) {
+        try {
+<span class="nc" id="L93">            int gameId = Integer.parseInt(reviewRequest.getGameId());</span>
+<span class="nc" id="L94">            int userId = Integer.parseInt( reviewRequest.getUserId());</span>
 
-<span class="nc" id="L91">        return ResponseEntity.ok(_gameService.addReview(</span>
-                userId,
-                gameId,
-<span class="nc" id="L94">                reviewRequest.getReviewText(),</span>
-<span class="nc" id="L95">                reviewRequest.getRating()</span>
-        ));
-<span class="nc" id="L97">    } catch (RuntimeException e) {</span>
-<span class="nc" id="L98">        return ResponseEntity.badRequest().body(e.getMessage());</span>
+<span class="nc" id="L96">            return ResponseEntity.ok(_gameService.addReview(</span>
+                    userId,
+                    gameId,
+<span class="nc" id="L99">                    reviewRequest.getReviewText(),</span>
+<span class="nc" id="L100">                    reviewRequest.getRating()</span>
+            ));
+<span class="nc" id="L102">        } catch (RuntimeException e) {</span>
+<span class="nc" id="L103">            return ResponseEntity.badRequest().body(e.getMessage());</span>
+        }
     }
-}
 
 
     @GetMapping(&quot;/{gameId}/reviews&quot;)
     public ResponseEntity&lt;List&lt;Review&gt;&gt; getReviews(@PathVariable int gameId) {
-<span class="nc" id="L105">        return ResponseEntity.ok(_gameService.getReviewsForGame(gameId));</span>
+<span class="nc" id="L110">        return ResponseEntity.ok(_gameService.getReviewsForGame(gameId));</span>
     }
+
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

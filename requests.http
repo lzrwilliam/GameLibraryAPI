@@ -33,6 +33,9 @@ PATCH http://localhost:8080/Users/AddMoney/user=5&sum=100.10
 ### Get all games
 GET http://localhost:8080/games/GetAll
 
+### Get all games of genre
+GET http://localhost:8080/games/genre/RPG
+
 ### Add a new game
 POST http://localhost:8080/games/Add
 Content-Type: application/json

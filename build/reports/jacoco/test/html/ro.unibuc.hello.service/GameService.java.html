@@ -32,167 +32,171 @@ public class GameService {
 <span class="nc" id="L32">        this.counterService = counterService;</span>
 <span class="nc" id="L33">    }</span>
 
+    public List&lt;Game&gt; getAllGamesByGenre(String genre) {
+<span class="nc" id="L36">        return _gameRepository.findByGenre(genre);</span>
+    }
+
     public List&lt;Game&gt; getAllGames() {
-<span class="nc" id="L36">        return _gameRepository.findAll();</span>
+<span class="nc" id="L40">        return _gameRepository.findAll();</span>
     }
 
     public Optional&lt;Game&gt; getGameById(int id) {
-<span class="nc" id="L40">        return _gameRepository.findById(id);</span>
+<span class="nc" id="L44">        return _gameRepository.findById(id);</span>
     }
 
     public Game addGame(Game game) {
-<span class="nc" id="L44">      game.setId(counterService.getNextSequence(&quot;games&quot;));</span>
+<span class="nc" id="L48">      game.setId(counterService.getNextSequence(&quot;games&quot;));</span>
 
-<span class="nc" id="L46">        return _gameRepository.save(game);</span>
+<span class="nc" id="L50">        return _gameRepository.save(game);</span>
     }
 
     public Rent rentGame(int gameID, int userID, int length) {
         
-<span class="nc" id="L51">        Optional&lt;Game&gt; optionalGame = getGameById(gameID);</span>
-<span class="nc bnc" id="L52" title="All 2 branches missed.">        if (optionalGame.isEmpty()) {</span>
-<span class="nc" id="L53">            throw new RuntimeException(&quot;Game not found with ID: &quot; + gameID);</span>
+<span class="nc" id="L55">        Optional&lt;Game&gt; optionalGame = getGameById(gameID);</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">        if (optionalGame.isEmpty()) {</span>
+<span class="nc" id="L57">            throw new RuntimeException(&quot;Game not found with ID: &quot; + gameID);</span>
         }
 
-<span class="nc" id="L56">        Optional&lt;User&gt; optionalUser = _userRepository.findById(userID);</span>
-<span class="nc bnc" id="L57" title="All 2 branches missed.">        if (optionalUser.isEmpty()){</span>
-<span class="nc" id="L58">            throw new RuntimeException(&quot;User not found with ID: &quot; + userID);</span>
+<span class="nc" id="L60">        Optional&lt;User&gt; optionalUser = _userRepository.findById(userID);</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">        if (optionalUser.isEmpty()){</span>
+<span class="nc" id="L62">            throw new RuntimeException(&quot;User not found with ID: &quot; + userID);</span>
         }
     
-<span class="nc" id="L61">        Game game = optionalGame.get();</span>
-<span class="nc" id="L62">        int noCopies = game.getAvailableCopies(); </span>
-<span class="nc" id="L63">        User user = optionalUser.get();</span>
-<span class="nc" id="L64">        double balance = user.getBalance();</span>
-<span class="nc bnc" id="L65" title="All 2 branches missed.">        if (noCopies &gt;= 1) {</span>
-<span class="nc" id="L66">            double price = game.getPrice();</span>
-<span class="nc" id="L67">            price *= length;</span>
+<span class="nc" id="L65">        Game game = optionalGame.get();</span>
+<span class="nc" id="L66">        int noCopies = game.getAvailableCopies(); </span>
+<span class="nc" id="L67">        User user = optionalUser.get();</span>
+<span class="nc" id="L68">        double balance = user.getBalance();</span>
+<span class="nc bnc" id="L69" title="All 2 branches missed.">        if (noCopies &gt;= 1) {</span>
+<span class="nc" id="L70">            double price = game.getPrice();</span>
+<span class="nc" id="L71">            price *= length;</span>
 
-<span class="nc bnc" id="L69" title="All 2 branches missed.">            if(balance &lt; price){</span>
-<span class="nc" id="L70">                throw new RuntimeException(&quot;User dose not have enough money&quot;);</span>
+<span class="nc bnc" id="L73" title="All 2 branches missed.">            if(balance &lt; price){</span>
+<span class="nc" id="L74">                throw new RuntimeException(&quot;User dose not have enough money&quot;);</span>
             }
 
-<span class="nc" id="L73">            game.setAvailableCopies(game.getAvailableCopies() - 1);</span>
-<span class="nc" id="L74">            _gameRepository.save(game);</span>
-<span class="nc" id="L75">            user.addToBalance(-price);</span>
-<span class="nc" id="L76">            _userRepository.save(user);</span>
-<span class="nc" id="L77">            return _rentRepository.save(new Rent(userID, gameID, LocalDate.now(), length, price));</span>
+<span class="nc" id="L77">            game.setAvailableCopies(game.getAvailableCopies() - 1);</span>
+<span class="nc" id="L78">            _gameRepository.save(game);</span>
+<span class="nc" id="L79">            user.addToBalance(-price);</span>
+<span class="nc" id="L80">            _userRepository.save(user);</span>
+<span class="nc" id="L81">            return _rentRepository.save(new Rent(userID, gameID, LocalDate.now(), length, price));</span>
             
         }
     
-<span class="nc" id="L81">        throw new RuntimeException(&quot;No available copies for game: &quot; + gameID);</span>
+<span class="nc" id="L85">        throw new RuntimeException(&quot;No available copies for game: &quot; + gameID);</span>
     }
     
     public Rent extendRent(int gameID, int userID, LocalDate startDate, int length){
-<span class="nc" id="L85">        Optional&lt;Game&gt; optionalGame = getGameById(gameID);</span>
-<span class="nc bnc" id="L86" title="All 2 branches missed.">        if (optionalGame.isEmpty()) {</span>
-<span class="nc" id="L87">            throw new RuntimeException(&quot;Game not found with ID: &quot; + gameID);</span>
+<span class="nc" id="L89">        Optional&lt;Game&gt; optionalGame = getGameById(gameID);</span>
+<span class="nc bnc" id="L90" title="All 2 branches missed.">        if (optionalGame.isEmpty()) {</span>
+<span class="nc" id="L91">            throw new RuntimeException(&quot;Game not found with ID: &quot; + gameID);</span>
         }
 
-<span class="nc" id="L90">        Optional&lt;User&gt; optionalUser = _userRepository.findById(userID);</span>
-<span class="nc bnc" id="L91" title="All 2 branches missed.">        if (optionalUser.isEmpty()){</span>
-<span class="nc" id="L92">            throw new RuntimeException(&quot;User not found with ID: &quot; + userID);</span>
+<span class="nc" id="L94">        Optional&lt;User&gt; optionalUser = _userRepository.findById(userID);</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">        if (optionalUser.isEmpty()){</span>
+<span class="nc" id="L96">            throw new RuntimeException(&quot;User not found with ID: &quot; + userID);</span>
         }
 
-<span class="nc" id="L95">        Optional&lt;Rent&gt; optionalRent = _rentRepository.findByUserIDAndGameIDAndStartDate(userID, gameID, startDate);</span>
-<span class="nc bnc" id="L96" title="All 2 branches missed.">        if (optionalRent.isEmpty()){</span>
-<span class="nc" id="L97">            throw new RuntimeException(&quot;User: \&quot;&quot; + userID + &quot;\&quot; did not rent the game: \&quot;&quot; + gameID + &quot;\&quot; on date :&quot; + startDate);</span>
+<span class="nc" id="L99">        Optional&lt;Rent&gt; optionalRent = _rentRepository.findByUserIDAndGameIDAndStartDate(userID, gameID, startDate);</span>
+<span class="nc bnc" id="L100" title="All 2 branches missed.">        if (optionalRent.isEmpty()){</span>
+<span class="nc" id="L101">            throw new RuntimeException(&quot;User: \&quot;&quot; + userID + &quot;\&quot; did not rent the game: \&quot;&quot; + gameID + &quot;\&quot; on date :&quot; + startDate);</span>
         }
 
         
 
-<span class="nc" id="L102">        Rent rent = optionalRent.get(); </span>
-<span class="nc" id="L103">        LocalDate endDate = rent.getEndDate();</span>
+<span class="nc" id="L106">        Rent rent = optionalRent.get(); </span>
+<span class="nc" id="L107">        LocalDate endDate = rent.getEndDate();</span>
 
-<span class="nc" id="L105">        LocalDate actualDate = LocalDate.now();</span>
-<span class="nc bnc" id="L106" title="All 2 branches missed.">        if (actualDate.isAfter(endDate)) {</span>
-<span class="nc" id="L107">            throw new RuntimeException(&quot;Can't extend a rent that is over&quot;);</span>
+<span class="nc" id="L109">        LocalDate actualDate = LocalDate.now();</span>
+<span class="nc bnc" id="L110" title="All 2 branches missed.">        if (actualDate.isAfter(endDate)) {</span>
+<span class="nc" id="L111">            throw new RuntimeException(&quot;Can't extend a rent that is over&quot;);</span>
         }
 
-<span class="nc" id="L110">        User user = optionalUser.get();</span>
-<span class="nc" id="L111">        Game game = optionalGame.get();</span>
-<span class="nc" id="L112">        double balance = user.getBalance();</span>
-<span class="nc" id="L113">        double price = game.getPrice();</span>
-<span class="nc" id="L114">        price *= length;</span>
+<span class="nc" id="L114">        User user = optionalUser.get();</span>
+<span class="nc" id="L115">        Game game = optionalGame.get();</span>
+<span class="nc" id="L116">        double balance = user.getBalance();</span>
+<span class="nc" id="L117">        double price = game.getPrice();</span>
+<span class="nc" id="L118">        price *= length;</span>
         
-<span class="nc bnc" id="L116" title="All 2 branches missed.">        if(balance &lt; price){</span>
-<span class="nc" id="L117">            throw new RuntimeException(&quot;User dose not have enough money&quot;);</span>
+<span class="nc bnc" id="L120" title="All 2 branches missed.">        if(balance &lt; price){</span>
+<span class="nc" id="L121">            throw new RuntimeException(&quot;User dose not have enough money&quot;);</span>
         }
         
-<span class="nc" id="L120">        user.addToBalance(-price);</span>
-<span class="nc" id="L121">        _userRepository.save(user);</span>
-<span class="nc" id="L122">        rent.addToEndDate(length);</span>
-<span class="nc" id="L123">        rent.addToPrice(price);</span>
+<span class="nc" id="L124">        user.addToBalance(-price);</span>
+<span class="nc" id="L125">        _userRepository.save(user);</span>
+<span class="nc" id="L126">        rent.addToEndDate(length);</span>
+<span class="nc" id="L127">        rent.addToPrice(price);</span>
 
-<span class="nc" id="L125">        return _rentRepository.save(rent);</span>
+<span class="nc" id="L129">        return _rentRepository.save(rent);</span>
     }
 
     public void deleteGame(int id) {
-<span class="nc" id="L129">        _gameRepository.deleteById(id);</span>
-<span class="nc" id="L130">    }</span>
+<span class="nc" id="L133">        _gameRepository.deleteById(id);</span>
+<span class="nc" id="L134">    }</span>
 
     public void deleteAllGames(){
-<span class="nc" id="L133">        _gameRepository.deleteAll();</span>
-<span class="nc" id="L134">         counterService.resetCounter(&quot;games&quot;);</span>
-<span class="nc" id="L135">    }</span>
-
-    public void deleteAllrents(){
-<span class="nc" id="L138">        _rentRepository.deleteAll();</span>
+<span class="nc" id="L137">        _gameRepository.deleteAll();</span>
+<span class="nc" id="L138">         counterService.resetCounter(&quot;games&quot;);</span>
 <span class="nc" id="L139">    }</span>
 
-public String addReview(int userId, int gameId, String reviewText, int rating) {
-    
-<span class="nc" id="L143">    Optional&lt;Game&gt; gameOpt = _gameRepository.findById(gameId);</span>
-<span class="nc bnc" id="L144" title="All 2 branches missed.">    if (gameOpt.isEmpty()) {</span>
-<span class="nc" id="L145">        throw new RuntimeException(&quot;Jocul nu există!&quot;);</span>
-    }
-<span class="nc" id="L147">    Game game = gameOpt.get();</span>
+    public void deleteAllrents(){
+<span class="nc" id="L142">        _rentRepository.deleteAll();</span>
+<span class="nc" id="L143">    }</span>
+
+    public String addReview(int userId, int gameId, String reviewText, int rating) {
+        
+<span class="nc" id="L147">        Optional&lt;Game&gt; gameOpt = _gameRepository.findById(gameId);</span>
+<span class="nc bnc" id="L148" title="All 2 branches missed.">        if (gameOpt.isEmpty()) {</span>
+<span class="nc" id="L149">            throw new RuntimeException(&quot;Jocul nu există!&quot;);</span>
+        }
+<span class="nc" id="L151">        Game game = gameOpt.get();</span>
+
+        
+<span class="nc bnc" id="L154" title="All 4 branches missed.">        if (rating &lt; 1 || rating &gt; 5) {</span>
+<span class="nc" id="L155">            throw new RuntimeException(&quot;Rating-ul trebuie să fie între 1 și 5!&quot;);</span>
+        }
+<span class="nc bnc" id="L157" title="All 2 branches missed.">        if(reviewText.length() == 0){</span>
+<span class="nc" id="L158">            throw new RuntimeException(&quot;Review-ul nu poate fi gol!&quot;);</span>
+        }
 
     
-<span class="nc bnc" id="L150" title="All 4 branches missed.">    if (rating &lt; 1 || rating &gt; 5) {</span>
-<span class="nc" id="L151">        throw new RuntimeException(&quot;Rating-ul trebuie să fie între 1 și 5!&quot;);</span>
-    }
-<span class="nc bnc" id="L153" title="All 2 branches missed.">    if(reviewText.length() == 0){</span>
-<span class="nc" id="L154">        throw new RuntimeException(&quot;Review-ul nu poate fi gol!&quot;);</span>
-    }
+<span class="nc" id="L162">        Optional&lt;User&gt; userOpt = _userRepository.findById(userId);</span>
+<span class="nc bnc" id="L163" title="All 2 branches missed.">        if (userOpt.isEmpty()) {</span>
+<span class="nc" id="L164">            throw new RuntimeException(&quot;Utilizatorul nu există!&quot;);</span>
+        }
+        
+<span class="nc" id="L167">        User user = userOpt.get();</span>
 
-   
-<span class="nc" id="L158">    Optional&lt;User&gt; userOpt = _userRepository.findById(userId);</span>
-<span class="nc bnc" id="L159" title="All 2 branches missed.">    if (userOpt.isEmpty()) {</span>
-<span class="nc" id="L160">        throw new RuntimeException(&quot;Utilizatorul nu există!&quot;);</span>
-    }
     
-<span class="nc" id="L163">    User user = userOpt.get();</span>
-
-   
-<span class="nc" id="L166">    List&lt;Rent&gt; rentals = _rentRepository.findAll();</span>
-<span class="nc" id="L167">    boolean hasRentedGame = rentals.stream()</span>
-<span class="nc bnc" id="L168" title="All 4 branches missed.">            .anyMatch(r -&gt; r.getUserID() == userId &amp;&amp; r.getGameID() == gameId);</span>
+<span class="nc" id="L170">        List&lt;Rent&gt; rentals = _rentRepository.findAll();</span>
+<span class="nc" id="L171">        boolean hasRentedGame = rentals.stream()</span>
+<span class="nc bnc" id="L172" title="All 4 branches missed.">                .anyMatch(r -&gt; r.getUserID() == userId &amp;&amp; r.getGameID() == gameId);</span>
 
 
-<span class="nc bnc" id="L171" title="All 2 branches missed.">    if (!hasRentedGame) {</span>
-<span class="nc" id="L172">        throw new RuntimeException(&quot;Nu poți lăsa un review pentru un joc pe care nu l-ai închiriat!&quot;);</span>
+<span class="nc bnc" id="L175" title="All 2 branches missed.">        if (!hasRentedGame) {</span>
+<span class="nc" id="L176">            throw new RuntimeException(&quot;Nu poți lăsa un review pentru un joc pe care nu l-ai închiriat!&quot;);</span>
+        }
+
+    
+
+    
+<span class="nc bnc" id="L182" title="All 2 branches missed.">        boolean alreadyReviewed = game.getReviews().stream().anyMatch(r -&gt; r.getUserId() == userId);</span>
+<span class="nc bnc" id="L183" title="All 2 branches missed.">        if (alreadyReviewed) {</span>
+<span class="nc" id="L184">            throw new RuntimeException(&quot;Ai lăsat deja un review pentru acest joc!&quot;);</span>
+        }
+
+    
+<span class="nc" id="L188">        game.addReview(new Review(userId, reviewText, rating));</span>
+<span class="nc" id="L189">        _gameRepository.save(game);</span>
+
+<span class="nc" id="L191">        return &quot;Review adăugat cu succes!&quot;;</span>
     }
-
-  
-
-   
-<span class="nc bnc" id="L178" title="All 2 branches missed.">    boolean alreadyReviewed = game.getReviews().stream().anyMatch(r -&gt; r.getUserId() == userId);</span>
-<span class="nc bnc" id="L179" title="All 2 branches missed.">    if (alreadyReviewed) {</span>
-<span class="nc" id="L180">        throw new RuntimeException(&quot;Ai lăsat deja un review pentru acest joc!&quot;);</span>
-    }
-
-   
-<span class="nc" id="L184">    game.addReview(new Review(userId, reviewText, rating));</span>
-<span class="nc" id="L185">    _gameRepository.save(game);</span>
-
-<span class="nc" id="L187">    return &quot;Review adăugat cu succes!&quot;;</span>
-}
 
     public List&lt;Review&gt; getReviewsForGame(int gameId) {
-<span class="nc" id="L191">        Optional&lt;Game&gt; gameOpt = _gameRepository.findById(gameId);</span>
-<span class="nc bnc" id="L192" title="All 2 branches missed.">        if (gameOpt.isEmpty()) {</span>
-<span class="nc" id="L193">            throw new RuntimeException(&quot;Jocul nu există!&quot;);</span>
+<span class="nc" id="L195">        Optional&lt;Game&gt; gameOpt = _gameRepository.findById(gameId);</span>
+<span class="nc bnc" id="L196" title="All 2 branches missed.">        if (gameOpt.isEmpty()) {</span>
+<span class="nc" id="L197">            throw new RuntimeException(&quot;Jocul nu există!&quot;);</span>
         }
-<span class="nc" id="L195">        return gameOpt.get().getReviews();</span>
+<span class="nc" id="L199">        return gameOpt.get().getReviews();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ro.unibuc.hello.dto.GreetingTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2025-03-11T18:15:47" hostname="874d027e5915" time="0.006">
+<testsuite name="ro.unibuc.hello.dto.GreetingTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2025-03-16T16:37:46" hostname="codespaces-438657" time="0.007">
   <properties/>
-  <testcase name="test_id()" classname="ro.unibuc.hello.dto.GreetingTest" time="0.004"/>
+  <testcase name="test_id()" classname="ro.unibuc.hello.dto.GreetingTest" time="0.005"/>
   <testcase name="test_content()" classname="ro.unibuc.hello.dto.GreetingTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
