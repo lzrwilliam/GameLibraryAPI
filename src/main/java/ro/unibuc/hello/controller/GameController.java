@@ -27,6 +27,11 @@ public class GameController {
         this._gameService = gameService;
     }
 
+    @GetMapping("/genre/{genre}")
+    public List<Game> getAllGamesByGenre(@PathVariable String genre) {
+        return _gameService.getAllGamesByGenre(genre);
+    }
+
     @GetMapping("/GetAll")
     public List<Game> getAllGames() {
         return _gameService.getAllGames();
@@ -82,26 +87,28 @@ public class GameController {
     }
 
 
-@PostMapping("/AddReview")
-public ResponseEntity<String> addReview(@RequestBody ReviewRequest reviewRequest) {
-    try {
-        int gameId = Integer.parseInt(reviewRequest.getGameId());
-        int userId = Integer.parseInt( reviewRequest.getUserId());
+    @PostMapping("/AddReview")
+    public ResponseEntity<String> addReview(@RequestBody ReviewRequest reviewRequest) {
+        try {
+            int gameId = Integer.parseInt(reviewRequest.getGameId());
+            int userId = Integer.parseInt( reviewRequest.getUserId());
 
-        return ResponseEntity.ok(_gameService.addReview(
-                userId,
-                gameId,
-                reviewRequest.getReviewText(),
-                reviewRequest.getRating()
-        ));
-    } catch (RuntimeException e) {
-        return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.ok(_gameService.addReview(
+                    userId,
+                    gameId,
+                    reviewRequest.getReviewText(),
+                    reviewRequest.getRating()
+            ));
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
-}
 
 
     @GetMapping("/{gameId}/reviews")
     public ResponseEntity<List<Review>> getReviews(@PathVariable int gameId) {
         return ResponseEntity.ok(_gameService.getReviewsForGame(gameId));
     }
+
+
 }

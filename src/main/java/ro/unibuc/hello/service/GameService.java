@@ -32,6 +32,10 @@ public class GameService {
         this.counterService = counterService;
     }
 
+    public List<Game> getAllGamesByGenre(String genre) {
+        return _gameRepository.findByGenre(genre);
+    }
+
     public List<Game> getAllGames() {
         return _gameRepository.findAll();
     }
@@ -138,54 +142,54 @@ public class GameService {
         _rentRepository.deleteAll();
     }
 
-public String addReview(int userId, int gameId, String reviewText, int rating) {
-    
-    Optional<Game> gameOpt = _gameRepository.findById(gameId);
-    if (gameOpt.isEmpty()) {
-        throw new RuntimeException("Jocul nu există!");
-    }
-    Game game = gameOpt.get();
+    public String addReview(int userId, int gameId, String reviewText, int rating) {
+        
+        Optional<Game> gameOpt = _gameRepository.findById(gameId);
+        if (gameOpt.isEmpty()) {
+            throw new RuntimeException("Jocul nu există!");
+        }
+        Game game = gameOpt.get();
+
+        
+        if (rating < 1 || rating > 5) {
+            throw new RuntimeException("Rating-ul trebuie să fie între 1 și 5!");
+        }
+        if(reviewText.length() == 0){
+            throw new RuntimeException("Review-ul nu poate fi gol!");
+        }
 
     
-    if (rating < 1 || rating > 5) {
-        throw new RuntimeException("Rating-ul trebuie să fie între 1 și 5!");
-    }
-    if(reviewText.length() == 0){
-        throw new RuntimeException("Review-ul nu poate fi gol!");
-    }
+        Optional<User> userOpt = _userRepository.findById(userId);
+        if (userOpt.isEmpty()) {
+            throw new RuntimeException("Utilizatorul nu există!");
+        }
+        
+        User user = userOpt.get();
 
-   
-    Optional<User> userOpt = _userRepository.findById(userId);
-    if (userOpt.isEmpty()) {
-        throw new RuntimeException("Utilizatorul nu există!");
-    }
     
-    User user = userOpt.get();
-
-   
-    List<Rent> rentals = _rentRepository.findAll();
-    boolean hasRentedGame = rentals.stream()
-            .anyMatch(r -> r.getUserID() == userId && r.getGameID() == gameId);
+        List<Rent> rentals = _rentRepository.findAll();
+        boolean hasRentedGame = rentals.stream()
+                .anyMatch(r -> r.getUserID() == userId && r.getGameID() == gameId);
 
 
-    if (!hasRentedGame) {
-        throw new RuntimeException("Nu poți lăsa un review pentru un joc pe care nu l-ai închiriat!");
+        if (!hasRentedGame) {
+            throw new RuntimeException("Nu poți lăsa un review pentru un joc pe care nu l-ai închiriat!");
+        }
+
+    
+
+    
+        boolean alreadyReviewed = game.getReviews().stream().anyMatch(r -> r.getUserId() == userId);
+        if (alreadyReviewed) {
+            throw new RuntimeException("Ai lăsat deja un review pentru acest joc!");
+        }
+
+    
+        game.addReview(new Review(userId, reviewText, rating));
+        _gameRepository.save(game);
+
+        return "Review adăugat cu succes!";
     }
-
-  
-
-   
-    boolean alreadyReviewed = game.getReviews().stream().anyMatch(r -> r.getUserId() == userId);
-    if (alreadyReviewed) {
-        throw new RuntimeException("Ai lăsat deja un review pentru acest joc!");
-    }
-
-   
-    game.addReview(new Review(userId, reviewText, rating));
-    _gameRepository.save(game);
-
-    return "Review adăugat cu succes!";
-}
 
     public List<Review> getReviewsForGame(int gameId) {
         Optional<Game> gameOpt = _gameRepository.findById(gameId);
