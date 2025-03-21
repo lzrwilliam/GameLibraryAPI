@@ -4,6 +4,8 @@ import ro.unibuc.hello.data.model.User;
 import ro.unibuc.hello.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,7 +38,11 @@ public class UserController {
 
     @PatchMapping("/AddMoney")
     public User addMoney(@RequestParam int userID, @RequestParam double sum){
-        return _userService.addMoney(userID, sum);
+        try {
+            return _userService.addMoney(userID, sum);
+        } catch (RuntimeException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);
+        }
     }
     
     

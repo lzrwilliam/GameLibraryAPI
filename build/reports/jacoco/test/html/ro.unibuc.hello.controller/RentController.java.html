@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RentController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hello</a> &gt; <a href="index.source.html" class="el_package">ro.unibuc.hello.controller</a> &gt; <span class="el_source">RentController.java</span></div><h1>RentController.java</h1><pre class="source lang-java linenums">package ro.unibuc.hello.controller;
+
+import ro.unibuc.hello.data.model.Rent;
+import ro.unibuc.hello.service.RentService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.List;
+
+@RestController
+@RequestMapping(&quot;/Rents&quot;)
+public class RentController {
+
+    private final RentService rentService;
+
+<span class="nc" id="L18">    public RentController(RentService rentService) {</span>
+<span class="nc" id="L19">        this.rentService = rentService;</span>
+<span class="nc" id="L20">    }</span>
+
+    @PostMapping(&quot;/Rent/game/{gameid}/user/{userid}/for/{length}&quot;)
+    public ResponseEntity&lt;?&gt; rentGame(@PathVariable int gameid, 
+                                         @PathVariable int userid, 
+                                         @PathVariable int length) {
+<span class="nc bnc" id="L26" title="All 6 branches missed.">        if (gameid &lt;= 0 || userid &lt;= 0 || length &lt;= 0) {</span>
+<span class="nc" id="L27">            return ResponseEntity.badRequest().body(null);</span>
+        }
+        try {
+<span class="nc" id="L30">            Rent rent = rentService.rentGame(gameid, userid, length);</span>
+<span class="nc" id="L31">            return ResponseEntity.ok(rent);</span>
+<span class="nc" id="L32">        } catch (RuntimeException e) {</span>
+<span class="nc" id="L33">            return ResponseEntity.status(400).body(e.getMessage());</span>
+        }
+    }
+    
+
+    @PatchMapping(&quot;/Extend/game/{gameid}/user/{userid}/start/{startDate}/for/{length}&quot;)
+    public ResponseEntity&lt;?&gt; extendRent(@PathVariable int gameid, @PathVariable int userid, 
+                                        @PathVariable String startDate, @PathVariable int length) {
+        try {
+<span class="nc" id="L42">            LocalDate date = LocalDate.parse(startDate);</span>
+<span class="nc" id="L43">            Rent updatedRent = rentService.extendRent(gameid, userid, date, length);</span>
+<span class="nc" id="L44">            return ResponseEntity.ok(updatedRent);</span>
+<span class="nc" id="L45">        } catch (DateTimeParseException e) {</span>
+<span class="nc" id="L46">            return ResponseEntity.status(400).body(&quot;Invalid date format: &quot; + startDate);</span>
+<span class="nc" id="L47">        } catch (RuntimeException e) {</span>
+<span class="nc" id="L48">            return ResponseEntity.status(404).body(e.getMessage()); // Returnează mesajul de eroare</span>
+<span class="nc" id="L49">        } catch (Exception e) {</span>
+<span class="nc" id="L50">            return ResponseEntity.status(500).body(&quot;Unexpected error: &quot; + e.getMessage());</span>
+        }
+    }
+    
+
+    @DeleteMapping(&quot;/DeleteAll&quot;)
+    public ResponseEntity&lt;String&gt; deleteAllRents() {
+<span class="nc" id="L57">        rentService.deleteAllRents();</span>
+<span class="nc" id="L58">        return ResponseEntity.ok(&quot;All rents deleted successfully&quot;);</span>
+    }
+
+    @GetMapping(&quot;/GetAll&quot;)
+    public ResponseEntity&lt;List&lt;Rent&gt;&gt; getAllRents() {
+<span class="nc" id="L63">        return ResponseEntity.ok(rentService.getAllRents());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

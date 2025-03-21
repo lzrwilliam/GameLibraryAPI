@@ -4,6 +4,8 @@ import ro.unibuc.hello.data.model.User;
 import ro.unibuc.hello.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,35 +16,41 @@ public class UserController {
 
     private final UserService _userService;
 
-<span class="nc" id="L17">    public UserController(UserService userService) {</span>
-<span class="nc" id="L18">        _userService = userService;</span>
-<span class="nc" id="L19">    }</span>
+<span class="fc" id="L19">    public UserController(UserService userService) {</span>
+<span class="fc" id="L20">        _userService = userService;</span>
+<span class="fc" id="L21">    }</span>
 
 
     @GetMapping(&quot;/GetAll&quot;)
     public List&lt;User&gt; getAllUsers() {
-<span class="nc" id="L24">        return _userService.getAllUsers();</span>
+<span class="fc" id="L26">        return _userService.getAllUsers();</span>
     }
 
     @GetMapping(&quot;/Find/{id}&quot;)
     public Optional&lt;User&gt; GetUserByID(@PathVariable int id){
-<span class="nc" id="L29">        return _userService.GetUserByID(id);</span>
+<span class="fc" id="L31">        return _userService.GetUserByID(id);</span>
     }
 
     @PostMapping(&quot;/Add&quot;)
     public User addUser(@RequestBody User user){
-<span class="nc" id="L34">        return _userService.addUser(user);</span>
+<span class="fc" id="L36">        return _userService.addUser(user);</span>
     }
 
-    @PatchMapping(&quot;/AddMoney/user={userID}&amp;sum={sum}&quot;)
-    public User addMoney(@PathVariable int userID, @PathVariable double sum){
-<span class="nc" id="L39">        return _userService.addMoney(userID, sum);</span>
+    @PatchMapping(&quot;/AddMoney&quot;)
+    public User addMoney(@RequestParam int userID, @RequestParam double sum){
+        try {
+<span class="fc" id="L42">            return _userService.addMoney(userID, sum);</span>
+<span class="nc" id="L43">        } catch (RuntimeException e) {</span>
+<span class="nc" id="L44">            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);</span>
+        }
     }
+    
+    
 
     @DeleteMapping(&quot;/DeleteAll&quot;)
     public ResponseEntity&lt;String&gt; deleteAllUsers() {
-<span class="nc" id="L44">        _userService.deleteAllUsers();</span>
-<span class="nc" id="L45">        return ResponseEntity.ok(&quot;Toți utilizatorii au fost șterși&quot;);</span>
+<span class="fc" id="L52">        _userService.deleteAllUsers();</span>
+<span class="fc" id="L53">        return ResponseEntity.ok(&quot;All users deleted successfully&quot;);</span>
     }
 
 

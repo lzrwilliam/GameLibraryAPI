@@ -1,14 +1,12 @@
+#### USERS
 
-
-####Users
-
-###deleteAll
+### DELETE ALL USERS
 DELETE http://localhost:8080/Users/DeleteAll
 
-###GetAll
+### GET ALL USERS
 GET http://localhost:8080/Users/GetAll
 
-###AddUser
+### ADD USER
 POST http://localhost:8080/Users/Add
 Content-Type: application/json
 
@@ -23,20 +21,24 @@ Content-Type: application/json
     "phoneNumber": "1234567890"
 }
 
-### Get By ID
-GET http://localhost:8080/Users/Find/5
+### GET USER BY ID
+GET http://localhost:8080/Users/Find/1
 
-### Add Money to User
-PATCH http://localhost:8080/Users/AddMoney/user=1&sum=100.10
+### ADD MONEY TO USER
+PATCH http://localhost:8080/Users/AddMoney?userID=1&sum=100.10
 
 
-### Get all games
+---
+
+#### GAMES
+
+### GET ALL GAMES
 GET http://localhost:8080/games/GetAll
 
-### Get all games of genre
+### GET ALL GAMES BY GENRE
 GET http://localhost:8080/games/genre/RPG
 
-### Add a new game
+### ADD NEW GAME
 POST http://localhost:8080/games/Add
 Content-Type: application/json
 
@@ -52,49 +54,55 @@ Content-Type: application/json
     "ageCategory": "MATURE"
 }
 
-### Get By ID
+### GET GAME BY ID
 GET http://localhost:8080/games/Find/1
 
-### Rent Game
-PATCH  http://localhost:8080/games/Rent/game=1&user=5&for=2
-
-### Extend Rent 
-PATCH http://localhost:8080/games/Extend/game/67caf185879a72024606b493/user/67caf05de704c46fb40e6a92/start/2025-03-07/for/4
-
-### Delete All Rents
-DELETE http://localhost:8080/games/DeleteAllRents
-### Delete All Games
+### DELETE ALL GAMES
 DELETE http://localhost:8080/games/DeleteAllGames
 
+---
 
-###REVIEWS
-### 🟢 1. Adăugare review valid (utilizator a închiriat jocul)
+#### RENTS (separate de games)
+
+### RENT GAME (Mutat din `/games/Rent/...`)
+POST http://localhost:8080/Rents/Rent/game/1/user/1/for/2
+
+### EXTEND RENT (Mutat din `/games/Extend/...`)
+PATCH http://localhost:8080/Rents/Extend/game/1/user/1/start/2025-03-21/for/4
+
+### DELETE ALL RENTS
+DELETE http://localhost:8080/Rents/DeleteAll
+
+### GET ALL RENTS
+GET http://localhost:8080/Rents/GetAll
+
+---
+
+#### REVIEWS
+
+### ADD REVIEW (Valid)
 POST http://localhost:8080/games/AddReview
 Content-Type: application/json
 
 {
-    "userId": "5",
+    "userId": "1",
     "gameId": "1",
     "reviewText": "Joc fantastic! Grafica superbă și gameplay captivant!",
     "rating": 5
 }
 
-###
-
-### 🔴 2. Adăugare review de către un utilizator care NU a închiriat jocul (ar trebui să eșueze)
+### ADD REVIEW (Utilizator care NU a închiriat jocul - ar trebui să eșueze)
 POST http://localhost:8080/games/AddReview
 Content-Type: application/json
 
 {
-     "userId": "2",
+    "userId": "1",
     "gameId": "2",
     "reviewText": "Nu am jucat jocul, dar pare interesant.",
     "rating": 4
 }
 
-###
-
-### 🔴 3. Adăugare review duplicat (utilizatorul încearcă să lase încă un review pentru același joc)
+### ADD DUPLICATE REVIEW (Ar trebui să eșueze)
 POST http://localhost:8080/games/AddReview
 Content-Type: application/json
 
@@ -105,19 +113,13 @@ Content-Type: application/json
     "rating": 5
 }
 
-
-### 🟢 4. Obținere review-uri pentru un joc (ar trebui să conțină review-ul adăugat)
+### GET REVIEWS FOR A GAME
 GET http://localhost:8080/games/1/reviews
 
-###
-
-# adaugat validare daca exista jocul
-### 🔴 5. Obținere review-uri pentru un joc care nu are recenzii (ar trebui să returneze listă goală)
+### GET REVIEWS FOR A GAME WITH NO REVIEWS (Should return empty list)
 GET http://localhost:8080/games/2/reviews
 
-###
-
-### 🔴 6. Adăugare review cu rating invalid (ar trebui să eșueze)
+### ADD REVIEW WITH INVALID RATING (Should fail)
 POST http://localhost:8080/games/AddReview
 Content-Type: application/json
 
@@ -128,22 +130,18 @@ Content-Type: application/json
     "rating": 6
 }
 
-###
-
-### 🔴 7. Adăugare review cu text gol (ar trebui să eșueze)
+### ADD REVIEW WITH EMPTY TEXT (Should fail)
 POST http://localhost:8080/games/AddReview
 Content-Type: application/json
 
 {
-     "userId": "5",
+    "userId": "5",
     "gameId": "1",
     "reviewText": "",
     "rating": 3
 }
 
-###
-
-### 🔴 8. Adăugare review cu utilizator inexistent (ar trebui să eșueze)
+### ADD REVIEW WITH NON-EXISTENT USER (Should fail)
 POST http://localhost:8080/games/AddReview
 Content-Type: application/json
 
@@ -154,9 +152,7 @@ Content-Type: application/json
     "rating": 3
 }
 
-###
-
-### 🔴 9. Adăugare review pentru un joc inexistent (ar trebui să eșueze)
+### ADD REVIEW FOR NON-EXISTENT GAME (Should fail)
 POST http://localhost:8080/games/AddReview
 Content-Type: application/json
 

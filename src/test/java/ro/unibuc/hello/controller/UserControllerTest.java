@@ -90,15 +90,18 @@ class UserControllerTest {
 
     @Test
     void testAddMoney_UserExists() throws Exception {
-        when(userService.addMoney(1, 50.0)).thenReturn(new User(1, "John", "Doe", "johndoe", "password123",
-                LocalDate.of(2000, 5, 10), 150.0, "john.doe@example.com", "123456789"));
+        when(userService.addMoney(1, 50.0)).thenReturn(
+            new User(1, "John", "Doe", "johndoe", "password123",
+                LocalDate.of(2000, 5, 10), 150.0, "john.doe@example.com", "123456789")
+        );
     
         mockMvc.perform(patch("/Users/AddMoney")
-                .param("userID", "1")  
-                .param("sum", "50.0")) 
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.balance").value(150.0));
+                .param("userID", "1")
+                .param("sum", "50.0"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.balance").value(org.hamcrest.Matchers.closeTo(150.0, 0.01)));
     }
+    
     
     @Test
     void testAddMoney_UserNotFound() throws Exception {

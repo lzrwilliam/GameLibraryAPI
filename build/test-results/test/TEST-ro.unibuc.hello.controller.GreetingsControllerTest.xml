@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ro.unibuc.hello.controller.GreetingsControllerTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2025-03-16T16:37:41" hostname="codespaces-438657" time="5.575">
+<testsuite name="ro.unibuc.hello.controller.GreetingsControllerTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2025-03-21T10:26:22" hostname="DESKTOP-EMVME5P" time="18.93">
   <properties/>
-  <testcase name="test_info()" classname="ro.unibuc.hello.controller.GreetingsControllerTest" time="5.103"/>
-  <testcase name="test_getAllGreetings()" classname="ro.unibuc.hello.controller.GreetingsControllerTest" time="0.081"/>
-  <testcase name="test_updateGreeting()" classname="ro.unibuc.hello.controller.GreetingsControllerTest" time="0.234"/>
-  <testcase name="test_createGreeting()" classname="ro.unibuc.hello.controller.GreetingsControllerTest" time="0.035"/>
-  <testcase name="test_info_cascadesException()" classname="ro.unibuc.hello.controller.GreetingsControllerTest" time="0.033"/>
-  <testcase name="test_deleteGreeting()" classname="ro.unibuc.hello.controller.GreetingsControllerTest" time="0.049"/>
-  <testcase name="test_sayHello()" classname="ro.unibuc.hello.controller.GreetingsControllerTest" time="0.026"/>
-  <system-out><![CDATA[16:37:45.898 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
-16:37:45.902 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
-16:37:45.918 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 8 ms
-16:37:46.479 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
-16:37:46.479 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
-16:37:46.479 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
-16:37:46.565 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
-16:37:46.572 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
-16:37:46.573 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
-16:37:46.794 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
-16:37:46.794 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
-16:37:46.794 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
-16:37:46.824 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
-16:37:46.825 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
-16:37:46.826 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
-16:37:46.858 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
-16:37:46.858 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
-16:37:46.859 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
-16:37:46.907 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
-16:37:46.907 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
-16:37:46.908 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 1 ms
+  <testcase name="test_info()" classname="ro.unibuc.hello.controller.GreetingsControllerTest" time="18.17"/>
+  <testcase name="test_getAllGreetings()" classname="ro.unibuc.hello.controller.GreetingsControllerTest" time="0.064"/>
+  <testcase name="test_updateGreeting()" classname="ro.unibuc.hello.controller.GreetingsControllerTest" time="0.475"/>
+  <testcase name="test_createGreeting()" classname="ro.unibuc.hello.controller.GreetingsControllerTest" time="0.028"/>
+  <testcase name="test_info_cascadesException()" classname="ro.unibuc.hello.controller.GreetingsControllerTest" time="0.059"/>
+  <testcase name="test_deleteGreeting()" classname="ro.unibuc.hello.controller.GreetingsControllerTest" time="0.099"/>
+  <testcase name="test_sayHello()" classname="ro.unibuc.hello.controller.GreetingsControllerTest" time="0.027"/>
+  <system-out><![CDATA[12:26:38.435 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
+12:26:38.449 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
+12:26:38.479 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 29 ms
+12:26:40.760 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
+12:26:40.760 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
+12:26:40.761 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
+12:26:40.823 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
+12:26:40.823 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
+12:26:40.823 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
+12:26:41.297 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
+12:26:41.297 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
+12:26:41.298 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
+12:26:41.325 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
+12:26:41.325 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
+12:26:41.325 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
+12:26:41.386 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
+12:26:41.386 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
+12:26:41.386 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
+12:26:41.484 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
+12:26:41.484 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
+12:26:41.485 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
 ]]></system-out>
   <system-err><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build what is described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html#0.3
-WARNING: A Java agent has been loaded dynamically (/home/codespace/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy-agent/1.15.10/e8eb255b2c378b9a6c7341e7b0e12f0a5636377/byte-buddy-agent-1.15.10.jar)
+WARNING: A Java agent has been loaded dynamically (/root/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy-agent/1.15.10/e8eb255b2c378b9a6c7341e7b0e12f0a5636377/byte-buddy-agent-1.15.10.jar)
 WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
 WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
 WARNING: Dynamic loading of agents will be disallowed by default in a future release
