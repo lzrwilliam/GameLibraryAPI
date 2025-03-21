@@ -27,7 +27,7 @@ Content-Type: application/json
 GET http://localhost:8080/Users/Find/5
 
 ### Add Money to User
-PATCH http://localhost:8080/Users/AddMoney/user=5&sum=100.10
+PATCH http://localhost:8080/Users/AddMoney/user=1&sum=100.10
 
 
 ### Get all games
