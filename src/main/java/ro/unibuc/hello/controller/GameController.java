@@ -32,6 +32,7 @@ public class GameController {
         return _gameService.getAllGamesByGenre(genre);
     }
 
+   
     @GetMapping("/GetAll")
     public List<Game> getAllGames() {
         return _gameService.getAllGames();
@@ -40,23 +41,17 @@ public class GameController {
     @GetMapping("/Find/{id}")
     public ResponseEntity<Game> getGameById(@PathVariable int id) {
         Optional<Game> game = _gameService.getGameById(id);
-        return game.map(ResponseEntity::ok)
-                   .orElseGet(() -> ResponseEntity.notFound().build());
+        return game.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping("/Add")
-    public Game addGame(@RequestBody Game game) {
-        return _gameService.addGame(game);
+    public ResponseEntity<Game> addGame(@RequestBody Game game) {
+        Game createdGame = _gameService.addGame(game);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdGame); // Modificat la 201 CREATED
     }
 
-    
-
-
-
-   
-
     @DeleteMapping("/Delete/{id}")
-    public ResponseEntity<Void> deleteGame(@PathVariable  int id) {
+    public ResponseEntity<Void> deleteGame(@PathVariable int id) {
         _gameService.deleteGame(id);
         return ResponseEntity.noContent().build();
     }
@@ -64,8 +59,18 @@ public class GameController {
     @DeleteMapping("/DeleteAllGames")
     public ResponseEntity<String> deleteAllGames() {
         _gameService.deleteAllGames();
-        return ResponseEntity.ok("Toate jocurile au fost ștersee");
+        return ResponseEntity.ok("Toate jocurile au fost sterse");
     }
+
+  
+    
+
+
+    
+
+
+
+   
 
 
     @PostMapping("/AddReview")
@@ -87,9 +92,11 @@ public class GameController {
 
 
     @GetMapping("/{gameId}/reviews")
-    public ResponseEntity<List<Review>> getReviews(@PathVariable int gameId) {
-        return ResponseEntity.ok(_gameService.getReviewsForGame(gameId));
-    }
+public ResponseEntity<List<Review>> getReviews(@PathVariable int gameId) {
+    List<Review> reviews = _gameService.getReviewsForGame(gameId);
+    return ResponseEntity.ok(reviews != null ? reviews : List.of()); 
+}
+
 
 
 }

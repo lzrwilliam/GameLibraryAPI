@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ro.unibuc.hello.service.UserServiceTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2025-03-21T10:26:44" hostname="DESKTOP-EMVME5P" time="0.15">
+<testsuite name="ro.unibuc.hello.service.UserServiceTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2025-03-21T14:56:34" hostname="DESKTOP-EMVME5P" time="0.359">
   <properties/>
-  <testcase name="testAddMoney_UserNotFound()" classname="ro.unibuc.hello.service.UserServiceTest" time="0.126"/>
-  <testcase name="testAddUser()" classname="ro.unibuc.hello.service.UserServiceTest" time="0.003"/>
-  <testcase name="testDeleteAllUsers()" classname="ro.unibuc.hello.service.UserServiceTest" time="0.002"/>
-  <testcase name="testGetAllUsers()" classname="ro.unibuc.hello.service.UserServiceTest" time="0.006"/>
-  <testcase name="testGetUserById_UserExists()" classname="ro.unibuc.hello.service.UserServiceTest" time="0.006"/>
-  <testcase name="testAddMoney_UserExists()" classname="ro.unibuc.hello.service.UserServiceTest" time="0.002"/>
-  <testcase name="testGetUserById_UserNotFound()" classname="ro.unibuc.hello.service.UserServiceTest" time="0.001"/>
+  <testcase name="testAddMoney_UserNotFound()" classname="ro.unibuc.hello.service.UserServiceTest" time="0.296"/>
+  <testcase name="testAddUser()" classname="ro.unibuc.hello.service.UserServiceTest" time="0.007"/>
+  <testcase name="testDeleteAllUsers()" classname="ro.unibuc.hello.service.UserServiceTest" time="0.004"/>
+  <testcase name="testGetAllUsers()" classname="ro.unibuc.hello.service.UserServiceTest" time="0.017"/>
+  <testcase name="testGetUserById_UserExists()" classname="ro.unibuc.hello.service.UserServiceTest" time="0.019"/>
+  <testcase name="testAddMoney_UserExists()" classname="ro.unibuc.hello.service.UserServiceTest" time="0.005"/>
+  <testcase name="testGetUserById_UserNotFound()" classname="ro.unibuc.hello.service.UserServiceTest" time="0.003"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
