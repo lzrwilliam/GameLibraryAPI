@@ -1,0 +1,62 @@
+ Product Eng. 
+    Pasi 
+        Set Up:
+            
+            Code -> CodeSpace
+            
+            Plugins:
+                Java 21
+                Rest Client
+            
+            Commands:
+            
+                Main:
+                    New Branch:
+                        git checkout -b [Nume]
+                    
+                    Check Docker:
+                        docker ps
+                    
+                    Creere Build:
+                        make build
+                    
+                    Start baza de date:
+                        docker-compose up -d mongo
+                        
+                    Run:
+			./start.sh
+                        chmod+x ./start.sh -- daca nu merge comanda data
+                
+                   apoi dupa ce am dat run la start.sh:
+ Full start: ./gradlew bootRun // daca nu merge doar asta si facem schimbari dam :
+                        ./gradlew clean
+                        ./gradlew build
+                        ./gradlew bootRun
+
+                    
+                    
+                AUX:
+                    Check JDK:
+                        java --verison+
+ 
+                        
+                    install java:
+                      sudo apt update
+	sudo apt install openjdk-21-jdk -y
+	export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
+	export PATH=$JAVA_HOME/bin:$PATH
+
+
+vedem procesul care foloseste portul 8080 
+sudo lsof -i :8080
+
+oprim fortat
+sudo kill -9 pid
+
+sterge container ca sa pot da iar makebuild
+docker rm -f hello-builder-container
+
+
+eroare permission denied /usr/bin/env \sh/r\ din cauza la caractere
+
+dam comanda dos2unix gradlew(comanda)
