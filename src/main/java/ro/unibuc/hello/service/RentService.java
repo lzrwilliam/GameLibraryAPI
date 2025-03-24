@@ -22,7 +22,7 @@ public class RentService {
     @Autowired
     private RentRepository rentRepository;
 
-      @Autowired
+    @Autowired
     private GameRepository gameRepository;
 
     @Autowired

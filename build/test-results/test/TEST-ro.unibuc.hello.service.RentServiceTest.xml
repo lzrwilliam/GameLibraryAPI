@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ro.unibuc.hello.service.RentServiceTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2025-03-24T11:29:36" hostname="codespaces-d414a7" time="0.07">
+  <properties/>
+  <testcase name="testDeleteAllRents()" classname="ro.unibuc.hello.service.RentServiceTest" time="0.006"/>
+  <testcase name="testExtendRent_Success()" classname="ro.unibuc.hello.service.RentServiceTest" time="0.007"/>
+  <testcase name="testGetAllRents()" classname="ro.unibuc.hello.service.RentServiceTest" time="0.005"/>
+  <testcase name="testExtendRent_NotFound()" classname="ro.unibuc.hello.service.RentServiceTest" time="0.005"/>
+  <testcase name="testGetRent_NotFound()" classname="ro.unibuc.hello.service.RentServiceTest" time="0.005"/>
+  <testcase name="testGetRent_Success()" classname="ro.unibuc.hello.service.RentServiceTest" time="0.004"/>
+  <testcase name="testRentGame_InsufficientBalance()" classname="ro.unibuc.hello.service.RentServiceTest" time="0.008"/>
+  <testcase name="testExtendRent_InsufficientFunds()" classname="ro.unibuc.hello.service.RentServiceTest" time="0.005"/>
+  <testcase name="testRentGame_NoAvailableCopies()" classname="ro.unibuc.hello.service.RentServiceTest" time="0.017"/>
+  <testcase name="testRentGame_Success()" classname="ro.unibuc.hello.service.RentServiceTest" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
