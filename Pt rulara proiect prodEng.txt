@@ -57,6 +57,14 @@ sterge container ca sa pot da iar makebuild
 docker rm -f hello-builder-container
 
 
+PENTRU TESTE PERFORMANTA CU JMETER
+DAM IN TERMINAL : echo "https://$(printenv CODESPACE_NAME)-8080.app.github.dev" ca sa obtinem link-ul codespace pentru configurare.
+in jmeter setam protocol https, dam apoi restul de link si la port lasam gol nu punem nimic, se mapeaza intern singur
+
+de asemenea ,in gitgub-vscode-ports facem portul 8080 public ca sa mearga metodele post si sa nu avem nevoie de autentificare
+
+
+
 eroare permission denied /usr/bin/env \sh/r\ din cauza la caractere
 
 dam comanda dos2unix gradlew(comanda)
