@@ -41,13 +41,13 @@ public class GameController {
     @GetMapping(&quot;/Find/{id}&quot;)
     public ResponseEntity&lt;Game&gt; getGameById(@PathVariable int id) {
 <span class="fc" id="L43">        Optional&lt;Game&gt; game = _gameService.getGameById(id);</span>
-<span class="fc" id="L44">        return game.map(ResponseEntity::ok).orElseGet(() -&gt; ResponseEntity.notFound().build());</span>
+<span class="pc" id="L44">        return game.map(ResponseEntity::ok).orElseGet(() -&gt; ResponseEntity.notFound().build());</span>
     }
 
     @PostMapping(&quot;/Add&quot;)
     public ResponseEntity&lt;Game&gt; addGame(@RequestBody Game game) {
-<span class="fc" id="L49">        Game createdGame = _gameService.addGame(game);</span>
-<span class="fc" id="L50">        return ResponseEntity.status(HttpStatus.CREATED).body(createdGame); // Modificat la 201 CREATED</span>
+<span class="nc" id="L49">        Game createdGame = _gameService.addGame(game);</span>
+<span class="nc" id="L50">        return ResponseEntity.status(HttpStatus.CREATED).body(createdGame); // Modificat la 201 CREATED</span>
     }
 
     @DeleteMapping(&quot;/Delete/{id}&quot;)
@@ -93,8 +93,8 @@ public class GameController {
 
     @GetMapping(&quot;/{gameId}/reviews&quot;)
 public ResponseEntity&lt;List&lt;Review&gt;&gt; getReviews(@PathVariable int gameId) {
-<span class="fc" id="L96">    List&lt;Review&gt; reviews = _gameService.getReviewsForGame(gameId);</span>
-<span class="pc bpc" id="L97" title="1 of 2 branches missed.">    return ResponseEntity.ok(reviews != null ? reviews : List.of()); </span>
+<span class="nc" id="L96">    List&lt;Review&gt; reviews = _gameService.getReviewsForGame(gameId);</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">    return ResponseEntity.ok(reviews != null ? reviews : List.of()); </span>
 }
 
 

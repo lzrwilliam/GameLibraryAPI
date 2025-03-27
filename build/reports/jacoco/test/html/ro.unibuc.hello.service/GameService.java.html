@@ -86,13 +86,13 @@ public class GameService {
 <span class="fc" id="L86">        List&lt;Rent&gt; rentals = _rentRepository.findAll();</span>
 <span class="pc bpc" id="L87" title="2 of 4 branches missed.">        boolean hasRentedGame = rentals.stream().anyMatch(r -&gt; r.getUserID() == userId &amp;&amp; r.getGameID() == gameId);</span>
     
-<span class="fc bfc" id="L89" title="All 2 branches covered.">        if (!hasRentedGame) {</span>
-<span class="fc" id="L90">            throw new RuntimeException(&quot;Nu poți lăsa un review pentru un joc pe care nu l-ai închiriat!&quot;);</span>
+<span class="pc bpc" id="L89" title="1 of 2 branches missed.">        if (!hasRentedGame) {</span>
+<span class="nc" id="L90">            throw new RuntimeException(&quot;Nu poți lăsa un review pentru un joc pe care nu l-ai închiriat!&quot;);</span>
         }
     
-<span class="pc bpc" id="L93" title="1 of 2 branches missed.">        boolean alreadyReviewed = game.getReviews().stream().anyMatch(r -&gt; r.getUserId() == userId);</span>
-<span class="fc bfc" id="L94" title="All 2 branches covered.">        if (alreadyReviewed) {</span>
-<span class="fc" id="L95">            throw new RuntimeException(&quot;Ai lăsat deja un review pentru acest joc!&quot;);</span>
+<span class="pc bnc" id="L93" title="All 2 branches missed.">        boolean alreadyReviewed = game.getReviews().stream().anyMatch(r -&gt; r.getUserId() == userId);</span>
+<span class="pc bpc" id="L94" title="1 of 2 branches missed.">        if (alreadyReviewed) {</span>
+<span class="nc" id="L95">            throw new RuntimeException(&quot;Ai lăsat deja un review pentru acest joc!&quot;);</span>
         }
     
 <span class="fc" id="L98">        game.addReview(new Review(userId, reviewText, rating));</span>
@@ -102,7 +102,7 @@ public class GameService {
     }
     
     public List&lt;Review&gt; getReviewsForGame(int gameId) {
-<span class="fc" id="L105">        return _gameRepository.findById(gameId).map(Game::getReviews).orElse(List.of());</span>
+<span class="nc" id="L105">        return _gameRepository.findById(gameId).map(Game::getReviews).orElse(List.of());</span>
     }
     
 }

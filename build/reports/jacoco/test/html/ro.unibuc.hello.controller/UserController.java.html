@@ -23,23 +23,23 @@ public class UserController {
 
     @GetMapping(&quot;/GetAll&quot;)
     public List&lt;User&gt; getAllUsers() {
-<span class="fc" id="L26">        return _userService.getAllUsers();</span>
+<span class="nc" id="L26">        return _userService.getAllUsers();</span>
     }
 
     @GetMapping(&quot;/Find/{id}&quot;)
     public Optional&lt;User&gt; GetUserByID(@PathVariable int id){
-<span class="fc" id="L31">        return _userService.GetUserByID(id);</span>
+<span class="nc" id="L31">        return _userService.GetUserByID(id);</span>
     }
 
     @PostMapping(&quot;/Add&quot;)
     public User addUser(@RequestBody User user){
-<span class="fc" id="L36">        return _userService.addUser(user);</span>
+<span class="nc" id="L36">        return _userService.addUser(user);</span>
     }
 
     @PatchMapping(&quot;/AddMoney&quot;)
     public User addMoney(@RequestParam int userID, @RequestParam double sum){
         try {
-<span class="fc" id="L42">            return _userService.addMoney(userID, sum);</span>
+<span class="nc" id="L42">            return _userService.addMoney(userID, sum);</span>
 <span class="nc" id="L43">        } catch (RuntimeException e) {</span>
 <span class="nc" id="L44">            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);</span>
         }
@@ -49,8 +49,8 @@ public class UserController {
 
     @DeleteMapping(&quot;/DeleteAll&quot;)
     public ResponseEntity&lt;String&gt; deleteAllUsers() {
-<span class="fc" id="L52">        _userService.deleteAllUsers();</span>
-<span class="fc" id="L53">        return ResponseEntity.ok(&quot;All users deleted successfully&quot;);</span>
+<span class="nc" id="L52">        _userService.deleteAllUsers();</span>
+<span class="nc" id="L53">        return ResponseEntity.ok(&quot;All users deleted successfully&quot;);</span>
     }
 
 

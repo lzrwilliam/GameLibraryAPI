@@ -22,39 +22,39 @@ import java.util.List;
     @GetMapping(&quot;/hello-world&quot;)
     @ResponseBody
     public Greeting sayHello(@RequestParam(name=&quot;name&quot;, required=false, defaultValue=&quot;Stranger&quot;) String name) {
-<span class="fc" id="L25">        return greetingsService.hello(name);</span>
+<span class="nc" id="L25">        return greetingsService.hello(name);</span>
     }
 
     @GetMapping(&quot;/info&quot;)
     @ResponseBody
     public Greeting info(@RequestParam(name=&quot;title&quot;, required=false, defaultValue=&quot;Overview&quot;) String title) throws EntityNotFoundException {
-<span class="fc" id="L31">        return greetingsService.buildGreetingFromInfo(title);</span>
+<span class="nc" id="L31">        return greetingsService.buildGreetingFromInfo(title);</span>
     }
 
     @GetMapping(&quot;/greetings&quot;)
     @ResponseBody
     public List&lt;Greeting&gt; getAllGreetings() {
-<span class="fc" id="L37">        return greetingsService.getAllGreetings();</span>
+<span class="nc" id="L37">        return greetingsService.getAllGreetings();</span>
     }
 
 
     @PostMapping(&quot;/greetings&quot;)
     @ResponseBody
     public Greeting createGreeting(@RequestBody Greeting greeting) {
-<span class="fc" id="L44">        return greetingsService.saveGreeting(greeting);</span>
+<span class="nc" id="L44">        return greetingsService.saveGreeting(greeting);</span>
     }
 
     @PutMapping(&quot;/greetings/{id}&quot;)
     @ResponseBody
     public Greeting updateGreeting(@PathVariable String id, @RequestBody Greeting greeting) throws EntityNotFoundException {
-<span class="fc" id="L50">        return greetingsService.updateGreeting(id, greeting);</span>
+<span class="nc" id="L50">        return greetingsService.updateGreeting(id, greeting);</span>
     }
 
     @DeleteMapping(&quot;/greetings/{id}&quot;)
     @ResponseBody
     public void deleteGreeting(@PathVariable String id) throws EntityNotFoundException {
-<span class="fc" id="L56">        greetingsService.deleteGreeting(id);</span>
-<span class="fc" id="L57">    }</span>
+<span class="nc" id="L56">        greetingsService.deleteGreeting(id);</span>
+<span class="nc" id="L57">    }</span>
 }
 
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
