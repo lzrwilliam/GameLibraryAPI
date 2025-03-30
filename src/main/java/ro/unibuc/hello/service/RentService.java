@@ -33,6 +33,11 @@ public class RentService {
                 .orElseThrow(() -> new RuntimeException("Rent not found"));
     }
 
+    public Rent save(Rent rent) {
+        return rentRepository.save(rent);
+    }
+    
+
     public Rent rentGame(int gameID, int userID, int length) {
         Optional<Game> optionalGame = gameRepository.findById(gameID);
         Optional<User> optionalUser = userRepository.findById(userID);
@@ -84,39 +89,40 @@ public class RentService {
         if (optionalRent.isEmpty()) {
             throw new RuntimeException("No active rent found for this game and user.");
         }
-
+    
         Rent rent = optionalRent.get();
         LocalDate endDate = rent.getEndDate();
-        if (endDate == null) {
-            throw new RuntimeException("Invalid rent record: missing end date.");
-        }
-
-        if (LocalDate.now().isAfter(endDate)) {
+        if (endDate == null || LocalDate.now().isAfter(endDate)) {
             throw new RuntimeException("Cannot extend a rent that is over.");
         }
-
+    
         Optional<Game> optionalGame = gameRepository.findById(gameID);
-        Optional<User> optionalUser = userRepository.findById(userID);
-
-        if (optionalGame.isEmpty() || optionalUser.isEmpty()) {
-            throw new RuntimeException("Game or User not found.");
+        if (optionalGame.isEmpty()) {
+            throw new RuntimeException("Game not found with ID: " + gameID);
         }
-
+    
         Game game = optionalGame.get();
-        User user = optionalUser.get();
-
         double extraPrice = game.getPrice() * length;
+    
+        Optional<User> optionalUser = userRepository.findById(userID);
+        if (optionalUser.isEmpty()) {
+            throw new RuntimeException("User not found with ID: " + userID);
+        }
+    
+        User user = optionalUser.get();
         if (user.getBalance() < extraPrice) {
             throw new RuntimeException("User does not have enough money.");
         }
-
+    
+        // Deduct the extra price and update rent details
         user.addToBalance(-extraPrice);
         userRepository.save(user);
-
+        
         rent.addToEndDate(length);
         rent.addToPrice(extraPrice);
         return rentRepository.save(rent);
     }
+    
 
     public void deleteAllRents() {
         rentRepository.deleteAll();

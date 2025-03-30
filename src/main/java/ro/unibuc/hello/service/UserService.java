@@ -17,6 +17,10 @@ public class UserService{
         this.counterService = counterService;
     }
 
+    public User save(User user) {
+        return _userRepository.save(user);
+    }
+    
     public List<User> getAllUsers(){
         return _userRepository.findAll();
     }

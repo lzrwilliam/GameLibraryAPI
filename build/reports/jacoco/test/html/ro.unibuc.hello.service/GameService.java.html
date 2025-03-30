@@ -31,9 +31,13 @@ public class GameService {
 <span class="fc" id="L31">        this._userRepository = userRepository;</span>
 <span class="fc" id="L32">        this.counterService = counterService;</span>
 <span class="fc" id="L33">    }</span>
+    public Game save(Game game) {
+<span class="fc" id="L35">        return _gameRepository.save(game);</span>
+    }
+    
 
     public List&lt;Game&gt; getAllGamesByGenre(String genre) {
-<span class="fc" id="L36">        return _gameRepository.findByGenre(genre);</span>
+<span class="fc" id="L40">        return _gameRepository.findByGenre(genre);</span>
     }
 
   
@@ -43,66 +47,66 @@ public class GameService {
     
     
     public List&lt;Game&gt; getAllGames() {
-<span class="fc" id="L46">        List&lt;Game&gt; games = _gameRepository.findAll();</span>
-<span class="pc bpc" id="L47" title="1 of 2 branches missed.">        return games != null ? games : List.of();</span>
+<span class="fc" id="L50">        List&lt;Game&gt; games = _gameRepository.findAll();</span>
+<span class="pc bpc" id="L51" title="1 of 2 branches missed.">        return games != null ? games : List.of();</span>
     }
     
 
     public Optional&lt;Game&gt; getGameById(int id) {
-<span class="fc" id="L52">        return _gameRepository.findById(id);</span>
+<span class="fc" id="L56">        return _gameRepository.findById(id);</span>
     }
 
     public Game addGame(Game game) {
-<span class="fc" id="L56">        game.setId(counterService.getNextSequence(&quot;games&quot;));</span>
-<span class="fc" id="L57">        return _gameRepository.save(game);</span>
+<span class="fc" id="L60">        game.setId(counterService.getNextSequence(&quot;games&quot;));</span>
+<span class="fc" id="L61">        return _gameRepository.save(game);</span>
     }
 
     public void deleteGame(int id) {
-<span class="fc" id="L61">        _gameRepository.deleteById(id);</span>
-<span class="fc" id="L62">    }</span>
+<span class="fc" id="L65">        _gameRepository.deleteById(id);</span>
+<span class="fc" id="L66">    }</span>
 
     public void deleteAllGames() {
-<span class="fc" id="L65">        _gameRepository.deleteAll();</span>
-<span class="fc" id="L66">        counterService.resetCounter(&quot;games&quot;);</span>
-<span class="fc" id="L67">    }</span>
+<span class="fc" id="L69">        _gameRepository.deleteAll();</span>
+<span class="fc" id="L70">        counterService.resetCounter(&quot;games&quot;);</span>
+<span class="fc" id="L71">    }</span>
 
     
 
     public String addReview(int userId, int gameId, String reviewText, int rating) {
-<span class="fc" id="L72">        Optional&lt;Game&gt; gameOpt = _gameRepository.findById(gameId);</span>
-<span class="fc bfc" id="L73" title="All 2 branches covered.">        if (gameOpt.isEmpty()) {</span>
-<span class="fc" id="L74">            throw new RuntimeException(&quot;Jocul nu există!&quot;);</span>
+<span class="fc" id="L76">        Optional&lt;Game&gt; gameOpt = _gameRepository.findById(gameId);</span>
+<span class="fc bfc" id="L77" title="All 2 branches covered.">        if (gameOpt.isEmpty()) {</span>
+<span class="fc" id="L78">            throw new RuntimeException(&quot;Jocul nu există!&quot;);</span>
         }
         
-<span class="fc" id="L77">        Game game = gameOpt.get();</span>
+<span class="fc" id="L81">        Game game = gameOpt.get();</span>
     
-<span class="pc bpc" id="L79" title="2 of 4 branches missed.">        if (rating &lt; 1 || rating &gt; 5) {</span>
-<span class="nc" id="L80">            throw new RuntimeException(&quot;Rating-ul trebuie sa fie intre 1 si 5!&quot;);</span>
+<span class="pc bpc" id="L83" title="2 of 4 branches missed.">        if (rating &lt; 1 || rating &gt; 5) {</span>
+<span class="nc" id="L84">            throw new RuntimeException(&quot;Rating-ul trebuie sa fie intre 1 si 5!&quot;);</span>
         }
-<span class="pc bpc" id="L82" title="1 of 2 branches missed.">        if (reviewText.isEmpty()) {</span>
-<span class="nc" id="L83">            throw new RuntimeException(&quot;Review-ul nu poate fi gol!&quot;);</span>
-        }
-    
-<span class="fc" id="L86">        List&lt;Rent&gt; rentals = _rentRepository.findAll();</span>
-<span class="pc bpc" id="L87" title="2 of 4 branches missed.">        boolean hasRentedGame = rentals.stream().anyMatch(r -&gt; r.getUserID() == userId &amp;&amp; r.getGameID() == gameId);</span>
-    
-<span class="pc bpc" id="L89" title="1 of 2 branches missed.">        if (!hasRentedGame) {</span>
-<span class="nc" id="L90">            throw new RuntimeException(&quot;Nu poți lăsa un review pentru un joc pe care nu l-ai închiriat!&quot;);</span>
+<span class="pc bpc" id="L86" title="1 of 2 branches missed.">        if (reviewText.isEmpty()) {</span>
+<span class="nc" id="L87">            throw new RuntimeException(&quot;Review-ul nu poate fi gol!&quot;);</span>
         }
     
-<span class="pc bnc" id="L93" title="All 2 branches missed.">        boolean alreadyReviewed = game.getReviews().stream().anyMatch(r -&gt; r.getUserId() == userId);</span>
-<span class="pc bpc" id="L94" title="1 of 2 branches missed.">        if (alreadyReviewed) {</span>
-<span class="nc" id="L95">            throw new RuntimeException(&quot;Ai lăsat deja un review pentru acest joc!&quot;);</span>
+<span class="fc" id="L90">        List&lt;Rent&gt; rentals = _rentRepository.findAll();</span>
+<span class="pc bpc" id="L91" title="1 of 4 branches missed.">        boolean hasRentedGame = rentals.stream().anyMatch(r -&gt; r.getUserID() == userId &amp;&amp; r.getGameID() == gameId);</span>
+    
+<span class="fc bfc" id="L93" title="All 2 branches covered.">        if (!hasRentedGame) {</span>
+<span class="fc" id="L94">            throw new RuntimeException(&quot;Nu poți lăsa un review pentru un joc pe care nu l-ai închiriat!&quot;);</span>
         }
     
-<span class="fc" id="L98">        game.addReview(new Review(userId, reviewText, rating));</span>
-<span class="fc" id="L99">        _gameRepository.save(game);</span>
+<span class="pc bpc" id="L97" title="1 of 2 branches missed.">        boolean alreadyReviewed = game.getReviews().stream().anyMatch(r -&gt; r.getUserId() == userId);</span>
+<span class="fc bfc" id="L98" title="All 2 branches covered.">        if (alreadyReviewed) {</span>
+<span class="fc" id="L99">            throw new RuntimeException(&quot;Ai lăsat deja un review pentru acest joc!&quot;);</span>
+        }
     
-<span class="fc" id="L101">        return &quot;Review adaugat cu succes!&quot;;</span>
+<span class="fc" id="L102">        game.addReview(new Review(userId, reviewText, rating));</span>
+<span class="fc" id="L103">        _gameRepository.save(game);</span>
+    
+<span class="fc" id="L105">        return &quot;Review adaugat cu succes!&quot;;</span>
     }
     
     public List&lt;Review&gt; getReviewsForGame(int gameId) {
-<span class="nc" id="L105">        return _gameRepository.findById(gameId).map(Game::getReviews).orElse(List.of());</span>
+<span class="fc" id="L109">        return _gameRepository.findById(gameId).map(Game::getReviews).orElse(List.of());</span>
     }
     
 }

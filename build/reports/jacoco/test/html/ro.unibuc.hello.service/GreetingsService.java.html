@@ -22,22 +22,22 @@ import java.util.concurrent.atomic.AtomicLong;
     private static final String informationTemplate = &quot;%s : %s!&quot;;
 
     public Greeting hello(String name) {
-<span class="nc" id="L25">        return new Greeting(Long.toString(counter.incrementAndGet()), String.format(helloTemplate, name));</span>
+<span class="fc" id="L25">        return new Greeting(Long.toString(counter.incrementAndGet()), String.format(helloTemplate, name));</span>
     }
 
     public Greeting buildGreetingFromInfo(String title) throws EntityNotFoundException {
-<span class="nc" id="L29">        InformationEntity entity = informationRepository.findByTitle(title);</span>
-<span class="nc bnc" id="L30" title="All 2 branches missed.">        if (entity == null) {</span>
-<span class="nc" id="L31">            throw new EntityNotFoundException(title);</span>
+<span class="fc" id="L29">        InformationEntity entity = informationRepository.findByTitle(title);</span>
+<span class="fc bfc" id="L30" title="All 2 branches covered.">        if (entity == null) {</span>
+<span class="fc" id="L31">            throw new EntityNotFoundException(title);</span>
         }
-<span class="nc" id="L33">        return new Greeting(Long.toString(counter.incrementAndGet()), String.format(informationTemplate, entity.getTitle(), entity.getDescription()));</span>
+<span class="fc" id="L33">        return new Greeting(Long.toString(counter.incrementAndGet()), String.format(informationTemplate, entity.getTitle(), entity.getDescription()));</span>
     }
 
     public List&lt;Greeting&gt; getAllGreetings() {
-<span class="nc" id="L37">        List&lt;InformationEntity&gt; entities = informationRepository.findAll();</span>
-<span class="nc" id="L38">        return entities.stream()</span>
-<span class="nc" id="L39">                .map(entity -&gt; new Greeting(entity.getId(), entity.getTitle()))</span>
-<span class="nc" id="L40">                .collect(Collectors.toList());</span>
+<span class="fc" id="L37">        List&lt;InformationEntity&gt; entities = informationRepository.findAll();</span>
+<span class="fc" id="L38">        return entities.stream()</span>
+<span class="fc" id="L39">                .map(entity -&gt; new Greeting(entity.getId(), entity.getTitle()))</span>
+<span class="fc" id="L40">                .collect(Collectors.toList());</span>
     }
 
     public Greeting getGreetingById(String id) throws EntityNotFoundException {
@@ -47,11 +47,11 @@ import java.util.concurrent.atomic.AtomicLong;
     }
 
     public Greeting saveGreeting(Greeting greeting) {
-<span class="nc" id="L50">        InformationEntity entity = new InformationEntity();</span>
-<span class="nc" id="L51">        entity.setId(greeting.getId());</span>
-<span class="nc" id="L52">        entity.setTitle(greeting.getContent());</span>
-<span class="nc" id="L53">        informationRepository.save(entity);</span>
-<span class="nc" id="L54">        return new Greeting(entity.getId(), entity.getTitle());</span>
+<span class="fc" id="L50">        InformationEntity entity = new InformationEntity();</span>
+<span class="fc" id="L51">        entity.setId(greeting.getId());</span>
+<span class="fc" id="L52">        entity.setTitle(greeting.getContent());</span>
+<span class="fc" id="L53">        informationRepository.save(entity);</span>
+<span class="fc" id="L54">        return new Greeting(entity.getId(), entity.getTitle());</span>
     }
 
     public List&lt;Greeting&gt; saveAll(List&lt;Greeting&gt; greetings) {
@@ -72,18 +72,18 @@ import java.util.concurrent.atomic.AtomicLong;
     }
 
     public Greeting updateGreeting(String id, Greeting greeting) throws EntityNotFoundException {
-<span class="nc" id="L75">        InformationEntity entity = informationRepository.findById(id)</span>
-<span class="nc" id="L76">                .orElseThrow(() -&gt; new EntityNotFoundException(String.valueOf(id)));</span>
-<span class="nc" id="L77">        entity.setTitle(greeting.getContent());</span>
-<span class="nc" id="L78">        informationRepository.save(entity);</span>
-<span class="nc" id="L79">        return new Greeting(entity.getId(), entity.getTitle());</span>
+<span class="fc" id="L75">        InformationEntity entity = informationRepository.findById(id)</span>
+<span class="fc" id="L76">                .orElseThrow(() -&gt; new EntityNotFoundException(String.valueOf(id)));</span>
+<span class="fc" id="L77">        entity.setTitle(greeting.getContent());</span>
+<span class="fc" id="L78">        informationRepository.save(entity);</span>
+<span class="fc" id="L79">        return new Greeting(entity.getId(), entity.getTitle());</span>
     }
 
     public void deleteGreeting(String id) throws EntityNotFoundException {
-<span class="nc" id="L83">        InformationEntity entity = informationRepository.findById(id)</span>
-<span class="nc" id="L84">                .orElseThrow(() -&gt; new EntityNotFoundException(String.valueOf(id)));</span>
-<span class="nc" id="L85">        informationRepository.delete(entity);</span>
-<span class="nc" id="L86">    }</span>
+<span class="fc" id="L83">        InformationEntity entity = informationRepository.findById(id)</span>
+<span class="fc" id="L84">                .orElseThrow(() -&gt; new EntityNotFoundException(String.valueOf(id)));</span>
+<span class="fc" id="L85">        informationRepository.delete(entity);</span>
+<span class="fc" id="L86">    }</span>
 
     public void deleteAllGreetings() {
 <span class="nc" id="L89">        informationRepository.deleteAll();</span>
