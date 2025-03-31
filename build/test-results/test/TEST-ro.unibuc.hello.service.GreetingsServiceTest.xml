@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ro.unibuc.hello.service.GreetingsServiceTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2025-03-21T14:56:34" hostname="DESKTOP-EMVME5P" time="0.389">
+<testsuite name="ro.unibuc.hello.service.GreetingsServiceTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2025-03-30T16:22:24" hostname="codespaces-9d48ea" time="0.045">
   <properties/>
-  <testcase name="testDeleteGreeting_NonExistingEntity()" classname="ro.unibuc.hello.service.GreetingsServiceTest" time="0.285"/>
-  <testcase name="testDeleteGreeting_ExistingEntity()" classname="ro.unibuc.hello.service.GreetingsServiceTest" time="0.006"/>
-  <testcase name="testHello()" classname="ro.unibuc.hello.service.GreetingsServiceTest" time="0.015"/>
-  <testcase name="testUpdateGreeting_NonExistingEntity()" classname="ro.unibuc.hello.service.GreetingsServiceTest" time="0.007"/>
-  <testcase name="testBuildGreetingFromInfo_NonExistingEntity()" classname="ro.unibuc.hello.service.GreetingsServiceTest" time="0.009"/>
-  <testcase name="testUpdateGreeting_ExistingEntity()" classname="ro.unibuc.hello.service.GreetingsServiceTest" time="0.02"/>
-  <testcase name="testGetAllGreetings()" classname="ro.unibuc.hello.service.GreetingsServiceTest" time="0.007"/>
-  <testcase name="testSaveGreeting()" classname="ro.unibuc.hello.service.GreetingsServiceTest" time="0.006"/>
-  <testcase name="testBuildGreetingFromInfo_ExistingEntity()" classname="ro.unibuc.hello.service.GreetingsServiceTest" time="0.005"/>
-  <system-out><![CDATA[16:56:24.368 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [ro.unibuc.hello.service.GreetingsServiceTest]: GreetingsServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+  <testcase name="testDeleteGreeting_NonExistingEntity()" classname="ro.unibuc.hello.service.GreetingsServiceTest" time="0.005"/>
+  <testcase name="testDeleteGreeting_ExistingEntity()" classname="ro.unibuc.hello.service.GreetingsServiceTest" time="0.004"/>
+  <testcase name="testHello()" classname="ro.unibuc.hello.service.GreetingsServiceTest" time="0.002"/>
+  <testcase name="testUpdateGreeting_NonExistingEntity()" classname="ro.unibuc.hello.service.GreetingsServiceTest" time="0.005"/>
+  <testcase name="testBuildGreetingFromInfo_NonExistingEntity()" classname="ro.unibuc.hello.service.GreetingsServiceTest" time="0.004"/>
+  <testcase name="testUpdateGreeting_ExistingEntity()" classname="ro.unibuc.hello.service.GreetingsServiceTest" time="0.004"/>
+  <testcase name="testGetAllGreetings()" classname="ro.unibuc.hello.service.GreetingsServiceTest" time="0.003"/>
+  <testcase name="testSaveGreeting()" classname="ro.unibuc.hello.service.GreetingsServiceTest" time="0.002"/>
+  <testcase name="testBuildGreetingFromInfo_ExistingEntity()" classname="ro.unibuc.hello.service.GreetingsServiceTest" time="0.002"/>
+  <system-out><![CDATA[2025-03-30T16:22:24.622Z  INFO 101138 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [ro.unibuc.hello.service.GreetingsServiceTest]: GreetingsServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

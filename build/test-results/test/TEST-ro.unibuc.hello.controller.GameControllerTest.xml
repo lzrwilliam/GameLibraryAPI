@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ro.unibuc.hello.controller.GameControllerTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2025-03-30T16:22:08" hostname="codespaces-9d48ea" time="1.346">
+  <properties/>
+  <testcase name="testGetAllGamesByGenre()" classname="ro.unibuc.hello.controller.GameControllerTest" time="0.695"/>
+  <testcase name="testAddGame()" classname="ro.unibuc.hello.controller.GameControllerTest" time="0.262"/>
+  <testcase name="testDeleteAllGames()" classname="ro.unibuc.hello.controller.GameControllerTest" time="0.045"/>
+  <testcase name="testGetGameById_Found()" classname="ro.unibuc.hello.controller.GameControllerTest" time="0.048"/>
+  <testcase name="testGetGameById_NotFound()" classname="ro.unibuc.hello.controller.GameControllerTest" time="0.045"/>
+  <testcase name="testGetAllGames()" classname="ro.unibuc.hello.controller.GameControllerTest" time="0.048"/>
+  <testcase name="testGetReviewsForGame()" classname="ro.unibuc.hello.controller.GameControllerTest" time="0.043"/>
+  <testcase name="testAddReview_Success()" classname="ro.unibuc.hello.controller.GameControllerTest" time="0.041"/>
+  <testcase name="testDeleteGame()" classname="ro.unibuc.hello.controller.GameControllerTest" time="0.026"/>
+  <testcase name="testAddReview_Failure()" classname="ro.unibuc.hello.controller.GameControllerTest" time="0.052"/>
+  <system-out><![CDATA[2025-03-30T16:22:08.696Z  INFO 101138 --- [    Test worker] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2025-03-30T16:22:08.699Z  INFO 101138 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-03-30T16:22:08.700Z  INFO 101138 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2025-03-30T16:22:08.918Z  INFO 101138 --- [    Test worker] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2025-03-30T16:22:08.919Z  INFO 101138 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-03-30T16:22:08.922Z  INFO 101138 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2025-03-30T16:22:09.184Z  INFO 101138 --- [    Test worker] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2025-03-30T16:22:09.184Z  INFO 101138 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-03-30T16:22:09.185Z  INFO 101138 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2025-03-30T16:22:09.224Z  INFO 101138 --- [    Test worker] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2025-03-30T16:22:09.224Z  INFO 101138 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-03-30T16:22:09.225Z  INFO 101138 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2025-03-30T16:22:09.285Z  INFO 101138 --- [    Test worker] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2025-03-30T16:22:09.288Z  INFO 101138 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-03-30T16:22:09.288Z  INFO 101138 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2025-03-30T16:22:09.328Z  INFO 101138 --- [    Test worker] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2025-03-30T16:22:09.331Z  INFO 101138 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-03-30T16:22:09.332Z  INFO 101138 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2025-03-30T16:22:09.381Z  INFO 101138 --- [    Test worker] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2025-03-30T16:22:09.381Z  INFO 101138 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-03-30T16:22:09.381Z  INFO 101138 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2025-03-30T16:22:09.427Z  INFO 101138 --- [    Test worker] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2025-03-30T16:22:09.429Z  INFO 101138 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-03-30T16:22:09.429Z  INFO 101138 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2025-03-30T16:22:09.467Z  INFO 101138 --- [    Test worker] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2025-03-30T16:22:09.467Z  INFO 101138 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-03-30T16:22:09.469Z  INFO 101138 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2025-03-30T16:22:09.504Z  INFO 101138 --- [    Test worker] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2025-03-30T16:22:09.510Z  INFO 101138 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-03-30T16:22:09.511Z  INFO 101138 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

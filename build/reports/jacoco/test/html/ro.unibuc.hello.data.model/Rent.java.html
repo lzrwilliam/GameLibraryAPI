@@ -17,73 +17,73 @@ public class Rent {
     private int length;
     private double price;
 
-<span class="nc" id="L20">    public Rent(){</span>
-<span class="nc" id="L21">    }</span>
+<span class="fc" id="L20">    public Rent(){</span>
+<span class="fc" id="L21">    }</span>
 
-<span class="nc" id="L23">    public Rent(int userID, int gameID, LocalDate startDate, int length, double price){</span>
-<span class="nc" id="L24">        this.userID = userID;</span>
-<span class="nc" id="L25">        this.gameID = gameID;</span>
-<span class="nc" id="L26">        this.startDate = startDate;</span>
-<span class="nc" id="L27">        this.length = length;</span>
-<span class="nc" id="L28">        this.endDate = startDate.plusDays(length);</span>
-<span class="nc" id="L29">        this.price = price;</span>
-<span class="nc" id="L30">    }</span>
+<span class="fc" id="L23">    public Rent(int userID, int gameID, LocalDate startDate, int length, double price){</span>
+<span class="fc" id="L24">        this.userID = userID;</span>
+<span class="fc" id="L25">        this.gameID = gameID;</span>
+<span class="fc" id="L26">        this.startDate = startDate;</span>
+<span class="fc" id="L27">        this.length = length;</span>
+<span class="fc" id="L28">        this.endDate = startDate.plusDays(length);</span>
+<span class="fc" id="L29">        this.price = price;</span>
+<span class="fc" id="L30">    }</span>
 
     public String getId(){
-<span class="nc" id="L33">        return id;</span>
+<span class="fc" id="L33">        return id;</span>
     }
 
     public int getUserID(){
-<span class="nc" id="L37">        return userID;</span>
+<span class="fc" id="L37">        return userID;</span>
     }
     public void setUserID(int userID){
 <span class="nc" id="L40">        this.userID = userID;</span>
 <span class="nc" id="L41">    }</span>
 
     public int getGameID(){
-<span class="nc" id="L44">        return gameID;</span>
+<span class="fc" id="L44">        return gameID;</span>
     }
     public void setGameID(int gameID){
 <span class="nc" id="L47">        this.gameID = gameID;</span>
 <span class="nc" id="L48">    }</span>
 
     public LocalDate getStartDate(){
-<span class="nc" id="L51">        return startDate;</span>
+<span class="fc" id="L51">        return startDate;</span>
     }
     public void setStartDate(LocalDate date){
 <span class="nc" id="L54">        this.startDate = date;</span>
 <span class="nc" id="L55">    }</span>
 
     public LocalDate getEndDate(){
-<span class="nc" id="L58">        return endDate;</span>
+<span class="fc" id="L58">        return endDate;</span>
     }
     public void setEndDate(LocalDate date){
 <span class="nc" id="L61">        this.endDate = date;</span>
 <span class="nc" id="L62">    }</span>
     public void addToEndDate(int noDays){
-<span class="nc" id="L64">        endDate = endDate.plusDays(noDays); </span>
-<span class="nc" id="L65">        addToLength(noDays);</span>
-<span class="nc" id="L66">    }</span>
+<span class="fc" id="L64">        endDate = endDate.plusDays(noDays); </span>
+<span class="fc" id="L65">        addToLength(noDays);</span>
+<span class="fc" id="L66">    }</span>
 
     public int getLength(){
-<span class="nc" id="L69">        return length;</span>
+<span class="fc" id="L69">        return length;</span>
     }
     public void setLength(int length){
 <span class="nc" id="L72">        this.length = length;</span>
 <span class="nc" id="L73">    }</span>
     public void addToLength(int addingLength){
-<span class="nc" id="L75">        this.length += addingLength;</span>
-<span class="nc" id="L76">    }</span>
+<span class="fc" id="L75">        this.length += addingLength;</span>
+<span class="fc" id="L76">    }</span>
 
     public double getPrice(){
-<span class="nc" id="L79">        return price;</span>
+<span class="fc" id="L79">        return price;</span>
     }
     public void setPrice(double price){
 <span class="nc" id="L82">        this.price = price;</span>
 <span class="nc" id="L83">    }</span>
     public void addToPrice(double price){
-<span class="nc" id="L85">        this.price += price;</span>
-<span class="nc" id="L86">    }</span>
+<span class="fc" id="L85">        this.price += price;</span>
+<span class="fc" id="L86">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

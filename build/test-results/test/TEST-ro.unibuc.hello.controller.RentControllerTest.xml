@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ro.unibuc.hello.controller.RentControllerTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2025-03-30T16:22:23" hostname="codespaces-9d48ea" time="0.11">
+  <properties/>
+  <testcase name="testDeleteAllRents()" classname="ro.unibuc.hello.controller.RentControllerTest" time="0.092"/>
+  <testcase name="testExtendRent_Success()" classname="ro.unibuc.hello.controller.RentControllerTest" time="0.002"/>
+  <testcase name="testGetAllRents()" classname="ro.unibuc.hello.controller.RentControllerTest" time="0.002"/>
+  <testcase name="testExtendRent_NotFound()" classname="ro.unibuc.hello.controller.RentControllerTest" time="0.003"/>
+  <testcase name="testExtendRent_InvalidDateFormat()" classname="ro.unibuc.hello.controller.RentControllerTest" time="0.002"/>
+  <testcase name="testRentGame_BadRequest()" classname="ro.unibuc.hello.controller.RentControllerTest" time="0.001"/>
+  <testcase name="testRentGame_Success()" classname="ro.unibuc.hello.controller.RentControllerTest" time="0.001"/>
+  <testcase name="testRentGame_RuntimeException()" classname="ro.unibuc.hello.controller.RentControllerTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

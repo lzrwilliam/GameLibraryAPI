@@ -11,7 +11,7 @@ import jakarta.annotation.PostConstruct;
 
 @SpringBootApplication
 @EnableMongoRepositories(basePackageClasses = InformationRepository.class)
-<span class="nc" id="L14">public class HelloApplication {</span>
+<span class="fc" id="L14">public class HelloApplication {</span>
 
 	@Autowired
 	private InformationRepository informationRepository;
@@ -22,10 +22,10 @@ import jakarta.annotation.PostConstruct;
 
 	@PostConstruct
 	public void runAfterObjectCreated() {
-<span class="nc" id="L25">		informationRepository.deleteAll();</span>
-<span class="nc" id="L26">		informationRepository.save(new InformationEntity(&quot;Overview&quot;,</span>
+<span class="fc" id="L25">		informationRepository.deleteAll();</span>
+<span class="fc" id="L26">		informationRepository.save(new InformationEntity(&quot;Overview&quot;,</span>
 				&quot;This is an example of using a data storage engine running separately from our applications server&quot;));
-<span class="nc" id="L28">	}</span>
+<span class="fc" id="L28">	}</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

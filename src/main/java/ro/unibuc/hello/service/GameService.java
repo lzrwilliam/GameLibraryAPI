@@ -31,6 +31,10 @@ public class GameService {
         this._userRepository = userRepository;
         this.counterService = counterService;
     }
+    public Game save(Game game) {
+        return _gameRepository.save(game);
+    }
+    
 
     public List<Game> getAllGamesByGenre(String genre) {
         return _gameRepository.findByGenre(genre);

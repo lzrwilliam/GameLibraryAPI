@@ -17,36 +17,40 @@ public class UserService{
 <span class="fc" id="L17">        this.counterService = counterService;</span>
 <span class="fc" id="L18">    }</span>
 
+    public User save(User user) {
+<span class="fc" id="L21">        return _userRepository.save(user);</span>
+    }
+    
     public List&lt;User&gt; getAllUsers(){
-<span class="fc" id="L21">        return _userRepository.findAll();</span>
+<span class="fc" id="L25">        return _userRepository.findAll();</span>
     }
 
     public Optional&lt;User&gt; GetUserByID(int id){
-<span class="fc" id="L25">        return _userRepository.findById(id);</span>
+<span class="fc" id="L29">        return _userRepository.findById(id);</span>
     }
 
 
     public User addUser(User user){
-<span class="fc" id="L30">        user.setId(counterService.getNextSequence(&quot;users&quot;));</span>
-<span class="fc" id="L31">        return _userRepository.save(user);</span>
+<span class="fc" id="L34">        user.setId(counterService.getNextSequence(&quot;users&quot;));</span>
+<span class="fc" id="L35">        return _userRepository.save(user);</span>
         
     }
 
     public User addMoney(int id, double sum){
-<span class="fc" id="L36">        Optional&lt;User&gt; optionalUser = _userRepository.findById(id);</span>
-<span class="fc bfc" id="L37" title="All 2 branches covered.">        if(optionalUser.isEmpty()){</span>
-<span class="fc" id="L38">            throw new RuntimeException(&quot;User not found with ID: &quot; + id);</span>
+<span class="fc" id="L40">        Optional&lt;User&gt; optionalUser = _userRepository.findById(id);</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        if(optionalUser.isEmpty()){</span>
+<span class="fc" id="L42">            throw new RuntimeException(&quot;User not found with ID: &quot; + id);</span>
         }
 
-<span class="fc" id="L41">        User user = optionalUser.get();</span>
-<span class="fc" id="L42">        user.addToBalance(sum);</span>
+<span class="fc" id="L45">        User user = optionalUser.get();</span>
+<span class="fc" id="L46">        user.addToBalance(sum);</span>
         
-<span class="fc" id="L44">        return _userRepository.save(user);</span>
+<span class="fc" id="L48">        return _userRepository.save(user);</span>
     }
 
     public void deleteAllUsers() {
-<span class="fc" id="L48">        _userRepository.deleteAll();</span>
-<span class="fc" id="L49">        counterService.resetCounter(&quot;users&quot;); // resetare contor id</span>
-<span class="fc" id="L50">    }</span>
+<span class="fc" id="L52">        _userRepository.deleteAll();</span>
+<span class="fc" id="L53">        counterService.resetCounter(&quot;users&quot;); // resetare contor id</span>
+<span class="fc" id="L54">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
