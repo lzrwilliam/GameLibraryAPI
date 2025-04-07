@@ -88,7 +88,7 @@ public class GameService {
         }
     
 <span class="fc" id="L90">        List&lt;Rent&gt; rentals = _rentRepository.findAll();</span>
-<span class="pc bpc" id="L91" title="1 of 4 branches missed.">        boolean hasRentedGame = rentals.stream().anyMatch(r -&gt; r.getUserID() == userId &amp;&amp; r.getGameID() == gameId);</span>
+<span class="pc bpc" id="L91" title="2 of 4 branches missed.">        boolean hasRentedGame = rentals.stream().anyMatch(r -&gt; r.getUserID() == userId &amp;&amp; r.getGameID() == gameId);</span>
     
 <span class="fc bfc" id="L93" title="All 2 branches covered.">        if (!hasRentedGame) {</span>
 <span class="fc" id="L94">            throw new RuntimeException(&quot;Nu poți lăsa un review pentru un joc pe care nu l-ai închiriat!&quot;);</span>
