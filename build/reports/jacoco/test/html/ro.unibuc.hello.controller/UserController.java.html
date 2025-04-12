@@ -40,8 +40,8 @@ public class UserController {
     public User addMoney(@RequestParam int userID, @RequestParam double sum){
         try {
 <span class="fc" id="L42">            return _userService.addMoney(userID, sum);</span>
-<span class="fc" id="L43">        } catch (RuntimeException e) {</span>
-<span class="fc" id="L44">            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);</span>
+<span class="nc" id="L43">        } catch (RuntimeException e) {</span>
+<span class="nc" id="L44">            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);</span>
         }
     }
     

@@ -12,28 +12,28 @@ import java.util.Collection;
 import java.util.Collections;
 
 @Configuration
-<span class="fc" id="L15">public class MongoConfig extends AbstractMongoClientConfiguration {</span>
+<span class="nc" id="L15">public class MongoConfig extends AbstractMongoClientConfiguration {</span>
 
     @Value(&quot;${mongodb.connection.url}&quot;)
     private String connectionURL;
 
     @Override
     protected String getDatabaseName() {
-<span class="fc" id="L22">        return &quot;test&quot;;</span>
+<span class="nc" id="L22">        return &quot;test&quot;;</span>
     }
 
     @Override
     public MongoClient mongoClient() {
-<span class="fc" id="L27">        MongoClientSettings mongoClientSettings = MongoClientSettings.builder()</span>
-<span class="fc" id="L28">                .applyConnectionString(new ConnectionString(connectionURL))</span>
-<span class="fc" id="L29">                .build();</span>
+<span class="nc" id="L27">        MongoClientSettings mongoClientSettings = MongoClientSettings.builder()</span>
+<span class="nc" id="L28">                .applyConnectionString(new ConnectionString(connectionURL))</span>
+<span class="nc" id="L29">                .build();</span>
 
-<span class="fc" id="L31">        return MongoClients.create(mongoClientSettings);</span>
+<span class="nc" id="L31">        return MongoClients.create(mongoClientSettings);</span>
     }
 
     @Override
     public Collection&lt;String&gt; getMappingBasePackages() {
-<span class="fc" id="L36">        return Collections.singleton(&quot;ro.unibuc.hello.data&quot;);</span>
+<span class="nc" id="L36">        return Collections.singleton(&quot;ro.unibuc.hello.data&quot;);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

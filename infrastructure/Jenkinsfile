@@ -1,13 +1,48 @@
 pipeline {
     agent any
+
+    tools {
+        jdk 'jdk21'
+    }
+
     environment {
-        DOCKER_PASSWORD = credentials("docker_password")
+        DOCKER_USERNAME = 'williamlazar2002'
     }
 
     stages {
         stage('Build & Test') {
             steps {
                 sh './gradlew clean build'
+            }
+        }
+
+        stage('Tag & Build Docker Image') {
+            steps {
+                script {
+                    sh 'git fetch --tags'
+                    def gitTag = sh(script: "git tag | tail -n1", returnStdout: true).trim()
+                    def major = sh(script: "echo ${gitTag} | cut -d . -f 1", returnStdout: true).trim()
+                    def minor = sh(script: "echo ${gitTag} | cut -d . -f 2", returnStdout: true).trim()
+                    def patch = sh(script: "echo ${gitTag} | cut -d . -f 3", returnStdout: true).trim()
+
+                    def newMinor = minor.toInteger() + 1
+                    env.IMAGE_VERSION = "${major}.${newMinor}.${patch}"
+                }
+
+                sh '''
+                    docker build -t $DOCKER_USERNAME/hello-img:$IMAGE_VERSION -f Dockerfile .
+                '''
+            }
+        }
+
+        stage('Push Docker Image') {
+            steps {
+                withCredentials([string(credentialsId: 'docker_password', variable: 'DOCKER_PASSWORD')]) {
+                    sh '''
+                        echo "$DOCKER_PASSWORD" | docker login -u $DOCKER_USERNAME --password-stdin
+                        docker push $DOCKER_USERNAME/hello-img:$IMAGE_VERSION
+                    '''
+                }
             }
         }
     }
