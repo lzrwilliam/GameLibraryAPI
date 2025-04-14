@@ -1,0 +1,65 @@
+docker exec gamelibraryapi-jenkins-1 cat /var/jenkins_home/secrets/initialAdminPassword
+parola 5f9258febae24b45a9f2e0bf1d8d96f0 user admin pe port 8082 parca e jenkins
+
+
+
+ca sa luam parola jenkins cu care ne logam
+acum mereu inainte sa ne apucam : # Creezi un nou tag semantic
+git tag 1.3.0
+
+# Îl trimiți la GitHub
+git push origin 1.3.0
+
+
+Docker Hub
+Username: WilliamLazar2002
+parola: Facultate20212@
+
+Ai uploadat imaginile sub: WilliamLazar2002/hello-img:<version>
+
+
+
+Pașii efectuați până acum:
+✅ Ai configurat Jenkins folosind start.sh + Docker Compose.
+
+✅ Ai rulat make build pentru a crea imaginea hello-img.
+
+✅ Ai adăugat Gradle (v8.13) și JDK21 în Global Tool Configuration.
+
+✅ Ai creat credentialele docker_password și github_token4.
+
+✅ Ai creat un Jenkinsfile în folderul infrastructure/ din repo.
+
+✅ Ai configurat un GitHub Organization Folder în Jenkins:
+
+Organization: PEGameLibrary
+
+Script Path: infrastructure/Jenkinsfile
+
+Credentials: github_token4
+
+Include repo: .*GameLibraryAPI
+
+Branch regex: main
+
+✅ Pipeline-ul se rulează cu succes, build-ul și push-ul imaginilor la Docker Hub funcționează.
+
+🔁 Ce vrei să faci acum: Schimbare branch pentru scanare
+🔄 Schimbă branch-ul monitorizat în Organization Folder:
+Mergi în Jenkins > Dashboard > [Organization Folder]
+
+Click pe Configure
+
+Sub „Behaviours”:
+
+La Filter by name (with regular expression) → modifică în:
+
+
+Salvează și apasă Scan Organization Folder din nou.
+
+Verifică dacă rulează main și creează jobul corect.
+
+
+
+
+complet ce avem :

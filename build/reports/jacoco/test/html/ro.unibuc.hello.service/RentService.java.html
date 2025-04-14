@@ -34,7 +34,7 @@ import java.util.Optional;
     }
 
     public Rent save(Rent rent) {
-<span class="fc" id="L37">        return rentRepository.save(rent);</span>
+<span class="nc" id="L37">        return rentRepository.save(rent);</span>
     }
     
 
@@ -55,9 +55,9 @@ import java.util.Optional;
 
 <span class="fc" id="L56">        List&lt;Rent&gt; userRents = rentRepository.findAll();</span>
 <span class="fc" id="L57">        boolean alreadyActive = userRents.stream().anyMatch(r -&gt;</span>
-<span class="pc bpc" id="L58" title="1 of 2 branches missed.">            r.getUserID() == userID &amp;&amp;</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">            r.getUserID() == userID &amp;&amp;</span>
 <span class="nc bnc" id="L59" title="All 2 branches missed.">            r.getGameID() == gameID &amp;&amp;</span>
-<span class="pc bnc" id="L60" title="All 2 branches missed.">            LocalDate.now().isBefore(r.getEndDate())</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">            LocalDate.now().isBefore(r.getEndDate())</span>
         );
 <span class="pc bpc" id="L62" title="1 of 2 branches missed.">        if (alreadyActive) {</span>
 <span class="nc" id="L63">            throw new RuntimeException(&quot;User already has an active rent for this game.&quot;);</span>

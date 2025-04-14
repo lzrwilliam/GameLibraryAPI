@@ -1,13 +1,85 @@
 pipeline {
     agent any
+
+    tools {
+        jdk 'jdk21'
+    }
+
     environment {
-        DOCKER_PASSWORD = credentials("docker_password")
+        DOCKER_USERNAME = 'williamlazar2002'
+        DOCKER_PASSWORD = credentials('docker_password')
+        GITHUB_TOKEN = credentials('github_token3')
     }
 
     stages {
+        stage('Stop Running Containers') {
+    steps {
+        sh '''
+            echo "Stopping running hello and mongo containers if any..."
+
+            # Stop 'hello' container dacă există
+            docker ps -a --filter "name=hello" --format "{{.ID}}" | xargs -r docker rm -f
+
+            # Stop 'mongo' container dacă există
+            docker ps -a --filter "name=mongo" --format "{{.ID}}" | xargs -r docker rm -f
+        '''
+    }
+}
+
         stage('Build & Test') {
             steps {
                 sh './gradlew clean build'
+            }
+        }
+
+        stage('Tag & Build Docker Image') {
+            steps {
+                script {
+                    sh 'git fetch --tags'
+
+                    def gitTag = sh(script: 'git tag | sort --version-sort | tail -1', returnStdout: true).trim()
+                    def parts = gitTag.tokenize('.')
+                    def major = parts[0]
+                    def minor = parts[1].toInteger() + 1
+                    def patch = parts[2]
+
+                    env.MAJOR_VERSION = major
+                    env.MINOR_VERSION = minor.toString()
+                    env.PATCH_VERSION = patch
+                    env.IMAGE_TAG = "${major}.${minor}.${patch}"
+                }
+
+                sh "docker build -t $DOCKER_USERNAME/hello-img:$IMAGE_TAG -f Dockerfile ."
+            }
+        }
+
+        stage('Push Docker Image & Git Tag') {
+            steps {
+                withCredentials([
+                    string(credentialsId: 'github_token3', variable: 'GITHUB_TOKEN')
+                ]) {
+                    sh '''
+                        echo "$DOCKER_PASSWORD" | docker login -u $DOCKER_USERNAME --password-stdin
+                        docker push $DOCKER_USERNAME/hello-img:$IMAGE_TAG
+
+                        git config user.email "ci@jenkins.local"
+                        git config user.name "Jenkins CI"
+                        git tag $IMAGE_TAG
+                        git push https://$GITHUB_TOKEN@github.com/PEGameLibrary/GameLibraryAPI.git $IMAGE_TAG
+                    '''
+                }
+            }
+        }
+
+        stage('Deploy Docker Compose') {
+            steps {
+                sh "IMAGE_TAG=$IMAGE_TAG docker compose up -d hello mongo"
+            }
+        }
+
+        stage('Run Integration Tests') {
+            steps {
+                sh './gradlew testIT'
             }
         }
     }

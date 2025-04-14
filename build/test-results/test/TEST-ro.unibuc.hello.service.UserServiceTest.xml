@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ro.unibuc.hello.service.UserServiceTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2025-03-30T16:22:24" hostname="codespaces-9d48ea" time="0.024">
+<testsuite name="ro.unibuc.hello.service.UserServiceTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2025-04-11T15:06:21" hostname="codespaces-3e3e91" time="0.032">
   <properties/>
   <testcase name="testAddMoney_UserNotFound()" classname="ro.unibuc.hello.service.UserServiceTest" time="0.005"/>
   <testcase name="testAddUser()" classname="ro.unibuc.hello.service.UserServiceTest" time="0.004"/>
   <testcase name="testDeleteAllUsers()" classname="ro.unibuc.hello.service.UserServiceTest" time="0.002"/>
-  <testcase name="testGetAllUsers()" classname="ro.unibuc.hello.service.UserServiceTest" time="0.002"/>
-  <testcase name="testGetUserById_UserExists()" classname="ro.unibuc.hello.service.UserServiceTest" time="0.002"/>
-  <testcase name="testAddMoney_UserExists()" classname="ro.unibuc.hello.service.UserServiceTest" time="0.003"/>
-  <testcase name="testGetUserById_UserNotFound()" classname="ro.unibuc.hello.service.UserServiceTest" time="0.002"/>
+  <testcase name="testGetAllUsers()" classname="ro.unibuc.hello.service.UserServiceTest" time="0.004"/>
+  <testcase name="testGetUserById_UserExists()" classname="ro.unibuc.hello.service.UserServiceTest" time="0.004"/>
+  <testcase name="testAddMoney_UserExists()" classname="ro.unibuc.hello.service.UserServiceTest" time="0.004"/>
+  <testcase name="testGetUserById_UserNotFound()" classname="ro.unibuc.hello.service.UserServiceTest" time="0.003"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
