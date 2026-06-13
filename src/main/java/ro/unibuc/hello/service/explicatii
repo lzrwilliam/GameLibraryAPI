@@ -1,0 +1,7 @@
+Serviciile implementează logica de business. Câteva puncte importante:
+
+UserService – adaugă utilizatori cu ID generat, returnează lista de utilizatori, caută utilizatori după ID și permite adăugarea de bani în cont. Metoda de adăugare a banilor updatează soldul utilizatorului, iar metoda de ștergere golește colecția de utilizatori.
+GameService – permite adăugarea unui joc nou (generând ID), listarea jocurilor, căutarea după ID sau gen și ștergerea tuturor jocurilor. Gestionarea recenziilor include o validare complexă: se verifică existența jocului, rating‑ul trebuie să fie între 1 și 5, textul recenziei nu poate fi gol, utilizatorul trebuie să fi închiriat jocul, iar același utilizator nu poate lăsa două recenzii pentru același joc.
+RentService – gestionează închirierea jocurilor. La închiriere, se verifică: existența jocului și a utilizatorului, faptul că utilizatorul nu are deja o închiriere activă pentru joc, existența unor copii disponibile, soldul suficient al utilizatorului, apoi se actualizează stocul jocului și soldul utilizatorului. Există și funcționalitate de prelungire a unei închirieri, care ajustează durata și costul.
+CounterService – gestionează secvențele de ID-uri. Metoda getNextSequence citește și incrementează documentul corespunzător entității din colecția counters, iar resetCounter setează valoarea la 0.
+GreetingsService – folosit pentru două endpoint‑uri simple (/hello-world și /info) care returnează mesaje de test.

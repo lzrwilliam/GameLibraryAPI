@@ -12,58 +12,70 @@ pipeline {
     }
 
     stages {
-        stage('Stop Running Containers') {
-    steps {
-        sh '''
-            echo "Stopping running hello and mongo containers if any..."
-
-            # Stop 'hello' container dacă există
-            docker ps -a --filter "name=hello" --format "{{.ID}}" | xargs -r docker rm -f
-
-            # Stop 'mongo' container dacă există
-            docker ps -a --filter "name=mongo" --format "{{.ID}}" | xargs -r docker rm -f
-        '''
-    }
-}
-
-        stage('Build & Test') {
-            steps {
-                sh './gradlew clean build'
-            }
-        }
-
-        stage('Tag & Build Docker Image') {
+        stage('Calculate Version') {
             steps {
                 script {
                     sh 'git fetch --tags'
 
-                    def gitTag = sh(script: 'git tag | sort --version-sort | tail -1', returnStdout: true).trim()
-                    def parts = gitTag.tokenize('.')
-                    def major = parts[0]
-                    def minor = parts[1].toInteger() + 1
-                    def patch = parts[2]
+                    def latestTag = sh(
+                        script: 'git tag | sort --version-sort | tail -1',
+                        returnStdout: true
+                    ).trim()
 
-                    env.MAJOR_VERSION = major
-                    env.MINOR_VERSION = minor.toString()
-                    env.PATCH_VERSION = patch
-                    env.IMAGE_TAG = "${major}.${minor}.${patch}"
+                    if (!latestTag) {
+                        env.IMAGE_TAG = "1.0.0"
+                    } else {
+                        def parts = latestTag.tokenize('.')
+
+                        if (parts.size() != 3) {
+                            error "Invalid latest Git tag: ${latestTag}. Expected format: MAJOR.MINOR.PATCH, example: 1.0.0"
+                        }
+
+                        def major = parts[0]
+                        def minor = parts[1].toInteger() + 1
+                        def patch = parts[2]
+
+                        env.IMAGE_TAG = "${major}.${minor}.${patch}"
+                    }
+
+                    echo "Version calculated: ${env.IMAGE_TAG}"
                 }
+            }
+        }
 
-                sh "docker build -t $DOCKER_USERNAME/hello-img:$IMAGE_TAG -f Dockerfile ."
+        stage('Stop Running Containers') {
+            steps {
+                sh '''
+                    echo "Stopping running hello and mongo containers if any..."
+                    docker ps -a --filter "name=hello" --format "{{.ID}}" | xargs -r docker rm -f
+                    docker ps -a --filter "name=mongo" --format "{{.ID}}" | xargs -r docker rm -f
+                '''
+            }
+        }
+
+        stage('Build & Test') {
+            steps {
+                sh './gradlew clean build -PappVersion=$IMAGE_TAG'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build --build-arg APP_VERSION=$IMAGE_TAG -t $DOCKER_USERNAME/hello-img:$IMAGE_TAG -f Dockerfile .'
             }
         }
 
         stage('Push Docker Image & Git Tag') {
             steps {
-                withCredentials([
-                    string(credentialsId: 'github_token3', variable: 'GITHUB_TOKEN')
-                ]) {
+                withCredentials([string(credentialsId: 'github_token3', variable: 'GITHUB_TOKEN')]) {
                     sh '''
                         echo "$DOCKER_PASSWORD" | docker login -u $DOCKER_USERNAME --password-stdin
+
                         docker push $DOCKER_USERNAME/hello-img:$IMAGE_TAG
 
                         git config user.email "ci@jenkins.local"
                         git config user.name "Jenkins CI"
+
                         git tag $IMAGE_TAG
                         git push https://$GITHUB_TOKEN@github.com/PEGameLibrary/GameLibraryAPI.git $IMAGE_TAG
                     '''
@@ -73,13 +85,13 @@ pipeline {
 
         stage('Deploy Docker Compose') {
             steps {
-                sh "IMAGE_TAG=$IMAGE_TAG docker compose up -d hello mongo"
+                sh 'IMAGE_TAG=$IMAGE_TAG docker compose up -d hello mongo'
             }
         }
 
         stage('Run Integration Tests') {
             steps {
-                sh './gradlew testIT'
+                sh './gradlew testIT -PappVersion=$IMAGE_TAG'
             }
         }
     }

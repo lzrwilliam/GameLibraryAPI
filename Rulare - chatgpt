@@ -1,0 +1,81 @@
+Cum rulăm proiectul de la zero
+
+Fișierul Pt rulara proiect prodEng.txt oferă un ghid pas cu pas pentru rulare, deși acesta este orientat către mediul CodeSpace. Mai jos sunt adaptate aceste instrucțiuni pentru rularea locală pe Linux (Ubuntu). Este important să aveți instalate JDK 21, Docker și Docker Compose.
+
+1. Instalarea prealabilă (prerequisites)
+
+Instalați Java 21:
+
+sudo apt update
+sudo apt install openjdk-21-jdk -y
+export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
+export PATH=$JAVA_HOME/bin:$PATH
+
+
+Construiți containerul aplicației :
+Proiectul include un Makefile și scriptul build.sh pentru a crea imaginea Docker a aplicației. Rulați:
+
+apt update
+apt install -y dos2unix
+
+dos2unix gradlew 2>/dev/null || true
+find . -type f -name "*.sh" -exec dos2unix {} \;
+
+chmod +x gradlew 2>/dev/null || true
+
+
+sterge container ca sa pot da iar makebuild
+docker rm -f hello-builder-container
+
+make build -- sa am docker desktop deschis cand dau comanda
+
+Acest pas construiește imaginea cu codul actual.
+
+Porniți baza de date MongoDB:
+
+docker-compose up -d mongo
+
+Instrucțiunea este menționată explicit în documentul de rulare. Aceasta pornește un container MongoDB cu utilizatorul root și parola example, așa cum este specificat în fișierul docker-compose.yml.
+
+Rulați aplicația:
+
+Utilizați scriptul start.sh:
+
+chmod +x ./start.sh  # dacă scriptul nu are permisiuni
+docker tag hello-img:latest williamlazar2002/hello-img:latest
+./start.sh
+
+Scriptul va porni atât serviciul aplicației (construit în imaginea Docker) cât și baza de date.
+
+Alternativ, puteți rula direct aplicația local cu Gradle:
+
+./gradlew bootRun
+
+În cazul în care întâmpinați probleme, efectuați o curățare și reconstrucție: ./gradlew clean && ./gradlew build && ./gradlew bootRun.
+
+Verificați că serverul pornește: aplicația ar trebui să ruleze pe portul 8080. Dacă portul este deja ocupat, puteți verifica procesul folosind sudo lsof -i :8080 și, dacă este necesar, îl opriți cu sudo kill -9 PID.
+3. Testarea API‑ului
+
+Odată ce aplicația pornește, endpoint‑urile sunt disponibile la http://localhost:8080. Puteți folosi un client REST (Postman, VS Code Rest Client, curl) pentru a testa operațiile descrise în secțiunea „End‑point‑uri principale”. Exemplu de adăugare a unui utilizator:
+
+curl -X POST http://localhost:8080/Users/Add \
+  -H "Content-Type: application/json" \
+  -d '{
+    "firstName": "Ana", 
+    "lastName": "Pop", 
+    "username": "anapop", 
+    "password": "parola123", 
+    "birthDate": "1998-10-15", 
+    "balance": 100.0,
+    "email": "ana@example.com", 
+    "phone": "0712345678"
+  }'
+
+După ce utilizatorul este creat, puteți adăuga bani prin PATCH /Users/AddMoney/user={id}&sum={amount}, închiria un joc prin PATCH /games/Rent/... și adăuga recenzii. Respectați regulile de validare: rating‑ul între 1 și 5, recenzia nu poate fi goală, iar utilizatorul trebuie să fi închiriat jocul pentru a putea lăsa o recenzie.
+
+4. Monitorizare și oprire
+Monitorizarea serviciilor: proiectul conține scriptul pre-start-monitoring.sh și un fișier docker-compose.yml cu servicii precum mongo-express și node-exporter care pot fi activate pentru monitorizare. Acestea nu sunt necesare pentru rularea de bază, dar pot fi utile dacă doriți statistici de performanță.
+Oprirea serviciilor: utilizați scriptul stop.sh pentru a opri containerele sau rulați docker-compose down în directorul proiectului. Pentru a șterge containerul de build creat de Makefile, folosiți docker rm -f hello-builder-container.
+Concluzii
+
+Proiectul GameLibraryAPI demonstrează cum se construiește o aplicație CRUD cu un nivel suplimentar de complexitate: gestionarea stocului de jocuri și a închirierilor, validarea recenziilor și generarea de ID‑uri. Structura sa este modulară și ușor de extins. Pentru rulare este necesară configurarea unui mediu Java 21, instalarea Docker și a MongoDB; scripturile furnizate simplifică pornirea serviciilor. Prin urmare, urmând pașii prezentați, orice dezvoltator poate clona, compila și utiliza API‑ul pe propria mașină.

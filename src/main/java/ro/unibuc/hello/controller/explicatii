@@ -1,0 +1,7 @@
+
+Controller‑ele mapate pe diferite rute HTTP expun funcționalitatea aplicației:
+
+UserController – definește rutele /users: returnează toți utilizatorii, găsește un utilizator după ID, adaugă un nou utilizator, adaugă bani în cont și șterge toți utilizatorii.
+GameController – gestionează rutele /games: listarea tuturor jocurilor, găsirea jocurilor după gen, căutarea unui joc după ID, adăugarea unui joc, închirierea unui joc, prelungirea unei închirieri, ștergerea tuturor jocurilor și adăugarea unei recenzii. End‑point‑ul de adăugare recenzie folosește GameService pentru a verifica regulile de validare descrise anterior.
+RentController – oferă rute pentru închiriat (PATCH /games/Rent/game={idGame}&user={idUser}&for={days}), pentru prelungit o închiriere (PATCH /games/Extend/...) și pentru ștergerea tuturor închirierilor.
+GreetingsController – două rute de test: GET /hello-world și GET /info

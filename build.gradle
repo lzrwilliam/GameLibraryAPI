@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'ro.unibuc'
-version = '0.0.1-SNAPSHOT'
+version = project.findProperty("appVersion") ?: "0.0.1-SNAPSHOT"
 java {
 	sourceCompatibility = JavaVersion.VERSION_21
 }

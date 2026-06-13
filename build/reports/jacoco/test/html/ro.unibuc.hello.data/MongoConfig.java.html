@@ -10,30 +10,33 @@ import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
 
 import java.util.Collection;
 import java.util.Collections;
+//configurează conexiunea la baza de date MongoDB folosind proprietatea mongodb.connection.url.
+ //Dacă variabila de mediu MONGODB_CONECTION_URL nu este definită, 
+ //se folosește valoarea implicită mongodb://root:example@localhost:27017. Numele bazei de date este „test”
 
 @Configuration
-<span class="nc" id="L15">public class MongoConfig extends AbstractMongoClientConfiguration {</span>
+<span class="nc" id="L18">public class MongoConfig extends AbstractMongoClientConfiguration {</span>
 
     @Value(&quot;${mongodb.connection.url}&quot;)
     private String connectionURL;
 
     @Override
     protected String getDatabaseName() {
-<span class="nc" id="L22">        return &quot;test&quot;;</span>
+<span class="nc" id="L25">        return &quot;test&quot;;</span>
     }
 
     @Override
     public MongoClient mongoClient() {
-<span class="nc" id="L27">        MongoClientSettings mongoClientSettings = MongoClientSettings.builder()</span>
-<span class="nc" id="L28">                .applyConnectionString(new ConnectionString(connectionURL))</span>
-<span class="nc" id="L29">                .build();</span>
+<span class="nc" id="L30">        MongoClientSettings mongoClientSettings = MongoClientSettings.builder()</span>
+<span class="nc" id="L31">                .applyConnectionString(new ConnectionString(connectionURL))</span>
+<span class="nc" id="L32">                .build();</span>
 
-<span class="nc" id="L31">        return MongoClients.create(mongoClientSettings);</span>
+<span class="nc" id="L34">        return MongoClients.create(mongoClientSettings);</span>
     }
 
     @Override
     public Collection&lt;String&gt; getMappingBasePackages() {
-<span class="nc" id="L36">        return Collections.singleton(&quot;ro.unibuc.hello.data&quot;);</span>
+<span class="nc" id="L39">        return Collections.singleton(&quot;ro.unibuc.hello.data&quot;);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

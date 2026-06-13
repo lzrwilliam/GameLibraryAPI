@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ro.unibuc.hello.controller.UserControllerTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2025-04-15T08:21:02" hostname="1e6fcd13e66e" time="0.298">
+<testsuite name="ro.unibuc.hello.controller.UserControllerTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-06-13T12:04:14" hostname="cac8c4d9dc75" time="0.452">
   <properties/>
-  <testcase name="testAddMoney_UserNotFound()" classname="ro.unibuc.hello.controller.UserControllerTest" time="0.1"/>
-  <testcase name="testAddUser()" classname="ro.unibuc.hello.controller.UserControllerTest" time="0.055"/>
-  <testcase name="testDeleteAllUsers()" classname="ro.unibuc.hello.controller.UserControllerTest" time="0.022"/>
-  <testcase name="testGetAllUsers()" classname="ro.unibuc.hello.controller.UserControllerTest" time="0.028"/>
-  <testcase name="testGetUserById_UserExists()" classname="ro.unibuc.hello.controller.UserControllerTest" time="0.028"/>
-  <testcase name="testAddMoney_UserExists()" classname="ro.unibuc.hello.controller.UserControllerTest" time="0.039"/>
-  <testcase name="testGetUserById_UserNotFound()" classname="ro.unibuc.hello.controller.UserControllerTest" time="0.017"/>
-  <system-out><![CDATA[08:21:02.411 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
-08:21:02.411 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
-08:21:02.411 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
-08:21:02.421 [Test worker] WARN org.springframework.web.servlet.PageNotFound -- No mapping for PATCH /users/AddMoney/2/50.0
-08:21:02.425 [Test worker] WARN org.springframework.web.servlet.PageNotFound -- No endpoint PATCH /users/AddMoney/2/50.0.
-08:21:02.445 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
-08:21:02.445 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
-08:21:02.446 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
-08:21:02.503 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
-08:21:02.503 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
-08:21:02.503 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
-08:21:02.523 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
-08:21:02.524 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
-08:21:02.525 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 1 ms
-08:21:02.553 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
-08:21:02.554 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
-08:21:02.554 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
-08:21:02.584 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
-08:21:02.584 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
-08:21:02.585 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 1 ms
-08:21:02.623 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
-08:21:02.623 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
-08:21:02.623 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
-08:21:02.624 [Test worker] WARN org.springframework.web.servlet.PageNotFound -- No mapping for GET /users/Find/2
-08:21:02.624 [Test worker] WARN org.springframework.web.servlet.PageNotFound -- No endpoint GET /users/Find/2.
+  <testcase name="testAddMoney_UserNotFound()" classname="ro.unibuc.hello.controller.UserControllerTest" time="0.123"/>
+  <testcase name="testAddUser()" classname="ro.unibuc.hello.controller.UserControllerTest" time="0.106"/>
+  <testcase name="testDeleteAllUsers()" classname="ro.unibuc.hello.controller.UserControllerTest" time="0.028"/>
+  <testcase name="testGetAllUsers()" classname="ro.unibuc.hello.controller.UserControllerTest" time="0.033"/>
+  <testcase name="testGetUserById_UserExists()" classname="ro.unibuc.hello.controller.UserControllerTest" time="0.035"/>
+  <testcase name="testAddMoney_UserExists()" classname="ro.unibuc.hello.controller.UserControllerTest" time="0.091"/>
+  <testcase name="testGetUserById_UserNotFound()" classname="ro.unibuc.hello.controller.UserControllerTest" time="0.028"/>
+  <system-out><![CDATA[12:04:14.322 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
+12:04:14.323 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
+12:04:14.323 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
+12:04:14.334 [Test worker] WARN org.springframework.web.servlet.PageNotFound -- No mapping for PATCH /users/AddMoney/2/50.0
+12:04:14.355 [Test worker] WARN org.springframework.web.servlet.PageNotFound -- No endpoint PATCH /users/AddMoney/2/50.0.
+12:04:14.388 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
+12:04:14.389 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
+12:04:14.389 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
+12:04:14.496 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
+12:04:14.497 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
+12:04:14.497 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
+12:04:14.525 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
+12:04:14.525 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
+12:04:14.526 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
+12:04:14.559 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
+12:04:14.559 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
+12:04:14.560 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 1 ms
+12:04:14.597 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
+12:04:14.597 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
+12:04:14.598 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 1 ms
+12:04:14.688 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
+12:04:14.688 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
+12:04:14.688 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
+12:04:14.690 [Test worker] WARN org.springframework.web.servlet.PageNotFound -- No mapping for GET /users/Find/2
+12:04:14.691 [Test worker] WARN org.springframework.web.servlet.PageNotFound -- No endpoint GET /users/Find/2.
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

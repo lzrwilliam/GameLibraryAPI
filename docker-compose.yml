@@ -1,6 +1,6 @@
 services:
   hello:
-    image: williamlazar2002/hello-img:${IMAGE_TAG}
+    image: williamlazar2002/hello-img:${IMAGE_TAG:-0.0.1-SNAPSHOT}
 
     ports:
       - 8080:8080

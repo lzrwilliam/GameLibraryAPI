@@ -10,6 +10,9 @@ import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
 
 import java.util.Collection;
 import java.util.Collections;
+//configurează conexiunea la baza de date MongoDB folosind proprietatea mongodb.connection.url.
+ //Dacă variabila de mediu MONGODB_CONECTION_URL nu este definită, 
+ //se folosește valoarea implicită mongodb://root:example@localhost:27017. Numele bazei de date este „test”
 
 @Configuration
 public class MongoConfig extends AbstractMongoClientConfiguration {

@@ -3,7 +3,7 @@ set -x
 
 mkdir -p /workspaces/jenkins_config
 
-# Se
+# Dacă IMAGE_TAG nu este setat, folosim latest
+export IMAGE_TAG=${IMAGE_TAG:-latest}
 
-# Rulează cu variabila setată
-IMAGE_TAG=$IMAGE_TAG docker compose --profile mongo --profile hello-service up -d
+docker compose --profile mongo --profile hello-service up -d

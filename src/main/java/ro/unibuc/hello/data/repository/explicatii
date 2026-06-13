@@ -1,0 +1,6 @@
+Acest pachet conține interfețe ce extind MongoRepository sau CrudRepository. Ele definesc metode de interacțiune cu baza de date:
+
+UserRepository – operații CRUD pentru entitatea User.
+GameRepository – include metoda findByGenre pentru a căuta jocuri după gen.
+RentRepository – permite căutarea unui contract de închiriere activ după utilizator, joc și data de start.
+CounterRepository – lucrează cu documentele din colecția counters.

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ro.unibuc.hello.service.GameServiceTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2025-04-15T08:21:02" hostname="1e6fcd13e66e" time="0.804">
+<testsuite name="ro.unibuc.hello.service.GameServiceTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2026-06-13T12:04:14" hostname="cac8c4d9dc75" time="1.456">
   <properties/>
-  <testcase name="testGetGameById_GameExists()" classname="ro.unibuc.hello.service.GameServiceTest" time="0.639"/>
-  <testcase name="testGetAllGamesByGenre()" classname="ro.unibuc.hello.service.GameServiceTest" time="0.005"/>
-  <testcase name="testAddGame()" classname="ro.unibuc.hello.service.GameServiceTest" time="0.008"/>
-  <testcase name="testDeleteAllGames()" classname="ro.unibuc.hello.service.GameServiceTest" time="0.008"/>
-  <testcase name="testGetAllGames()" classname="ro.unibuc.hello.service.GameServiceTest" time="0.006"/>
-  <testcase name="testAddReview_GameNotFound()" classname="ro.unibuc.hello.service.GameServiceTest" time="0.005"/>
-  <testcase name="testGetReviewsForGame()" classname="ro.unibuc.hello.service.GameServiceTest" time="0.008"/>
-  <testcase name="testAddReview_UserNotRentedGame()" classname="ro.unibuc.hello.service.GameServiceTest" time="0.007"/>
-  <testcase name="testAddReview_Success()" classname="ro.unibuc.hello.service.GameServiceTest" time="0.089"/>
-  <testcase name="testGetGameById_GameNotFound()" classname="ro.unibuc.hello.service.GameServiceTest" time="0.007"/>
-  <testcase name="testDeleteGame()" classname="ro.unibuc.hello.service.GameServiceTest" time="0.005"/>
-  <testcase name="testAddReview_AlreadyReviewed()" classname="ro.unibuc.hello.service.GameServiceTest" time="0.008"/>
+  <testcase name="testGetGameById_GameExists()" classname="ro.unibuc.hello.service.GameServiceTest" time="1.347"/>
+  <testcase name="testGetAllGamesByGenre()" classname="ro.unibuc.hello.service.GameServiceTest" time="0.009"/>
+  <testcase name="testAddGame()" classname="ro.unibuc.hello.service.GameServiceTest" time="0.011"/>
+  <testcase name="testDeleteAllGames()" classname="ro.unibuc.hello.service.GameServiceTest" time="0.003"/>
+  <testcase name="testGetAllGames()" classname="ro.unibuc.hello.service.GameServiceTest" time="0.004"/>
+  <testcase name="testAddReview_GameNotFound()" classname="ro.unibuc.hello.service.GameServiceTest" time="0.002"/>
+  <testcase name="testGetReviewsForGame()" classname="ro.unibuc.hello.service.GameServiceTest" time="0.003"/>
+  <testcase name="testAddReview_UserNotRentedGame()" classname="ro.unibuc.hello.service.GameServiceTest" time="0.003"/>
+  <testcase name="testAddReview_Success()" classname="ro.unibuc.hello.service.GameServiceTest" time="0.049"/>
+  <testcase name="testGetGameById_GameNotFound()" classname="ro.unibuc.hello.service.GameServiceTest" time="0.01"/>
+  <testcase name="testDeleteGame()" classname="ro.unibuc.hello.service.GameServiceTest" time="0.003"/>
+  <testcase name="testAddReview_AlreadyReviewed()" classname="ro.unibuc.hello.service.GameServiceTest" time="0.006"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
